@@ -10,8 +10,8 @@ class MaterialReqController extends Controller
 
     public function index()
     {
-        $page_title = 'Material Requirement';
-        $page_description = 'Some requirements for the materials';
+        $page_title = 'Material';
+        $page_description = 'requirements for the materials';
 
         return view('admin.material_requirements.index', compact('page_title', 'page_description'));
     }

@@ -11,7 +11,7 @@ class PartInfoController extends Controller
     public function index()
     {
         $page_title = 'Part Information';
-        $page_description = 'Some information for the parts';
+        $page_description = '';
 
         return view('admin.part_information.index', compact('page_title', 'page_description'));
     }

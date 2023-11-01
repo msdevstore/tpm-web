@@ -11,7 +11,7 @@ class UniQuotesController extends Controller
     public function index()
     {
         $page_title = 'Uni_Quotes';
-        $page_description = 'Some requirements for the uni quotes';
+        $page_description = '';
 
         return view('admin.uni_quotes.index', compact('page_title', 'page_description'));
     }

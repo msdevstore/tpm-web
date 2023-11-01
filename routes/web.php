@@ -107,7 +107,6 @@ Route::get('/part_information', [PartInfoController::class,'index']);
 Route::get('/ring_adjustment', [RingAdjustController::class,'index']);
 Route::get('/ship_info', [ShipInfoController::class,'index']);
 
-
 Route::get('/datatables', [PagesController::class,'datatables']);
 Route::get('/ktdatatables', [PagesController::class,'ktDatatables']);
 Route::get('/select2', [PagesController::class,'select2']);

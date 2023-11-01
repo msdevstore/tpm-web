@@ -11,7 +11,7 @@ class QuotesController extends Controller
     public function newQuotes()
     {
         $page_title = 'New Quotes';
-        $page_description = 'Some description for the Quotes';
+        $page_description = '';
 
         return view('admin.quotes.new_quotes', compact('page_title', 'page_description'));
     }
@@ -19,7 +19,7 @@ class QuotesController extends Controller
     public function pricingSearch()
     {
         $page_title = 'Pricing Search';
-        $page_description = 'Some description for the Quotes';
+        $page_description = '';
 
         return view('admin.quotes.pricing_search', compact('page_title', 'page_description'));
     }
