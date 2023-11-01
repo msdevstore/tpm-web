@@ -20,7 +20,7 @@ return [
             'title' => 'Customers',
             'root' => true,
             'icon' => 'media/svg/icons/General/User.svg',
-            'page' => 'builder',
+            'page' => 'customers',
             'visible' => 'preview',
         ],
         [
@@ -31,31 +31,31 @@ return [
             'submenu' => [
                 [
                     'title' => 'All',
-                    'page' => 'layout/subheader/toolbar'
+                    'page' => 'orders/all'
                 ],
                 [
                     'title' => 'Yet To Start',
-                    'page' => 'layout/subheader/actions'
+                    'page' => 'orders/yet_to_start'
                 ],
                 [
                     'title' => 'Started',
-                    'page' => 'layout/subheader/tabbed'
+                    'page' => 'orders/started'
                 ],
                 [
                     'title' => 'Finished',
-                    'page' => 'layout/subheader/classic'
+                    'page' => 'orders/finished'
                 ],
                 [
                     'title' => 'Shipped',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'orders/shipped'
                 ],
                 [
                     'title' => 'Paused',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'orders/paused'
                 ],
                 [
                     'title' => 'Stamping',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'orders/stamping'
                 ]
             ]
         ],
@@ -67,31 +67,31 @@ return [
             'submenu' => [
                 [
                     'title' => 'Upcoming Orders',
-                    'page' => 'layout/subheader/toolbar'
+                    'page' => 'order_status/upcoming_orders'
                 ],
                 [
                     'title' => 'Shipping Today and Tomorrow',
-                    'page' => 'layout/subheader/actions'
+                    'page' => 'order_status/shipping'
                 ],
                 [
                     'title' => 'All Orders',
-                    'page' => 'layout/subheader/tabbed'
+                    'page' => 'order_status/all_orders'
                 ],
                 [
                     'title' => 'Material Search',
-                    'page' => 'layout/subheader/classic'
+                    'page' => 'order_status/material_search'
                 ],
                 [
                     'title' => 'Shipments',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'order_status/shipments'
                 ],
                 [
                     'title' => 'Mills',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'order_status/mills'
                 ],
                 [
                     'title' => 'Search Query',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'order_status/search_query'
                 ]
             ]
         ],
@@ -104,35 +104,35 @@ return [
             'submenu' => [
                 [
                     'title' => 'Steel Work Number',
-                    'page' => 'layout/themes/aside-light'
+                    'page' => 'inventory/steel_work_number'
                 ],
                 [
                     'title' => 'Receive Coil Mill',
-                    'page' => 'layout/themes/header-dark'
+                    'page' => 'inventory/receive_coil_mill'
                 ],
                 [
                     'title' => 'Receive Coil Stamping',
-                    'page' => 'layout/themes/header-dark'
+                    'page' => 'inventory/receive_coil_stamping'
                 ],
                 [
                     'title' => 'Mesh Receiving',
-                    'page' => 'layout/themes/header-dark'
+                    'page' => 'inventory/mesh_receiving'
                 ],
                 [
                     'title' => 'Mesh Inventory',
-                    'page' => 'layout/themes/header-dark'
+                    'page' => 'inventory/mesh_inventory'
                 ],
                 [
                     'title' => 'Mesh Allocated',
-                    'page' => 'layout/themes/header-dark'
+                    'page' => 'inventory/mesh_allocated'
                 ],
                 [
                     'title' => 'Used Mesh',
-                    'page' => 'layout/themes/header-dark'
+                    'page' => 'inventory/used_mesh'
                 ],
                 [
                     'title' => 'Packing List Entry',
-                    'page' => 'layout/themes/header-dark'
+                    'page' => 'inventory/packing_list_entry'
                 ]
             ]
         ],
@@ -145,31 +145,31 @@ return [
             'submenu' => [
                 [
                     'title' => 'Job Status Report',
-                    'page' => 'layout/subheader/toolbar'
+                    'page' => 'reports/job_status'
                 ],
                 [
                     'title' => 'PDF Generator',
-                    'page' => 'layout/subheader/actions'
+                    'page' => 'reports/pdf_generator'
                 ],
                 [
                     'title' => 'Standard Prices Report',
-                    'page' => 'layout/subheader/tabbed'
+                    'page' => 'reports/standard_prices'
                 ],
                 [
                     'title' => 'Training Report',
-                    'page' => 'layout/subheader/classic'
+                    'page' => 'reports/training'
                 ],
                 [
                     'title' => 'Steel Receive Report',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'reports/steel_receive'
                 ],
                 [
                     'title' => 'Audit Report',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'reports/audit'
                 ],
                 [
                     'title' => 'Order Status',
-                    'page' => 'layout/subheader/none'
+                    'page' => 'reports/order_status'
                 ]
             ]
         ],
@@ -181,11 +181,11 @@ return [
             'submenu' => [
                 [
                     'title' => 'Excess Part Stock',
-                    'page' => 'layout/general/fixed-content'
+                    'page' => 'excess_stock/part'
                 ],
                 [
                     'title' => 'Excess Ring Stock',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'excess_stock/ring'
                 ]
             ]
         ],
@@ -197,11 +197,11 @@ return [
             'submenu' => [
                 [
                     'title' => 'New Quotes',
-                    'page' => 'layout/general/fixed-content'
+                    'page' => 'quotes/new_quotes'
                 ],
                 [
                     'title' => 'Pricing Search',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'quotes/pricing_search'
                 ]
             ]
         ],
@@ -209,42 +209,42 @@ return [
             'title' => 'Material Requirements',
             'root' => true,
             'icon' => 'media/svg/icons/Design/PenAndRuller.svg',
-            'page' => 'builder',
+            'page' => 'material_requirements',
             'visible' => 'preview',
         ],
         [
-            'title' => 'UniScreen',
+            'title' => 'Uni_Screen',
             'root' => true,
             'icon' => 'media/svg/icons/Shopping/Box2.svg',
-            'page' => 'builder',
+            'page' => 'uni_screen',
             'visible' => 'preview',
         ],
         [
             'title' => 'Uni_Quotes',
             'root' => true,
             'icon' => 'media/svg/icons/General/Attachment2.svg',
-            'page' => 'builder',
+            'page' => 'uni_quotes',
             'visible' => 'preview',
         ],
         [
             'title' => 'Part Information',
             'root' => true,
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => 'builder',
+            'page' => 'part_information',
             'visible' => 'preview',
         ],
         [
             'title' => 'Ring Adjustment',
             'root' => true,
             'icon' => 'media/svg/icons/Design/Select.svg',
-            'page' => 'builder',
+            'page' => 'ring_adjustment',
             'visible' => 'preview',
         ],
         [
             'title' => 'Ship Info',
             'root' => true,
             'icon' => 'media/svg/icons/Shopping/Barcode-read.svg',
-            'page' => 'builder',
+            'page' => 'ship_info',
             'visible' => 'preview',
         ],
         [
@@ -255,95 +255,95 @@ return [
             'submenu' => [
                 [
                     'title' => 'Users',
-                    'page' => 'layout/general/fixed-content'
+                    'page' => 'setting/users'
                 ],
                 [
                     'title' => 'Instruction Type',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/instruction_type'
                 ],
                 [
                     'title' => 'Status Type',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/status_type'
                 ],
                 [
                     'title' => 'TPM Type',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/tpm_type'
                 ],
                 [
                     'title' => 'Unit Table',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/unit_table'
                 ],
                 [
                     'title' => 'Container',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/container'
                 ],
                 [
                     'title' => 'Ship Method',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/ship_method'
                 ],
                 [
                     'title' => 'Die Table',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/die_table'
                 ],
                 [
                     'title' => 'Stamping Die Table',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/stamping_die_table'
                 ],
                 [
                     'title' => 'Drifts',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/drifts'
                 ],
                 [
                     'title' => 'Employee',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/employee'
                 ],
                 [
                     'title' => 'Excluder Rings',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/excluder_rings'
                 ],
                 [
                     'title' => 'Fraction Table',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/fraction_table'
                 ],
                 [
                     'title' => 'Gage Table',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/gage_table'
                 ],
                 [
                     'title' => 'Material Table',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/material_table'
                 ],
                 [
                     'title' => 'Mesh Types',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/mesh_types'
                 ],
                 [
                     'title' => 'Micron',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/micron'
                 ],
                 [
                     'title' => 'Operator List',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/operator_list'
                 ],
                 [
                     'title' => 'Pattern Table',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/pattern_table'
                 ],
                 [
                     'title' => 'Weld Spec Mil',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/weld_spec_mil'
                 ],
                 [
                     'title' => 'Ship Via List',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/ship_via_list'
                 ],
                 [
                     'title' => 'Rings',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/rings'
                 ],
                 [
                     'title' => 'Footer Settings',
-                    'page' => 'layout/general/minimized-aside'
+                    'page' => 'setting/footer_settings'
                 ]
             ]
         ]
