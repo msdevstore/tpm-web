@@ -1,0 +1,75 @@
+.simplePopup {
+      display: none;
+      position: fixed;
+      border: 4px solid #23b7e5;
+      background: #23b7e5;
+      z-index: 999;
+      color: #fff;
+      padding: 12px;
+      width: 70%;
+      min-width: 70%;
+  }
+
+.simplePopupBackground {
+    display: none;
+    background: #000;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 112;
+}
+
+.simplePopupClose {
+    float: right;
+    cursor: pointer;
+    /*  margin-left: 10px;
+margin-bottom: 10px;*/
+    padding: 7px;
+    font-size: 18px;
+}
+
+.clear {
+    clear: both;
+}
+
+#start_tube,
+#end_tube {
+    color: #000;
+}
+
+.report_pop {
+    display: none;
+    position: fixed;
+    border: 4px solid #23b7e5;
+    background: #fff;
+    z-index: 999;
+    padding: 12px;
+    width: 70%;
+    min-width: 70%;
+}
+
+.choice_save {
+    display: none;
+    position: fixed;
+    border: 4px solid #23b7e5;
+    background: #76b0f9;
+    z-index: 9999;
+    padding: 12px;
+    width: 70%;
+    min-width: 70%;
+    text-align: center;
+}
+
+.checkedbox {
+    display: none;
+    color: #5d9cec !important;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.no-margin-right {
+    margin-right: 0px !important;
+    font-size: 12px;
+}

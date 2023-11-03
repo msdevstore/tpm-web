@@ -38,6 +38,9 @@ License: You must have a valid license purchased only from themeforest(the above
             <link href="{{ config('layout.self.rtl') ? asset(Metronic::rtlCssPath($theme)) : asset($theme) }}" rel="stylesheet" type="text/css"/>
         @endforeach
 
+        {{-- Custom css --}}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/layout.css') }}" />
+
         {{-- Includable CSS --}}
         @yield('styles')
     </head>

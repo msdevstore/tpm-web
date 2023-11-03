@@ -10,7 +10,7 @@ class OrdersController extends Controller
     public function all()
     {
         $page_title = 'All';
-        $page_description = 'description for the orders';
+        $page_description = '';
 
         return view('admin.orders.all', compact('page_title', 'page_description'));
     }

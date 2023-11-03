@@ -10,7 +10,7 @@ class UniScreenController extends Controller
 
     public function index()
     {
-        $page_title = 'UniScreen';
+        $page_title = 'Want to save customer and part information? Try this version here';
         $page_description = '';
 
         return view('admin.uni_screen.index', compact('page_title', 'page_description'));

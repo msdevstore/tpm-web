@@ -2,7 +2,7 @@
 var KTDatatablesAdvancedColumnVisibility = function() {
 
 	var init = function() {
-		var table = $('#kt_datatable');
+		var table = $('.kt_datatable');
 
 		// begin first table
 		table.DataTable({

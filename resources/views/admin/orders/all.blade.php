@@ -1,223 +1,203 @@
 {{-- Extends layout --}}
 @extends('layout.default')
 
+{{-- Style --}}
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
+@endsection
+
 {{-- Content --}}
 @section('content')
 
-    {{-- Dashboard 1 --}}
-
+    {{-- Main --}}
     <div class="row">
         <div class="col-lg-12 col-xxl-12 order-1 order-xxl-2">
             <!--begin::Card-->
             <div class="card card-custom gutter-b example example-compact">
                 <div class="card-header">
-                    <h3 class="card-title">2 Columns Horizontal Form Layout</h3>
-                    <div class="card-toolbar">
-                        <div class="example-tools justify-content-center">
-                            <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
-                            <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
-                        </div>
-                    </div>
+                    <h3 class="card-title">Orders</h3>
                 </div>
                 <!--begin::Form-->
                 <form class="form">
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-form-label text-lg-right">Full Name:</label>
-                            <div class="col-lg-3">
-                                <input type="email" class="form-control" placeholder="Enter full name" />
-                                <span class="form-text text-muted">Please enter your full name</span>
-                            </div>
-                            <label class="col-lg-2 col-form-label text-lg-right">Contact Number:</label>
-                            <div class="col-lg-3">
-                                <input type="email" class="form-control" placeholder="Enter contact number" />
-                                <span class="form-text text-muted">Please enter your contact number</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-form-label text-lg-right">Address:</label>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter your address" />
-                                    <div class="input-group-append">
-																	<span class="input-group-text">
-																		<i class="la la-map-marker"></i>
-																	</span>
-                                    </div>
-                                </div>
-                                <span class="form-text text-muted">Please enter your address</span>
-                            </div>
-                            <label class="col-lg-2 col-form-label text-lg-right">Postcode:</label>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter your postcode" />
-                                    <div class="input-group-append">
-																	<span class="input-group-text">
-																		<i class="la la-bookmark-o"></i>
-																	</span>
-                                    </div>
-                                </div>
-                                <span class="form-text text-muted">Please enter your postcode</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-form-label text-lg-right">Group:</label>
-                            <div class="col-lg-3">
-                                <div class="radio-inline">
-                                    <label class="radio radio-solid">
-                                        <input type="radio" name="example_2" checked="checked" value="2" />
-                                        <span></span>Sales Person</label>
-                                    <label class="radio radio-solid">
-                                        <input type="radio" name="example_2" value="2" />
-                                        <span></span>Customer</label>
-                                </div>
-                                <span class="form-text text-muted">Please select user group</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
                         <div class="row">
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-10">
-                                <button type="reset" class="btn btn-success mr-2">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            <div class="col-lg-4 gutter-b">
+                                <div class="grid-container-3">
+                                    <div class="grid-label"><label>Job No.</label></div>
+                                    <div class="grid-input"><input></div>
+                                    <div class="grid-label"><label>Customer</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>PO Number</label></div>
+                                    <div class="grid-input"><input></div>
+                                    <div class="grid-label"><label>Part No.</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Quantity</label></div>
+                                    <div class="grid-input"><input></div>
+                                    <div class="grid-label"><label>Date Ordered</label></div>
+                                    <div class="grid-input"><input></div>
+                                    <div class="grid-label"><label>Date Due</label></div>
+                                    <div class="grid-input"><input></div>
+                                    <div class="grid-label"><label>Shipping Date</label></div>
+                                    <div class="grid-input"><input></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 gutter-b">
+                                <div class="grid-container-3">
+                                    <div class="grid-label"><label>LF mat</label></div>
+                                    <div class="grid-input"><input type="number" step="0.001" placeholder="0.000"></div>
+                                    <div class="grid-label"><label>Weight (pre)</label></div>
+                                    <div class="grid-input"><input type="number" step="0.001" placeholder="0.000"></div>
+                                    <div class="grid-label"><label>Weight (post)</label></div>
+                                    <div class="grid-input"><input type="number" step="0.001" placeholder="0.000"></div>
+                                    <div class="grid-label"><label>Total tube (ft)</label></div>
+                                    <div class="grid-input"><input type="number" step="0.001" placeholder="0.000"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 gutter-b">
+                                <div class="grid-container-3">
+                                    <div class="grid-label"><label>Mill</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Mill Operator</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Cut Off Operator</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Repair Welder</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Inspector</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Container Type</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Shipping Method</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 gutter-b">
+                                <div class="grid-container-3">
+                                    <div class="grid-label"><label>Mill Weld Spec</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                    <div class="grid-label"><label>Repair Weld Spec</label></div>
+                                    <div class="grid-input"><select><option></option></select></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 gutter-b">
+                                <div class="grid-container-3">
+                                    <div class="grid-label"><label>LF mat</label></div>
+                                    <div class="grid-input"><input type="text"></div>
+                                    <div class="grid-label"><label>Weight (pre)</label></div>
+                                    <div class="grid-input"><input type="number"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 gutter-b">
+                                <div class="grid-container-3">
+                                    <div class="grid-label"><label>Ship Date</label></div>
+                                    <div class="grid-input"><input type="text"></div>
+                                    <div class="grid-label"><label>Quantity</label></div>
+                                    <div class="grid-input"><input type="number"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 gutter-b">
+                                <button class="btn btn-secondary">+</button>
+                            </div>
+                        </div>
+                        <div class="row mt-15">
+                            <div class="col-lg-6">
+                                <div class="d-flex justify-content-around">
+                                    <div>
+                                         <label><input name="coildata" type="radio"> Allocated</label>
+                                    </div>
+                                    <div>
+                                        <label><input name="coildata" type="radio"> All material widths</label>
+                                    </div>
+                                    <div>
+                                        <label><input name="coildata" type="radio"> Part specific widths</label>
+                                    </div>
+                                </div>
+                                <div class="table-container" style="height: 150px; border: 1px solid #ccc">
+                                    <table class="table table-bordered table-head-bg text-center">
+                                        <thead>
+                                        <tr>
+                                            <th>Coil</th>
+                                            <th>Weight</th>
+                                            <th>Width</th>
+                                            <th>Worker#</th>
+                                            <th>Heat#</th>
+                                            <th>Job</th>
+                                            <th>Allocated</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-success mr-2">Allocate </button>
+                                    <button class="btn btn-success mr-2">Deallocate </button>
+                                    <button class="btn btn-success">Deallocate </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-8">
+                                <div class="alert alert-primary" role="alert">
+                                    Weight Allocated: 0
+                                </div>
+                                <div class="alert alert-primary" role="alert">
+                                    Weight already used: 0
+                                </div>
+                                <div class="alert alert-primary" role="alert">
+                                    Total Weight dedicated to job: 0
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-20">
+                            <div class="col-lg-8">
+                                <div class="d-flex justify-content-around">
+                                    <div>
+                                        <label><input name="coildata" type="radio"> Allocated </label>
+                                    </div>
+                                    <div>
+                                        <label><input name="coildata" type="radio"> All Mesh </label>
+                                    </div>
+                                    <div>
+                                        <label><input name="coildata" type="radio"> Part Specific Mesh </label>
+                                    </div>
+                                </div>
+                                <div class="table-container" style="height: 150px; border: 1px solid #ccc">
+                                    <div class="tab-list">
+                                        <div class="tab-list-item active">Layer 1 Mesh</div>
+                                        <div class="tab-list-item">Layer 2 Mesh</div>
+                                        <div class="tab-list-item">Drainage 1 Mesh</div>
+                                        <div class="tab-list-item">Drainage 2 Mesh</div>
+                                    </div>
+                                    <table class="table table-head-bg text-center">
+                                        <thead>
+                                        <tr>
+                                            <th>Mesh Type</th>
+                                            <th>Type</th>
+                                            <th>Recieved</th>
+                                            <th>Width</th>
+                                            <th>Length</th>
+                                            <th>Allocated</th>
+                                            <th>TPM JOB</th>
+                                            <th>Heat#</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+{{--                    <div class="card-footer">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-lg-2"></div>--}}
+{{--                            <div class="col-lg-10">--}}
+{{--                                <button type="reset" class="btn btn-success mr-2">Submit</button>--}}
+{{--                                <button type="reset" class="btn btn-secondary">Cancel</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </form>
                 <!--end::Form-->
-            </div>
-            <!--end::Card-->
-        </div>
-        <div class="col-lg-12 col-xxl-6 order-1 order-xxl-2">
-            <!--begin::Card-->
-            <div class="card card-custom gutter-b example example-compact">
-                <div class="card-header">
-                    <h3 class="card-title">Textual HTML5 Inputs</h3>
-                    <div class="card-toolbar">
-                        <div class="example-tools justify-content-center">
-                            <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
-                            <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
-                        </div>
-                    </div>
-                </div>
-                <!--begin::Form-->
-                <form>
-                    <div class="card-body">
-                        <div class="form-group mb-8">
-                            <div class="alert alert-custom alert-default" role="alert">
-                                <div class="alert-icon">
-                                    <span class="svg-icon svg-icon-primary svg-icon-xl">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Tools/Compass.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path d="M7.07744993,12.3040451 C7.72444571,13.0716094 8.54044565,13.6920474 9.46808594,14.1079953 L5,23 L4.5,18 L7.07744993,12.3040451 Z M14.5865511,14.2597864 C15.5319561,13.9019016 16.375416,13.3366121 17.0614026,12.6194459 L19.5,18 L19,23 L14.5865511,14.2597864 Z M12,3.55271368e-14 C12.8284271,3.53749572e-14 13.5,0.671572875 13.5,1.5 L13.5,4 L10.5,4 L10.5,1.5 C10.5,0.671572875 11.1715729,3.56793164e-14 12,3.55271368e-14 Z" fill="#000000" opacity="0.3" />
-                                                <path d="M12,10 C13.1045695,10 14,9.1045695 14,8 C14,6.8954305 13.1045695,6 12,6 C10.8954305,6 10,6.8954305 10,8 C10,9.1045695 10.8954305,10 12,10 Z M12,13 C9.23857625,13 7,10.7614237 7,8 C7,5.23857625 9.23857625,3 12,3 C14.7614237,3 17,5.23857625 17,8 C17,10.7614237 14.7614237,13 12,13 Z" fill="#000000" fill-rule="nonzero" />
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                </div>
-                                <div class="alert-text">Here are examples of
-                                    <code>.form-control</code>applied to each textual HTML5 input type:</div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-2 col-form-label">Text</label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-search-input" class="col-2 col-form-label">Search</label>
-                            <div class="col-10">
-                                <input class="form-control" type="search" value="How do I shoot web" id="example-search-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-email-input" class="col-2 col-form-label">Email</label>
-                            <div class="col-10">
-                                <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-url-input" class="col-2 col-form-label">URL</label>
-                            <div class="col-10">
-                                <input class="form-control" type="url" value="https://getbootstrap.com" id="example-url-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
-                            <div class="col-10">
-                                <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-password-input" class="col-2 col-form-label">Password</label>
-                            <div class="col-10">
-                                <input class="form-control" type="password" value="hunter2" id="example-password-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-number-input" class="col-2 col-form-label">Number</label>
-                            <div class="col-10">
-                                <input class="form-control" type="number" value="42" id="example-number-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-datetime-local-input" class="col-2 col-form-label">Date and time</label>
-                            <div class="col-10">
-                                <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-date-input" class="col-2 col-form-label">Date</label>
-                            <div class="col-10">
-                                <input class="form-control" type="date" value="2011-08-19" id="example-date-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-month-input" class="col-2 col-form-label">Month</label>
-                            <div class="col-10">
-                                <input class="form-control" type="month" value="2011-08" id="example-month-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-week-input" class="col-2 col-form-label">Week</label>
-                            <div class="col-10">
-                                <input class="form-control" type="week" value="2011-W33" id="example-week-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-time-input" class="col-2 col-form-label">Time</label>
-                            <div class="col-10">
-                                <input class="form-control" type="time" value="13:45:00" id="example-time-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-color-input" class="col-2 col-form-label">Color</label>
-                            <div class="col-10">
-                                <input class="form-control" type="color" value="#563d7c" id="example-color-input" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-email-input" class="col-2 col-form-label">Range</label>
-                            <div class="col-10">
-                                <input class="form-control" type="range" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-2"></div>
-                            <div class="col-10">
-                                <button type="reset" class="btn btn-success mr-2">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
             </div>
             <!--end::Card-->
         </div>
@@ -227,5 +207,5 @@
 
 {{-- Scripts Section --}}
 @section('scripts')
-    <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/orders_all.js') }}" type="text/javascript"></script>
 @endsection
