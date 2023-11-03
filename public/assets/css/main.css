@@ -23,6 +23,10 @@
 
 .grid-input {
     grid-column: 2 / span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
 }
 
 .grid-label label {
@@ -36,6 +40,11 @@
     text-align: right;
     border: none;
     color: #888;
+}
+
+.grid-input input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
 }
 
 .grid-input textarea {
