@@ -215,6 +215,9 @@ return [
         // Metronic Aliases
         'Metronic' => App\Classes\Theme\Metronic::class,
         'Menu' => App\Classes\Theme\Menu::class,
+
+        // Custom Aliases
+//        'DBHelper' => App\Classes\Helpers\DBHelper::class,
     ])->toArray(),
 
 ];
