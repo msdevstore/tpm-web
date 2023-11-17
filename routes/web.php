@@ -33,9 +33,13 @@ use App\Http\Controllers\Admin\RingAdjustController;
 //    return view('index');
 //});
 
-Route::get('/', [PagesController::class,'index']);
+//Route::get('/', [PagesController::class,'index']);
+
+Route::get('/', [CustomerController::class,'index']);
 
 Route::get('/customers', [CustomerController::class,'index']);
+Route::post('/customers/create', [CustomerController::class,'create']);
+Route::delete('/customers/{id}', [CustomerController::class,'delete']);
 
 Route::get('/orders/all', [OrdersController::class,'all']);
 Route::get('/orders/yet_to_start', [OrdersController::class,'yetToStart']);

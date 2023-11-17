@@ -31,5 +31,9 @@ Route::prefix('v1')->group(function() {
     Route::get('/get_active_jobs', [MainController::class,'getActiveJobs']);
     Route::get('/get_parts/{job}', [MainController::class,'getParts']);
     Route::get('/get_drawing/{part}/{cust_id}', [MainController::class,'getDrawing']);
+
+    Route::post('/order_list_coil', [MainController::class,'getOrderListCoil']);
+    Route::post('/update_allocation', [MainController::class,'updateAllocation']);
+    Route::post('/order_list_mesh_order', [MainController::class,'orderListMeshOrder']);
 });
 

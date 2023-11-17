@@ -11,14 +11,19 @@
 .grid-container-3 {
     display: grid;
     grid-template-columns: auto auto auto;
-    background-color: #ccc;
+    background-color: #1BC5BD;
     grid-gap: 1px;
-    border: 1px solid #ccc;
+    border: 1px solid #1BC5BD;
 }
 
 .grid-label {
-    background-color: #f5f7fa;
-    color: #888;
+    background-color: #C9F7F5;
+    color: #1BC5BD;
+}
+
+.radio-label {
+    color: #1BC5BD;
+    font-size: large;
 }
 
 .grid-input {
@@ -37,7 +42,7 @@
 .grid-input input, .grid-input select, .grid-input textarea {
     width: 100%;
     height: 100%;
-    text-align: right;
+    text-align: center;
     border: none;
     color: #888;
 }
@@ -62,8 +67,9 @@
     text-align: center;
     vertical-align: top;
     padding: 7px 15px;
-    border-right: 1px solid #ccc;
-    color: #888;
+    /*border-right: 1px solid #1BC5BD;*/
+    background-color: #f7f7f7;
+    color: #1BC5BD;
 }
 
 .tab-list-item:hover {
@@ -71,14 +77,13 @@
 }
 
 .tab-list {
-    background: #f7f7f7;
-    border-bottom: 1px solid #ccc;
+    /*border-bottom: 1px solid #1BC5BD;*/
     display: flex;
     width: 100%;
 }
 
 .tab {
-    border: 1px solid #ccc;
+    border: 1px solid #1BC5BD;
     position: relative;
 }
 
@@ -95,7 +100,8 @@
 }
 
 .tab-list-item.active {
-    background: #fff;
+    background: #1BC5BD;
+    color: white;
 }
 
 fieldset {
@@ -134,7 +140,7 @@ fieldset.child-fieldset legend {
 
 .indi-input label {
     width: 100%;
-    background-color: #f5f7fa;
+    background-color: #C9F7F5;
     margin-bottom: 0;
     padding: 2px 0;
 }
@@ -143,7 +149,7 @@ fieldset.child-fieldset legend {
     width: 100%;
     border: 1px solid #ccc;
     padding: 3px 6px;
-    color: #888;
+    color: #1BC5BD;
 }
 
 .indi-input input:focus, .indi-input select:focus {
@@ -155,11 +161,11 @@ fieldset.child-fieldset legend {
 }
 
 .main-bg-color {
-    background-color: #f5f7fa;
+    background-color: #1BC5BD;
 }
 
 .main-color {
-    color: #888;
+    color: #C9F7F5;
 }
 
 .fraction-divider {
@@ -172,4 +178,47 @@ fieldset.child-fieldset legend {
     width: 2px;
     height: 100%;
     background-color: #888;
+}
+
+.table-container {
+    border: 1px solid #1BC5BD;
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.table-container .mesh-toolbar {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+.table-container th {
+    background-color: #C9F7F5 !important;
+    border: 1px solid #1BC5BD !important;
+}
+
+.btn-plus {
+    padding: 5px 10px;
+    background-color: #1BC5BD;
+    color: white;
+}
+
+.btn-control {
+    padding: 5px 10px;
+    width: 150px;
+    background-color: white;
+    border: 1px solid #1BC5BD;
+    transition: .3s;
+}
+
+.btn-control:hover {
+    color: #1BC5BD;
+    background-color: #1BC5BD;
+}
+
+
+.customer-btn:hover {
+    cursor: pointer;
 }

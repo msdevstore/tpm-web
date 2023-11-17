@@ -32,6 +32,22 @@
                 </ul>
             @endif
         </div>
+        @if(request()->is('customers'))
+            <div class="flex align-items-center">
+                <a href="#" id="customers-show"><i class="fa fa-list-alt"></i></a> &nbsp;
+                <a href="#" id="customer-save"><i class="fa fa-save"></i></a> &nbsp;
+                <a href="#" id="customer-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
+                <a href="#" id="customer-format"><i class="fa fa-undo"></i></a>
+            </div>
+        @endif
+        @if(request()->is('orders/all'))
+            <div class="flex align-items-center">
+                <a href="#" id="orders-show"><i class="fa fa-list-alt"></i></a> &nbsp;
+                <a href="#" id="orders-save"><i class="fa fa-save"></i></a> &nbsp;
+                <a href="#" id="orders-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
+                <a href="#" id="orders-format"><i class="fa fa-undo"></i></a>
+            </div>
+        @endif
 
 		{{-- Toolbar --}}
 

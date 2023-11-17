@@ -4,18 +4,18 @@ return [
 
     'items' => [
         // Dashboard
-        [
-            'title' => 'Dashboard',
-            'root' => true,
-            'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
-            'page' => '/',
-            'new-tab' => false,
-        ],
+//        [
+//            'title' => 'Dashboard',
+//            'root' => true,
+//            'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
+//            'page' => '/',
+//            'new-tab' => false,
+//        ],
 
         // Main Menu
-        [
-            'section' => 'Main Menu',
-        ],
+//        [
+//            'section' => 'Main Menu',
+//        ],
         [
             'title' => 'Customers',
             'root' => true,
