@@ -133,7 +133,7 @@
 
         $(document).ready(function () {
 
-            $('#customer-save').click(function() {
+            $('#main-table-save').click(function() {
                 let cust_id = $('#cust_id').val();
                 let customer = $('#customer').val();
                 let bill_to = $('#bill_to').val();
@@ -191,7 +191,7 @@
                 }
             })
 
-            $('#customer-delete').click(function() {
+            $('#main-table-delete').click(function() {
                 let cust_id = $('#cust_id').val();
                 let index = customers.findIndex(customer => customer.cust_id == cust_id);
                 if (index >= 0) {
@@ -217,7 +217,7 @@
                 }
             })
 
-            $('#customer-format').click(function() {
+            $('#main-table-format').click(function() {
                 $('#cust_id').val("{{$new_id}}");
                 $('#customer').val('');
                 $('#bill_to').val('');

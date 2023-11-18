@@ -114,7 +114,7 @@ $(document).ready(function() {
         $('#weld_spec_repair').val(obj.weld_spec_repair).change();
     }
 
-    $('#order-save').click(function() {
+    $('#main-table-save').click(function() {
         let obj = {
             job: $('#job').val(),
             cust_id: $('#cust_id').val(),
@@ -174,7 +174,7 @@ $(document).ready(function() {
         }
     })
 
-    $('#order-delete').click(function() {
+    $('#main-table-delete').click(function() {
         let job = $('#job').val();
         $.ajax({
             url: `/orders/${job}`,
@@ -200,7 +200,7 @@ $(document).ready(function() {
         $(this).addClass('active');
     })
 
-    $('#orders-show').click(function() {
+    $('#main-table-show').click(function() {
         // $('#orders-table').toggleClass("d-table");
         $('#orders-table').slideToggle();
     })

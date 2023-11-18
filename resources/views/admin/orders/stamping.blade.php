@@ -89,6 +89,12 @@
                 <!--begin::Form-->
                 <form class="form">
                     <div class="card-body">
+                        <div class="row gutter-b" id="control-panel" style="display: none">
+                            <div class="col-lg-7 d-flex justify-content-between">
+                                <a class="btn btn-control" id="backward-btn"><i class="fa fa-backward"></i></a>
+                                <a class="btn btn-control" id="forward-btn"><i class="fa fa-forward"></i></a>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-7 gutter-b">
                                 <div class="grid-container-3 mb-10">
@@ -232,7 +238,7 @@
         $(document).ready(function() {
             $('#DataTables_Table_0').parent().css('overflow-x', 'auto');
 
-            $('#order-format').click(function() {
+            $('#main-table-format').click(function() {
                 $('#job').val({{$job_no}});
                 $('#cust_id').val('');
                 $('#po').val('');

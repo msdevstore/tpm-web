@@ -34,18 +34,18 @@
         </div>
         @if(request()->is('customers'))
             <div class="flex align-items-center">
-                <a href="#" id="customers-show"><i class="fa fa-list-alt"></i></a> &nbsp;
-                <a href="#" id="customer-save"><i class="fa fa-save"></i></a> &nbsp;
-                <a href="#" id="customer-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
-                <a href="#" id="customer-format"><i class="fa fa-undo"></i></a>
+                <a href="#" id="main-table-show"><i class="fa fa-list-alt"></i></a> &nbsp;
+                <a href="#" id="main-table-save"><i class="fa fa-save"></i></a> &nbsp;
+                <a href="#" id="main-table-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
+                <a href="#" id="main-table-format"><i class="fa fa-undo"></i></a>
             </div>
         @endif
         @if(request()->is('orders/*'))
             <div class="flex align-items-center">
-                <a href="#" id="orders-show"><i class="fa fa-list-alt"></i></a> &nbsp;
-                <a href="#" id="order-save"><i class="fa fa-save"></i></a> &nbsp;
-                <a href="#" id="order-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
-                <a href="#" id="order-format"><i class="fa fa-undo"></i></a>
+                <a href="#" id="main-table-show"><i class="fa fa-list-alt"></i></a> &nbsp;
+                <a href="#" id="main-table-save"><i class="fa fa-save"></i></a> &nbsp;
+                <a href="#" id="main-table-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
+                <a href="#" id="main-table-format"><i class="fa fa-undo"></i></a>
             </div>
         @endif
 

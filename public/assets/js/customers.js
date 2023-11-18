@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#customers-show').click(function() {
+    $('#main-table-show').click(function() {
         $('#customers-table').slideToggle();
     })
 })

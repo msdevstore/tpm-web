@@ -52,7 +52,7 @@ $(document).ready(function() {
         $('#press').val(obj.press).change();
     }
 
-    $('#order-save').click(function() {
+    $('#main-table-save').click(function() {
         let obj = {
             job: $('#job').val(),
             cust_id: $('#cust_id').val(),
@@ -107,7 +107,7 @@ $(document).ready(function() {
         }
     })
 
-    $('#order-delete').click(function() {
+    $('#main-table-delete').click(function() {
         let job = $('#job').val();
         $.ajax({
             url: `/stamping_orders_tbl/${job}`,
@@ -128,7 +128,7 @@ $(document).ready(function() {
         })
     })
 
-    $('#order-format').click(function() {
+    $('#main-table-format').click(function() {
         $('#job').val('');
         $('#cust_id').val('').change();
         $('#part').val('');
@@ -153,7 +153,7 @@ $(document).ready(function() {
         $('#press').val('').change();
     })
 
-    $('#orders-show').click(function() {
+    $('#main-table-show').click(function() {
         // $('#orders-table').toggleClass("d-table");
         $('#orders-table').slideToggle();
     })

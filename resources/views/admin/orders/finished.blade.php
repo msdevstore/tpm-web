@@ -750,7 +750,7 @@
         $(document).ready(function() {
             $('#DataTables_Table_0').parent().css('overflow-x', 'auto');
 
-            $('#order-format').click(function() {
+            $('#main-table-format').click(function() {
                 $('#job').val({{$job_no}});
                 $('#cust_id').val('');
                 $('#po').val('');
