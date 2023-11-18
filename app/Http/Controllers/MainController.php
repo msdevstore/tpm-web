@@ -8,6 +8,34 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
+    public function createSteelWork(Request $request) {
+        $data = [
+            'material' => $request->material,
+            'gage' => $request->gage,
+            'width' => $request->width,
+            'heat' => $request->heat,
+            'pattern' => $request->pattern,
+            'holes' => $request->holes,
+            'centers' => $request->centers,
+            'tpm_po' => $request->tpm_po,
+            'tpm_job' => $request->tpm_job,
+        ];
+
+        $exist = DB::table('steel_tbl')->where('work', $request->work)->first();
+
+        if ($exist) return DB::table('steel_tbl')->where('work', $request->work)->update($data);
+        else {
+            $data['work'] = $request->work;
+            return DB::table('steel_tbl')->insert($data);
+        }
+    }
+
+    public function deleteOne($table, $field, $id) {
+        if (DB::table($table)->where($field, $id)->first()) {
+            return DB::table($table)->where($field, $id)->delete();
+        } else return response(2);
+    }
+
     public function createStampingOrder(Request $request) {
         $data = [
             'cust_id' => $request->cust_id,

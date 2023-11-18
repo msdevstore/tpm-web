@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InventoryController extends Controller
 {
@@ -11,8 +12,14 @@ class InventoryController extends Controller
     {
         $page_title = 'Steel Work Number';
         $page_description = '';
+        $obj_arr = DB::table('steel_tbl')->get();
+        $work = DB::table('steel_tbl')->orderBy('work', 'desc')->first()->work;
+        $materials = DB::table('mat_tbl')->get();
+        $gages = DB::table('gage_tbl')->get();
+        $patterns = DB::table('pat_tbl')->get();
+        $fracs = DB::table('frac_tbl')->get();
 
-        return view('admin.inventory.steel_work_number', compact('page_title', 'page_description'));
+        return view('admin.inventory.steel_work_number', compact('page_title', 'page_description', 'obj_arr', 'work', 'materials', 'gages', 'patterns', 'fracs'));
     }
 
     public function receiveCoilMill()

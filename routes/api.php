@@ -42,6 +42,9 @@ Route::prefix('v1')->group(function() {
     Route::post('/update_paused_job', [MainController::class, 'updatePausedJob']);
 
     Route::post('/stamping_orders_tbl/create', [MainController::class, 'createStampingOrder']);
-    Route::delete('/stamping_orders_tbl/{job}', [MainController::class, 'deleteStampingOrder']);
+    Route::delete('/delete_row/{table}/{field}/{job}', [MainController::class, 'deleteOne']);
+
+    Route::post('/steel_tbl/create', [MainController::class, 'createSteelWork']);
+    Route::delete('/delete_row/{table}/{field}/{work}', [MainController::class, 'deleteOne']);
 });
 
