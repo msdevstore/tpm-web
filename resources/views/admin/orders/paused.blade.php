@@ -1,58 +1,54 @@
 {{-- Extends layout --}}
 @extends('layout.default')
 
-{{-- Styles --}}
+{{-- Style --}}
 @section('styles')
     <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/orders_paused.css') }}" />
 @endsection
 
 {{-- Content --}}
 @section('content')
 
-    {{-- Dashboard 1 --}}
-
+    {{-- Main --}}
     <div class="row">
-        <div class="col-lg-12 col-xxl-12 card-stretch gutter-b">
+        <div class="col-lg-12 col-xxl-12 card-stretch">
             <div class="card card-custom">
                 <div class="card-header">
                     <div class="card-title">
                         <span class="card-icon">
                             <i class="flaticon2-image-file text-primary"></i>
                         </span>
-                        <h3 class="card-label">Orders</h3>
+                        <h3 class="card-label">Paused Jobs</h3>
                     </div>
                 </div>
                 <div class="card-body">
                     <!--begin: Datatable-->
-                    <table class="table table-separate table-bordered table-bordered text-center table-head-custom table-foot-custom table-checkable kt_datatable">
+                    <table class="table table-separate table-head-custom table-foot-custom table-checkable kt_datatable" style="margin-top: 13px !important">
                         <thead>
                         <tr>
                             <th>No</th>
-                            <th>Job #</th>
                             <th>Mill</th>
+                            <th>Job Number</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>8791</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>8791</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>8791</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8791</td>
-                            <td>8</td>
-                        </tr>
+                        <?php $i = 1; ?>
+                        @foreach($jobs as $job)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$job->job}}</td>
+                                <td>
+                                    <select class="select-custom" data="{{$job->job}}">
+                                        <option value="">Select Device</option>
+                                        @foreach($devices as $device)
+                                            <option value="{{$device->device}}">{{$device->device}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tfoot>
                     </table>
                     <!--end: Datatable-->
@@ -66,5 +62,6 @@
 {{-- Scripts Section --}}
 @section('scripts')
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
-{{--    <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>--}}
+    <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>
+    <script src="{{ asset('assets/js/orders_paused.js') }}"></script>
 @endsection

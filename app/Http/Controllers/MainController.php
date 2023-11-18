@@ -8,6 +8,148 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
+    public function createStampingOrder(Request $request) {
+        $data = [
+            'cust_id' => $request->cust_id,
+            'part' => $request->part,
+            'rouselle' => $request->rouselle,
+            'niagara' => $request->niagara,
+            'seyi' => $request->seyi,
+            'rouselleAlt' => $request->rouselleAlt,
+            'niagaraAlt' => $request->niagaraAlt,
+            'seyiAlt' => $request->seyiAlt,
+            'blank_area' => $request->blank_area,
+            'blank_areaAlt' => $request->blank_areaAlt,
+            'cycles' => $request->cycles,
+            'linear_feet' => $request->linear_feet,
+            'strip' => $request->strip,
+            'stripAlt' => $request->stripAlt,
+//            'die' => $request->die,
+//            'progression' => $request->progression,
+            'millJob' => $request->millJob,
+            'millCycles' => $request->millCycles,
+            'testCycles' => $request->testCycles,
+            'remarks' => $request->remarks,
+            'press' => $request->press
+        ];
+        $order = DB::table('stamping_orders_tbl')->where('job', $request->job)->first();
+        if ($order) {
+            return DB::table('stamping_orders_tbl')->where('job', $request->job)->update($data);
+        } else {
+            $data['job'] = $request->job;
+            $data['setup_op'] = 0;
+            $data['dimple_depth1'] = 0;
+            $data['dimple_depth2'] = 0;
+            $data['dimple_depth3'] = 0;
+            $data['dimple_depth4'] = 0;
+            $data['dimple_depth5'] = 0;
+            $data['has_started'] = 0;
+            $data['start_time'] = now();
+            $data['has_finished'] = 0;
+            $data['finish_time'] = now();
+            $data['date_entered'] = now();
+            return DB::table('stamping_orders_tbl')->insert($data);
+        }
+    }
+
+    public function updatePausedJob(Request $request) {
+        return DB::table('orders_tbl')->where([
+            'job' => $request->job
+        ])->update([
+            'has_finished' => 0,
+            'device' => $request->device
+        ]);
+    }
+
+    public function getJobDetail($job) {
+        $data = DB::table('order_specs')
+            ->join('part_specs', 'part_specs.part', '=', 'order_specs.part')
+            ->join('die_tbl', 'part_specs.die', '=', 'die_tbl.die')
+            ->join('gage_tbl', 'part_specs.gage', '=', 'gage_tbl.gage')
+            ->join('cont', 'order_specs.cont_type', '=', 'cont.ID')
+            ->join('ship_method', 'order_specs.ship_method', '=', 'ship_method.ID')
+            ->join('part_tbl', 'part_specs.part', '=', 'part_tbl.part')
+            ->join('weld_spec_mill', 'order_specs.mil_amps', '=', 'weld_spec_mill.mil_amps')
+            ->join('weld_spec_repair', 'order_specs.repair_amps', '=', 'weld_spec_repair.repair_amps')
+            ->where('order_specs.job', $job)
+            ->select('order_specs.job',
+                'order_specs.customer',
+                'order_specs.po as po_number',
+                'part_specs.part as part_no',
+                'order_specs.quantity',
+                'order_specs.ordered as date_ordered',
+                'order_specs.due as date_due',
+                'part_specs.description as part_desc',
+                'part_specs.type as material',
+                'part_specs.gage',
+                'part_specs.holes as hole_size',
+                'part_specs.centers as hole_centers',
+                'part_specs.pattern',
+                'part_specs.od',
+                'part_specs.finished_length',
+                'part_specs.dim_plus as od_postive',
+                'part_specs.dim_minus as od_negtive',
+                'part_specs.angle',
+                'part_specs.cutoff_length',
+                'part_specs.length_plus as finished_length_postive',
+                'part_specs.length_minus as finished_length_negtive',
+                'part_specs.drift as id_drift',
+                'part_specs.mill as mill',
+                'part_specs.die',
+                'part_specs.strip as strip_width',
+                'part_specs.oa',
+                'order_specs.item as line_item',
+                'die_tbl.die_id',
+                'gage_tbl.thickness',
+                'part_specs.notes',
+                'part_specs.ring_min',
+                'part_specs.ring_max',
+                'order_specs.began as date_started',
+                'order_specs.mill_operator',
+                'order_specs.cutoff_operator',
+                'order_specs.repair_welder',
+                'order_specs.inspector',
+                'order_specs.weld_spec_mill as mill_spec',
+                'order_specs.weld_spec_repair as repair_spec',
+                'order_specs.ship_date',
+                'part_specs.drawing',
+                'order_specs.mil_amps as mill_amps',
+                'order_specs.mil_volts as mill_volts',
+                'order_specs.mil_speed as mill_speed',
+                'order_specs.repair_amps',
+                'order_specs.repair_volts',
+                'order_specs.repair_speed',
+                'cont.cont_type as container_type',
+                'ship_method.ship_method as shipping_method',
+                'part_specs.insp_notes',
+                'order_specs.filler_rod',
+                'part_tbl.blank_length_plus',
+                'part_tbl.blank_length_minus',
+                'part_tbl.depth_of_dimple',
+                'part_tbl.depth_of_dimple_plus',
+                'part_tbl.depth_of_dimple_minus',
+                'part_tbl.blank_end',
+                'part_tbl.blank_end_plus',
+                'part_tbl.blank_end_minus',
+                'part_tbl.cutoff_length_plus',
+                'part_tbl.cutoff_length_minus',
+                'part_tbl.drawing_number',
+                'weld_spec_mill.torch_height as mill_torch_height',
+                'weld_spec_mill.Arc_length',
+                'weld_spec_mill.Torch_angle',
+                'weld_spec_repair.torch_height as repair_torch_height',
+                'weld_spec_repair.electro_length',
+                'weld_spec_repair.gas_repair'
+            )
+            ->orderBy('order_specs.job')
+            ->first();
+        return response()->json($data);
+    }
+
+    public function getPartDetail($part) {
+        return DB::table('part_tbl')->where('part', $part)->first();
+    }
+
     public function orderListMeshOrder(Request $request) {
         $part = $request->part;
         $job = $request->job;

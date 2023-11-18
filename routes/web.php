@@ -48,6 +48,8 @@ Route::get('/orders/finished', [OrdersController::class,'finished']);
 Route::get('/orders/shipped', [OrdersController::class,'shipped']);
 Route::get('/orders/paused', [OrdersController::class,'paused']);
 Route::get('/orders/stamping', [OrdersController::class,'stamping']);
+Route::post('/orders/create', [OrdersController::class,'create']);
+Route::delete('/orders/{id}', [OrdersController::class,'delete']);
 
 Route::get('/order_status/upcoming_orders', [OrderStatusController::class,'upcomingOrders']);
 Route::get('/order_status/shipping', [OrderStatusController::class,'shipping']);

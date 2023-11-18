@@ -1,12 +1,12 @@
 /*Grid*/
 
-.grid-container-1 {
-    display: grid;
-    grid-template-columns: auto;
-    background-color: #ccc;
-    grid-gap: 1px;
-    border: 1px solid #ccc;
-}
+/*.grid-container-3-1 {*/
+/*    display: grid;*/
+/*    grid-template-columns: auto;*/
+/*    background-color: #ccc;*/
+/*    grid-gap: 1px;*/
+/*    border: 1px solid #ccc;*/
+/*}*/
 
 .grid-container-3 {
     display: grid;
@@ -58,6 +58,28 @@
 
 .grid-input input:focus, .grid-input select:focus, .grid-input textarea:focus {
     outline: none;
+}
+
+.grid-container {
+    border: 1px solid #1BC5BD;
+}
+
+.grid-container-2 {
+    display: flex;
+    background-color: #1BC5BD;
+}
+
+.grid-container-2 .grid-label {
+    width: 120px;
+    border-right: 1px solid #1BC5BD;
+}
+
+.grid-container-2 .grid-input {
+    flex: 1;
+}
+
+.grid-container-2.grid-border-top {
+    border-top: 1px solid #1BC5BD;
 }
 
 /*///////*/
@@ -143,6 +165,7 @@ fieldset.child-fieldset legend {
     background-color: #C9F7F5;
     margin-bottom: 0;
     padding: 2px 0;
+    color: #1BC5BD;
 }
 
 .indi-input input, .indi-input select {
@@ -165,7 +188,7 @@ fieldset.child-fieldset legend {
 }
 
 .main-color {
-    color: #C9F7F5;
+    color: #1BC5BD;
 }
 
 .fraction-divider {
@@ -182,8 +205,11 @@ fieldset.child-fieldset legend {
 
 .table-container {
     border: 1px solid #1BC5BD;
-    min-height: 150px;
-    max-height: 300px;
+}
+
+.table-height {
+    min-height: 250px;
+    max-height: 400px;
     overflow-y: auto;
     position: relative;
 }

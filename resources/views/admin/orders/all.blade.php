@@ -95,162 +95,166 @@
                                 <a class="btn btn-control" id="forward-btn"><i class="fa fa-forward"></i></a>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 gutter-b">
-                                <div class="grid-container-3">
-                                    <div class="grid-label"><label>Job No.</label></div>
-                                    <div class="grid-input"><input id="job" value="{{$job_no}}"></div>
-                                    <div class="grid-label"><label>Customer</label></div>
-                                    <div class="grid-input">
-                                        <select id="cust_id">
-                                            <option value="">Select</option>
-                                            @foreach($customers as $customer)
-                                                <option value="{{$customer->cust_id}}"><?php echo (strlen($customer->customer) > 20) ? substr($customer->customer, 0, 20) . '...' : $customer->customer ?></option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>PO Number</label></div>
-                                    <div class="grid-input"><input id="po"></div>
-                                    <div class="grid-label"><label>Part No.</label></div>
-                                    <div class="grid-input">
-                                        <select id="part">
-                                            <option value="">Select</option>
-                                            @foreach($parts as $part)
-                                                <option {{$part->part}}><?php echo (strlen($part->part) > 20) ? substr($part->part, 0, 20) . '...' : $part->part ?></option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Quantity</label></div>
-                                    <div class="grid-input"><input id="quantity"></div>
-                                    <div class="grid-label"><label>Date Ordered</label></div>
-                                    <div class="grid-input"><input type="date" id="ordered"></div>
-                                    <div class="grid-label"><label>Date Due</label></div>
-                                    <div class="grid-input"><input type="date" id="due"></div>
-                                    <div class="grid-label"><label>Shipping Date</label></div>
-                                    <div class="grid-input"><input type="date" id="ship_date"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 gutter-b">
-                                <div class="grid-container-3">
-                                    <div class="grid-label"><label>LF mat</label></div>
-                                    <div class="grid-input"><input id="lf_req" type="number" step="0.001" placeholder="0.000"></div>
-                                    <div class="grid-label"><label>Weight (pre)</label></div>
-                                    <div class="grid-input"><input id="wbs" type="number" step="0.001" placeholder="0.000"></div>
-                                    <div class="grid-label"><label>Weight (post)</label></div>
-                                    <div class="grid-input"><input id="was" type="number" step="0.001" placeholder="0.000"></div>
-                                    <div class="grid-label"><label>Total tube (ft)</label></div>
-                                    <div class="grid-input"><input id="tf" type="number" step="0.001" placeholder="0.000"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 gutter-b">
-                                <div class="grid-container-3">
-                                    <div class="grid-label"><label>Mill</label></div>
-                                    <div class="grid-input">
-                                        <select id="mac_add_tbl">
-                                            <option value="">Select</option>
-                                            @foreach($mac_addresses as $mac_address)
-                                                <option value="{{$mac_address->device}}">{{$mac_address->device}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Mill Operator</label></div>
-                                    <div class="grid-input">
-                                        <select id="mill_operator">
-                                            <option value="">Select</option>
-                                            @foreach($mill_operators as $mill_operator)
-                                                <option value="{{$mill_operator->ID}}">{{$mill_operator->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Cut Off Operator</label></div>
-                                    <div class="grid-input">
-                                        <select id="cutoff_operator">
-                                            <option>Select</option>
-                                            @foreach($cutoff_operators as $cutoff_operator)
-                                                <option value="{{$cutoff_operator->ID}}">{{$cutoff_operator->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Repair Welder</label></div>
-                                    <div class="grid-input">
-                                        <select id="repair_welder">
-                                            <option>Select</option>
-                                            @foreach($repair_welders as $repair_welder)
-                                                <option value="{{$repair_welder->ID}}">{{$repair_welder->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Inspector</label></div>
-                                    <div class="grid-input">
-                                        <select id="inspector">
-                                            <option>Select</option>
-                                            @foreach($inspectors as $inspector)
-                                                <option value="{{$inspector->ID}}">{{$inspector->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Container Type</label></div>
-                                    <div class="grid-input">
-                                        <select id="cont_type">
-                                            <option>Select</option>
-                                            @foreach($conts as $cont)
-                                                <option value="{{$cont->ID}}">{{$cont->cont_type}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Shipping Method</label></div>
-                                    <div class="grid-input">
-                                        <select id="ship_method">
-                                            <option>Select</option>
-                                            @foreach($ship_methods as $ship_method)
-                                                <option value="{{$ship_method->ID}}">{{$ship_method->ship_method}}</option>
-                                            @endforeach
-                                        </select>
+                        <form>
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-4 gutter-b">
+                                    <div class="grid-container-3">
+                                        <div class="grid-label"><label>Job No.</label></div>
+                                        <div class="grid-input"><input id="job" value="{{$job_no}}"></div>
+                                        <div class="grid-label"><label>Customer</label></div>
+                                        <div class="grid-input">
+                                            <select id="cust_id">
+                                                <option value="">Select</option>
+                                                @foreach($customers as $customer)
+                                                    <option value="{{$customer->cust_id}}"><?php echo (strlen($customer->customer) > 20) ? substr($customer->customer, 0, 20) . '...' : $customer->customer ?></option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>PO Number</label></div>
+                                        <div class="grid-input"><input id="po"></div>
+                                        <div class="grid-label"><label>Part No.</label></div>
+                                        <div class="grid-input">
+                                            <select id="part">
+                                                <option value="">Select</option>
+                                                @foreach($parts as $part)
+                                                    <option {{$part->part}}><?php echo (strlen($part->part) > 20) ? substr($part->part, 0, 20) . '...' : $part->part ?></option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Quantity</label></div>
+                                        <div class="grid-input"><input type="number" id="quantity"></div>
+                                        <div class="grid-label"><label>Date Ordered</label></div>
+                                        <div class="grid-input"><input type="date" id="ordered"></div>
+                                        <div class="grid-label"><label>Date Due</label></div>
+                                        <div class="grid-input"><input type="date" id="due"></div>
+                                        <div class="grid-label"><label>Shipping Date</label></div>
+                                        <div class="grid-input"><input type="date" id="ship_date"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 gutter-b">
-                                <div class="grid-container-3">
-                                    <div class="grid-label"><label>Mill Weld Spec</label></div>
-                                    <div class="grid-input">
-                                        <select id="weld_spec_mill">
-                                            <option>Select</option>
-                                            @foreach($weld_spec_mills as $weld_spec_mill)
-                                                <option value="{{$weld_spec_mill->weld_spec}}">{{$weld_spec_mill->weld_spec}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="grid-label"><label>Repair Weld Spec</label></div>
-                                    <div class="grid-input">
-                                        <select id="weld_spec_repair">
-                                            <option>Select</option>
-                                            @foreach($weld_spec_repairs as $weld_spec_repair)
-                                                <option value="{{$weld_spec_repair->weld_spec}}">{{$weld_spec_repair->weld_spec}}</option>
-                                            @endforeach
-                                        </select>
+                                <div class="col-lg-4 gutter-b">
+                                    <div class="grid-container-3">
+                                        <div class="grid-label"><label>LF mat</label></div>
+                                        <div class="grid-input"><input id="lf_req" type="number" step="0.001" placeholder="0.000"></div>
+                                        <div class="grid-label"><label>Weight (pre)</label></div>
+                                        <div class="grid-input"><input id="wbs" type="number" step="0.001" placeholder="0.000"></div>
+                                        <div class="grid-label"><label>Weight (post)</label></div>
+                                        <div class="grid-input"><input id="was" type="number" step="0.001" placeholder="0.000"></div>
+                                        <div class="grid-label"><label>Total tube (ft)</label></div>
+                                        <div class="grid-input"><input id="tf" type="number" step="0.001" placeholder="0.000"></div>
                                     </div>
                                 </div>
-                            </div>
-{{--                            <div class="col-lg-4 gutter-b">--}}
-{{--                                <div class="grid-container-3">--}}
-{{--                                    <div class="grid-label"><label>LF mat</label></div>--}}
-{{--                                    <div class="grid-input"><input type="text"></div>--}}
-{{--                                    <div class="grid-label"><label>Weight (pre)</label></div>--}}
-{{--                                    <div class="grid-input"><input type="number"></div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                            <div class="col-lg-3 gutter-b">
-                                <div class="grid-container-3">
-                                    <div class="grid-label"><label>Ship Date</label></div>
-                                    <div class="grid-input"><input name="ship_dates[]" type="text"></div>
-                                    <div class="grid-label"><label>Quantity</label></div>
-                                    <div class="grid-input"><input name="ship_quantities[]" type="number"></div>
+                                <div class="col-lg-4 gutter-b">
+                                    <div class="grid-container-3">
+                                        <div class="grid-label"><label>Mill</label></div>
+                                        <div class="grid-input">
+                                            <select id="mac_add_tbl">
+                                                <option value="">Select</option>
+                                                @foreach($mac_addresses as $mac_address)
+                                                    <option value="{{$mac_address->device}}">{{$mac_address->device}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Mill Operator</label></div>
+                                        <div class="grid-input">
+                                            <select id="mill_operator">
+                                                <option value="">Select</option>
+                                                @foreach($mill_operators as $mill_operator)
+                                                    <option value="{{$mill_operator->ID}}">{{$mill_operator->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Cut Off Operator</label></div>
+                                        <div class="grid-input">
+                                            <select id="cutoff_operator">
+                                                <option>Select</option>
+                                                @foreach($cutoff_operators as $cutoff_operator)
+                                                    <option value="{{$cutoff_operator->ID}}">{{$cutoff_operator->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Repair Welder</label></div>
+                                        <div class="grid-input">
+                                            <select id="repair_welder">
+                                                <option>Select</option>
+                                                @foreach($repair_welders as $repair_welder)
+                                                    <option value="{{$repair_welder->ID}}">{{$repair_welder->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Inspector</label></div>
+                                        <div class="grid-input">
+                                            <select id="inspector">
+                                                <option>Select</option>
+                                                @foreach($inspectors as $inspector)
+                                                    <option value="{{$inspector->ID}}">{{$inspector->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Container Type</label></div>
+                                        <div class="grid-input">
+                                            <select id="cont_type">
+                                                <option>Select</option>
+                                                @foreach($conts as $cont)
+                                                    <option value="{{$cont->ID}}">{{$cont->cont_type}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Shipping Method</label></div>
+                                        <div class="grid-input">
+                                            <select id="ship_method">
+                                                <option>Select</option>
+                                                @foreach($ship_methods as $ship_method)
+                                                    <option value="{{$ship_method->ID}}">{{$ship_method->ship_method}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 gutter-b">
+                                    <div class="grid-container-3">
+                                        <div class="grid-label"><label>Mill Weld Spec</label></div>
+                                        <div class="grid-input">
+                                            <select id="weld_spec_mill">
+                                                <option>Select</option>
+                                                @foreach($weld_spec_mills as $weld_spec_mill)
+                                                    <option value="{{$weld_spec_mill->weld_spec}}">{{$weld_spec_mill->weld_spec}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Repair Weld Spec</label></div>
+                                        <div class="grid-input">
+                                            <select id="weld_spec_repair">
+                                                <option>Select</option>
+                                                @foreach($weld_spec_repairs as $weld_spec_repair)
+                                                    <option value="{{$weld_spec_repair->weld_spec}}">{{$weld_spec_repair->weld_spec}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--                            <div class="col-lg-4 gutter-b">--}}
+                                {{--                                <div class="grid-container-3">--}}
+                                {{--                                    <div class="grid-label"><label>LF mat</label></div>--}}
+                                {{--                                    <div class="grid-input"><input type="text"></div>--}}
+                                {{--                                    <div class="grid-label"><label>Weight (pre)</label></div>--}}
+                                {{--                                    <div class="grid-input"><input type="number"></div>--}}
+                                {{--                                </div>--}}
+                                {{--                            </div>--}}
+                                <div class="col-lg-3 gutter-b">
+                                    <div class="grid-container-3">
+                                        <div class="grid-label"><label>Ship Date</label></div>
+                                        <div class="grid-input"><input name="ship_dates[]" type="text"></div>
+                                        <div class="grid-label"><label>Quantity</label></div>
+                                        <div class="grid-input"><input name="ship_quantities[]" type="number"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 gutter-b">
+                                    <button type="button" id="add_btn" class="btn btn-plus">+</button>
                                 </div>
                             </div>
-                            <div class="col-lg-1 gutter-b">
-                                <button type="button" id="add_btn" class="btn btn-plus">+</button>
-                            </div>
-                        </div>
+                        </form>
+
                         <div class="row mt-5 mb-5" id="additional-container"></div>
                         <div class="row mt-5">
                             <div class="col-lg-7">
@@ -265,7 +269,7 @@
                                         <label class="radio-label"><input class="coil_option" name="coil_data" value="3" type="radio"> Part specific widths </label>
                                     </div>
                                 </div>
-                                <div class="table-container">
+                                <div class="table-container table-height">
                                     <table class="table table-bordered table-hover table-head-bg text-center">
                                         <thead>
                                         <tr>
@@ -318,7 +322,7 @@
                                         <div class="tab-list-item" onclick="meshRequest(3)">Drainage 1 Mesh</div>
                                         <div class="tab-list-item" onclick="meshRequest(4)">Drainage 2 Mesh</div>
                                     </div>
-                                    <div class="table-container">
+                                    <div class="table-container table-height">
                                         <table class="table table-head-bg text-center table-custom">
                                             <thead>
                                             <tr>
@@ -381,92 +385,23 @@
         $(document).ready(function() {
             $('#DataTables_Table_0').parent().css('overflow-x', 'auto');
 
-            $('#forward-btn').click(function() {
-                const job = $('#job').val();
-                let index = orders.findIndex(order => order.job == job);
-                if (index - 1 < 0) index = orders.length - 1;
-                updateValues(orders[index - 1]);
-            })
-
-            $('#backward-btn').click(function() {
-                const job = $('#job').val();
-                let index = orders.findIndex(order => order.job == job);
-                if (index + 1 >= orders.length) index = 0;
-                updateValues(orders[index + 1]);
-            })
-
-            function updateValues(obj) {
-                $('#job').val(obj.job);
-                $('#cust_id').val(obj.cust_id);
-                $('#po').val(obj.po);
-                $('#part').val(obj.part);
-                $('#quantity').val(obj.quantity);
-                $('#ordered').val(obj.ordered.substring(0,10));
-                $('#due').val(obj.due.substring(0,10));
-                $('#ship_date').val(obj.ship_date.substring(0,10));
-                $('#mill_operator').val(obj.mill_operator).change();
-                $('#cutoff_operator').val(obj.cutoff_operator).change();
-                $('#repair_welder').val(obj.repair_welder).change();
-                $('#inspector').val(obj.inspector).change();
-                $('#cont_type').val(obj.cont_type).change();
-                $('#ship_method').val(obj.ship_method).change();
-                $('#weld_spec_mill').val(obj.weld_spec_mill).change();
-                $('#weld_spec_repair').val(obj.weld_spec_repair).change();
-            }
-
-            $(document).on('click', '.order-btn', function(e) {
-                if ($(e.target)[0].localName === 'td') {
-                    let job = $(e.target).parent().attr('data');
-
-                    let order = orders.filter(order => order.job == job)[0];
-                    updateValues(order);
-
-                    $.ajax({
-                        url: '/api/v1/get_weight/' + order.job,
-                        type: 'get',
-                        success: function(res) {
-                            // console.log(res);
-                            const temp = `Weight Allocated: ${res.tw} <br>
-                                    Weight already used: ${res.used} <br>
-                                    Total Weight dedicated to job: ${Number(res.tw) + Number(res.used)}`;
-                            $('#weight_allocated_alert').empty().append(temp);
-                        },
-                        error: function(err) {
-                            console.log(err);
-                        }
-                    })
-
-                    $.ajax({
-                        url: '/api/v1/get_mesh_total/' + order.job,
-                        type: 'get',
-                        success: function(res) {
-                            console.log(res);
-                            const temp = `Length Allocated: ${res.ML} <br>
-                                    Length already used: ${res.EL} <br>
-                                    Total Required Length: ${Number(res.ML) + Number(res.EL)}`;
-                            $('#length_allocated_alert').empty().append(temp);
-                        },
-                        error: function(err) {
-                            console.log(err);
-                        }
-                    })
-
-                    $('#orders-table').slideToggle();
-                    $('#control-panel').css('display', 'flex');
-                    // console.log(order);
-                }
-            })
-
-            $('#add_btn').click(function() {
-                const temp = `<div class="col-lg-3 gutter-b">
-                                <div class="grid-container-3">
-                                    <div class="grid-label"><label>Ship Date</label></div>
-                                    <div class="grid-input"><input name="ship_dates[]" type="text"></div>
-                                    <div class="grid-label"><label>Quantity</label></div>
-                                    <div class="grid-input"><input name="ship_quantities[]" type="number"></div>
-                                </div>
-                            </div>`;
-                $('#additional-container').append(temp);
+            $('#order-format').click(function() {
+                $('#job').val({{$job_no}});
+                $('#cust_id').val('');
+                $('#po').val('');
+                $('#part').val('');
+                $('#quantity').val('');
+                $('#ordered').val('');
+                $('#due').val('');
+                $('#ship_date').val('');
+                $('#mill_operator').val('').change();
+                $('#cutoff_operator').val('').change();
+                $('#repair_welder').val('').change();
+                $('#inspector').val('').change();
+                $('#cont_type').val('').change();
+                $('#ship_method').val('').change();
+                $('#weld_spec_mill').val('').change();
+                $('#weld_spec_repair').val('').change();
             })
         })
     </script>

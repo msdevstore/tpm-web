@@ -40,12 +40,12 @@
                 <a href="#" id="customer-format"><i class="fa fa-undo"></i></a>
             </div>
         @endif
-        @if(request()->is('orders/all'))
+        @if(request()->is('orders/*'))
             <div class="flex align-items-center">
                 <a href="#" id="orders-show"><i class="fa fa-list-alt"></i></a> &nbsp;
-                <a href="#" id="orders-save"><i class="fa fa-save"></i></a> &nbsp;
-                <a href="#" id="orders-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
-                <a href="#" id="orders-format"><i class="fa fa-undo"></i></a>
+                <a href="#" id="order-save"><i class="fa fa-save"></i></a> &nbsp;
+                <a href="#" id="order-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
+                <a href="#" id="order-format"><i class="fa fa-undo"></i></a>
             </div>
         @endif
 

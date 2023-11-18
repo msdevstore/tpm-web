@@ -10,6 +10,11 @@
     color: #1BC5BD
 }
 
-.kt_datatable td:hover {
+.kt_datatable.table-hover td:hover {
     cursor: pointer;
+}
+
+.btn.btn-success {
+    padding: 4px 8px;
+    width: 120px !important;
 }

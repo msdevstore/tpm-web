@@ -43,6 +43,32 @@ $(document).ready(function() {
         }
     })
 
+    $('#started-check').change(function() {
+        $('#began').parent().parent().toggleClass('d-none');
+        let job = $('#job').val();
+        console.log('job: ', job);
+        $.ajax({
+            url: '/api/v1/get_job_detail/' + job,
+            type: 'get',
+            success: function(res) {
+                console.log('res: ', res);
+                $('#modal_job').val(job);
+                $('#jobModalCenterBtn').click();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    })
+
+    $('#finished-check').change(function() {
+        $('#finished').parent().parent().toggleClass('d-none');
+    })
+
+    $('#shipped-check').change(function() {
+        $('#shipped').parent().parent().toggleClass('d-none');
+    })
+
     $('#add_btn').click(function() {
         const temp = `<div class="col-lg-3 gutter-b">
                                 <div class="grid-container-3">
@@ -108,6 +134,17 @@ $(document).ready(function() {
             weld_spec_repair: $('#weld_spec_repair').val(),
         }
 
+        obj['item'] = $('#item').val();
+        if (!$('#began').parent().parent().hasClass('d-none')) {
+            obj['began'] = $('#began').val();
+        }
+        if (!$('#finished').parent().parent().hasClass('d-none')) {
+            obj['finished'] = $('#finished').val();
+        }
+        if (!$('#shipped').parent().parent().hasClass('d-none')) {
+            obj['shipped'] = $('#shipped').val();
+        }
+
         let flag = false;
         Object.keys(obj).forEach(key => {
             if (obj[key] === '') flag = true;
@@ -123,7 +160,7 @@ $(document).ready(function() {
                 data: obj,
                 success: function(res) {
                     console.log(res);
-                    if (res === 1) {
+                    if (res === '1') {
                         alert("Updated successfully!");
                         window.location.reload();
                     } else if (res === true) alert("Created successfully!");
@@ -319,9 +356,6 @@ function meshRequest(num) {
                             <td>${obj.hasOwnProperty('allocated') ? obj['allocated'] : ''}</td>
                             <td>${obj.hasOwnProperty('TPM_JOB') ? obj['TPM_JOB'] : ''}</td>
                             <td>${obj.hasOwnProperty('heat') ? obj['heat'] : ''}</td></tr>`
-                        // Object.keys(obj).forEach(key => {
-                        //     tbodyContent += `<td>${obj[key]}</td>`
-                        // });
                     })
                 } else {
                     tbodyContent = '<tr>';
@@ -335,9 +369,6 @@ function meshRequest(num) {
                             <td>${obj.hasOwnProperty('allocated') ? obj['allocated'] : ''}</td>
                             <td>${obj.hasOwnProperty('TPM_JOB') ? obj['TPM_JOB'] : ''}</td>
                             <td>${obj.hasOwnProperty('heat') ? obj['heat'] : ''}</td></tr>`
-                        // Object.keys(obj).forEach(key => {
-                        //     tbodyContent += `<td>${obj[key]}</td>`
-                        // });
                     })
                 }
             }

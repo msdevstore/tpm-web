@@ -35,5 +35,13 @@ Route::prefix('v1')->group(function() {
     Route::post('/order_list_coil', [MainController::class,'getOrderListCoil']);
     Route::post('/update_allocation', [MainController::class,'updateAllocation']);
     Route::post('/order_list_mesh_order', [MainController::class,'orderListMeshOrder']);
+
+    Route::get('/get_job_detail/{job}', [MainController::class, 'getJobDetail']);
+    Route::get('/get_part_detail/{part}', [MainController::class, 'getPartDetail']);
+
+    Route::post('/update_paused_job', [MainController::class, 'updatePausedJob']);
+
+    Route::post('/stamping_orders_tbl/create', [MainController::class, 'createStampingOrder']);
+    Route::delete('/stamping_orders_tbl/{job}', [MainController::class, 'deleteStampingOrder']);
 });
 
