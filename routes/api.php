@@ -48,6 +48,8 @@ Route::prefix('v1')->group(function() {
     Route::post('/coil_tbl/create', [MainController::class, 'createCoilWork']);
     Route::post('/mesh_tbl/create', [MainController::class, 'createMeshWork']);
     Route::post('/used_mesh/create', [MainController::class, 'createUsedMesh']);
-    Route::post('/packing_list_entry/create', [MainController::class, 'creatPackingList']);
+    Route::post('/packing_list_entry/create', [MainController::class, 'createPackingList']);
+    Route::post('/excess_part/create', [MainController::class, 'createExcessPart']);
+    Route::post('/excess_ring/create', [MainController::class, 'createExcessRing']);
 });
 

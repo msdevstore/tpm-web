@@ -8,7 +8,41 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
-    public function creatPackingList(Request $request) {
+    public function createExcessRing(Request $request) {
+        $data = [
+            'ring' => $request->ring,
+            'excess_qty' => $request->excess_qty,
+            'date_produced' => $request->date_produced,
+            'los' => $request->los
+        ];
+
+        $exist = DB::table('excess_ring')->where('job', $request->job)->first();
+
+        if ($exist) return DB::table('excess_ring')->where('job', $request->job)->update($data);
+        else {
+            $data['job'] = $request->job;
+            return DB::table('excess_ring')->insert($data);
+        }
+    }
+    public function createExcessPart(Request $request) {
+        $data = [
+            'cust_id' => $request->cust_id,
+            'part' => $request->part,
+            'excess_qty' => $request->excess_qty,
+            'date_produced' => $request->date_produced,
+            'los' => $request->los
+        ];
+
+        $exist = DB::table('excess_part')->where('job', $request->job)->first();
+
+        if ($exist) return DB::table('excess_part')->where('job', $request->job)->update($data);
+        else {
+            $data['job'] = $request->job;
+            return DB::table('excess_part')->insert($data);
+        }
+    }
+
+    public function createPackingList(Request $request) {
         $data = [
             'heat_num' => $request->heat_num,
             'type_mat' => $request->type_mat,
