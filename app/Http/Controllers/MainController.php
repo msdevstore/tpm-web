@@ -8,6 +8,97 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
+    public function creatPackingList(Request $request) {
+        $data = [
+            'heat_num' => $request->heat_num,
+            'type_mat' => $request->type_mat,
+            'mesh' => $request->mesh,
+            'width' => $request->width,
+            'tot_len' => $request->tot_len,
+            'allocated' => $request->allocated,
+            'job' => $request->job,
+            'length' => $request->length,
+            'crate' => $request->crate
+        ];
+        $data['quantity'] = 0;
+
+        $exist = DB::table('packing_list_entry')->where('po', $request->po)->first();
+
+        if ($exist) return DB::table('packing_list_entry')->where('po', $request->po)->update($data);
+        else {
+            $data['po'] = $request->po;
+            return DB::table('packing_list_entry')->insert($data);
+        }
+    }
+
+    public function createUsedMesh(Request $request) {
+        $data = [
+            'job' => $request->job,
+            'supplier' => $request->supplier,
+            'tpm_po' => $request->tpm_po,
+            'date_received' => $request->date_received,
+            'width' => $request->width,
+            'length' => $request->length,
+            'date_used' => $request->date_used,
+            'operator' => $request->operator,
+            'heat' => $request->heat,
+            'mesh' => $request->mesh,
+            'type' => $request->type
+        ];
+
+        $exist = DB::table('used_mesh')->where('mesh_no', $request->mesh_no)->first();
+
+        if ($exist) return DB::table('used_mesh')->where('mesh_no', $request->mesh_no)->update($data);
+        else {
+            $data['mesh_no'] = $request->mesh_no;
+            return DB::table('used_mesh')->insert($data);
+        }
+    }
+
+    public function createMeshWork(Request $request) {
+        $data = [
+            'job' => $request->job,
+            'supplier' => $request->supplier,
+            'tpm_po' => $request->tpm_po,
+            'date_received' => $request->date_received,
+            'width' => $request->width,
+            'length' => $request->length,
+            'allocated' => $request->allocated,
+            'heat' => $request->heat,
+            'mesh' => $request->mesh,
+            'type' => $request->type
+        ];
+
+        $exist = DB::table('mesh_tbl')->where('mesh_no', $request->mesh_no)->first();
+
+        if ($exist) return DB::table('mesh_tbl')->where('mesh_no', $request->mesh_no)->update($data);
+        else {
+            $data['mesh_no'] = $request->mesh_no;
+            return DB::table('mesh_tbl')->insert($data);
+        }
+    }
+
+    public function createCoilWork(Request $request) {
+        $data = [
+            'work' => $request->work,
+            'no_of_coil' => $request->no_of_coil,
+            'weight' => $request->weight,
+            'operator' => $request->operator,
+            'cycles' => $request->cycles,
+            'footage' => $request->footage,
+            'allocated' => $request->allocated,
+            'job' => $request->job,
+            'date_received' => $request->date_received,
+        ];
+
+        $exist = DB::table('coil_tbl')->where('coil_no', $request->coil_no)->first();
+
+        if ($exist) return DB::table('coil_tbl')->where('coil_no', $request->coil_no)->update($data);
+        else {
+            $data['coil_no'] = $request->coil_no;
+            return DB::table('coil_tbl')->insert($data);
+        }
+    }
     public function createSteelWork(Request $request) {
         $data = [
             'material' => $request->material,
@@ -28,12 +119,6 @@ class MainController extends Controller
             $data['work'] = $request->work;
             return DB::table('steel_tbl')->insert($data);
         }
-    }
-
-    public function deleteOne($table, $field, $id) {
-        if (DB::table($table)->where($field, $id)->first()) {
-            return DB::table($table)->where($field, $id)->delete();
-        } else return response(2);
     }
 
     public function createStampingOrder(Request $request) {

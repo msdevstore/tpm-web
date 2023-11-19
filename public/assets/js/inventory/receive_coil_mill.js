@@ -1,9 +1,9 @@
 $(document).ready(function() {
     $(document).on('click', '.main-table-btn', function (e) {
         if ($(e.target)[0].localName === 'td') {
-            let work = $(e.target).parent().attr('data');
+            let coil_no = $(e.target).parent().attr('data');
 
-            let obj = objArr.filter(item => item.work == work)[0];
+            let obj = objArr.filter(item => item.coil_no == coil_no)[0];
             updateValues(obj);
 
             $('#main-table').slideToggle();
@@ -26,16 +26,16 @@ $(document).ready(function() {
     // })
 
     function updateValues(obj) {
-        $('#work').val(obj.work);
-        $('#material').val(obj.material).change();
-        $('#gage').val(obj.gage).change();
-        $('#width').val(obj.width);
-        $('#heat').val(obj.heat);
-        $('#pattern').val(obj.pattern).change();
-        $('#holes').val(obj.holes).change();
-        $('#centers').val(obj.centers).change();
-        $('#tpm_po').val(obj.tpm_po);
-        $('#tpm_job').prop('checked', obj.tpm_job === 1 ? true : false);
+        $('#work').val(obj.work).change();
+        $('#coil_no').val(obj.coil_no);
+        $('#no_of_coil').val(obj.no_of_coil);
+        $('#weight').val(obj.weight);
+        $('#operator').val(obj.operator).change();
+        $('#cycles').val(obj.cycles);
+        $('#footage').val(obj.footage);
+        $('#allocated').prop('checked', obj.allocated === 1 ? true : false);
+        $('#job').val(obj.job);
+        $('#date_received').val(obj.date_received);
     }
 
     $('#main-table-show').click(function() {
@@ -46,15 +46,15 @@ $(document).ready(function() {
     $('#main-table-save').click(function() {
         let obj = {
             work: $('#work').val(),
-            material: $('#material').val(),
-            gage: $('#gage').val(),
-            width: $('#width').val(),
-            heat: $('#heat').val(),
-            pattern: $('#pattern').val(),
-            holes: $('#holes').val(),
-            centers: $('#centers').val(),
-            tpm_po: $('#tpm_po').val(),
-            tpm_job: $('#tpm_job').prop('checked') ? 1 : 0,
+            coil_no: $('#coil_no').val(),
+            no_of_coil: $('#no_of_coil').val(),
+            weight: $('#weight').val(),
+            operator: $('#operator').val(),
+            cycles: $('#cycles').val(),
+            footage: $('#footage').val(),
+            allocated: $('#allocated').prop('checked') ? 1 : 0,
+            job: $('#job').val(),
+            date_received: $('#date_received').val(),
         }
 
         let flag = false;
@@ -64,7 +64,7 @@ $(document).ready(function() {
         if (flag) alert("Please input all data!");
         else {
             $.ajax({
-                url: '/api/v1/steel_tbl/create',
+                url: '/api/v1/coil_tbl/create',
                 type: 'post',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -87,10 +87,10 @@ $(document).ready(function() {
     })
 
     $('#main-table-delete').click(function() {
-        let work = $('#work').val();
-        if (work) {
+        let coil_no = $('#coil_no').val();
+        if (coil_no) {
             $.ajax({
-                url: `/api/v1/delete_row/steel_tbl/work/${work}`,
+                url: `/api/v1/delete_row/coil_tbl/coil_no/${coil_no}`,
                 type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -118,16 +118,16 @@ $(document).ready(function() {
 
 
     $('#main-table-format').click(function() {
-        $('#work').val('');
-        $('#material').val('').change();
-        $('#gage').val('').change();
-        $('#width').val('');
-        $('#heat').val('');
-        $('#pattern').val('').change();
-        $('#holes').val('').change();
-        $('#centers').val('').change();
-        $('#tpm_po').val('');
-        $('#tpm_job').val('');
+        $('#work').val('').change();
+        $('#coil_no').val('');
+        $('#no_of_coil').val('');
+        $('#weight').val('');
+        $('#operator').val('').change();
+        $('#cycles').val('').change();
+        $('#footage').val('').change();
+        $('#allocated').prop('checked', false);
+        $('#job').val('');
+        $('#date_received').val('');
     })
 
 })

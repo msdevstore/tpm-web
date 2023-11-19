@@ -16,4 +16,10 @@ class UtilsController extends Controller
         return DB::table($table)->orderBy($field)->get();
     }
 
+    public function deleteOne($table, $field, $id) {
+        if (DB::table($table)->where($field, $id)->first()) {
+            return DB::table($table)->where($field, $id)->delete();
+        } else return response(2);
+    }
+
 }

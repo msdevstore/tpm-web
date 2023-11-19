@@ -1,9 +1,9 @@
 $(document).ready(function() {
     $(document).on('click', '.main-table-btn', function (e) {
         if ($(e.target)[0].localName === 'td') {
-            let work = $(e.target).parent().attr('data');
+            let mesh_no = $(e.target).parent().attr('data');
 
-            let obj = objArr.filter(item => item.work == work)[0];
+            let obj = objArr.filter(item => item.mesh_no == mesh_no)[0];
             updateValues(obj);
 
             $('#main-table').slideToggle();
@@ -26,16 +26,18 @@ $(document).ready(function() {
     // })
 
     function updateValues(obj) {
-        $('#work').val(obj.work);
-        $('#material').val(obj.material).change();
-        $('#gage').val(obj.gage).change();
-        $('#width').val(obj.width);
-        $('#heat').val(obj.heat);
-        $('#pattern').val(obj.pattern).change();
-        $('#holes').val(obj.holes).change();
-        $('#centers').val(obj.centers).change();
+        $('#mesh_no').val(obj.mesh_no);
+        $('#supplier').val(obj.supplier);
+        $('#job').val(obj.job);
         $('#tpm_po').val(obj.tpm_po);
-        $('#tpm_job').prop('checked', obj.tpm_job === 1 ? true : false);
+        $('#date_received').val(obj.date_received);
+        $('#date_used').val(obj.date_used);
+        $('#operator').val(obj.operator);
+        $('#width').val(obj.width);
+        $('#length').val(obj.length);
+        $('#heat').val(obj.heat);
+        $('#mesh').val(obj.mesh).change();
+        $('#type').val(obj.type).change();
     }
 
     $('#main-table-show').click(function() {
@@ -45,16 +47,18 @@ $(document).ready(function() {
 
     $('#main-table-save').click(function() {
         let obj = {
-            work: $('#work').val(),
-            material: $('#material').val(),
-            gage: $('#gage').val(),
-            width: $('#width').val(),
-            heat: $('#heat').val(),
-            pattern: $('#pattern').val(),
-            holes: $('#holes').val(),
-            centers: $('#centers').val(),
+            job: $('#job').val(),
+            mesh_no: $('#mesh_no').val(),
+            supplier: $('#supplier').val(),
             tpm_po: $('#tpm_po').val(),
-            tpm_job: $('#tpm_job').prop('checked') ? 1 : 0,
+            date_received: $('#date_received').val(),
+            date_used: $('#date_used').val(),
+            operator: $('#operator').val(),
+            width: $('#width').val(),
+            length: $('#length').val(),
+            heat: $('#heat').val(),
+            mesh: $('#mesh').val(),
+            type: $('#type').val()
         }
 
         let flag = false;
@@ -64,7 +68,7 @@ $(document).ready(function() {
         if (flag) alert("Please input all data!");
         else {
             $.ajax({
-                url: '/api/v1/steel_tbl/create',
+                url: '/api/v1/used_mesh/create',
                 type: 'post',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -87,10 +91,10 @@ $(document).ready(function() {
     })
 
     $('#main-table-delete').click(function() {
-        let work = $('#work').val();
-        if (work) {
+        let mesh_no = $('#mesh_no').val();
+        if (mesh_no) {
             $.ajax({
-                url: `/api/v1/delete_row/steel_tbl/work/${work}`,
+                url: `/api/v1/delete_row/used_mesh/mesh_no/${mesh_no}`,
                 type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -116,18 +120,17 @@ $(document).ready(function() {
     })
 
 
-
     $('#main-table-format').click(function() {
-        $('#work').val('');
-        $('#material').val('').change();
-        $('#gage').val('').change();
+        $('#job').val('');
+        $('#mesh_no').val('');
+        $('#supplier').val('');
+        $('#tpm_po').val('').change();
         $('#width').val('');
+        $('#date_received').val('');
         $('#heat').val('');
-        $('#pattern').val('').change();
-        $('#holes').val('').change();
-        $('#centers').val('').change();
-        $('#tpm_po').val('');
-        $('#tpm_job').val('');
+        $('#mesh').val('').change();
+        $('#length').val('');
+        $('#type').val('').change();
     })
 
 })

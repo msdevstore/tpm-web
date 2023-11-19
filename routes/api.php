@@ -41,10 +41,13 @@ Route::prefix('v1')->group(function() {
 
     Route::post('/update_paused_job', [MainController::class, 'updatePausedJob']);
 
-    Route::post('/stamping_orders_tbl/create', [MainController::class, 'createStampingOrder']);
-    Route::delete('/delete_row/{table}/{field}/{job}', [MainController::class, 'deleteOne']);
+    Route::delete('/delete_row/{table}/{field}/{job}', [UtilsController::class, 'deleteOne']);
 
+    Route::post('/stamping_orders_tbl/create', [MainController::class, 'createStampingOrder']);
     Route::post('/steel_tbl/create', [MainController::class, 'createSteelWork']);
-    Route::delete('/delete_row/{table}/{field}/{work}', [MainController::class, 'deleteOne']);
+    Route::post('/coil_tbl/create', [MainController::class, 'createCoilWork']);
+    Route::post('/mesh_tbl/create', [MainController::class, 'createMeshWork']);
+    Route::post('/used_mesh/create', [MainController::class, 'createUsedMesh']);
+    Route::post('/packing_list_entry/create', [MainController::class, 'creatPackingList']);
 });
 

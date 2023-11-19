@@ -110,17 +110,20 @@ $(document).ready(function() {
     $('#main-table-delete').click(function() {
         let job = $('#job').val();
         $.ajax({
-            url: `/stamping_orders_tbl/${job}`,
+            url: `/api/v1/delete_row/stamping_orders_tbl/job/${job}`,
             type: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(res) {
                 console.log(res);
-                if (res) {
+                if (res === '1') {
                     alert("Deleted successfully!");
                     window.location.reload();
-                } else alert("Something went wrong!");
+                } else if (res === '2') {
+                    alert("Can't find the data in database!");
+                }
+                else alert("Something went wrong!");
             },
             error: function(err) {
                 console.log(err);

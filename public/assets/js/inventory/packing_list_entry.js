@@ -1,9 +1,9 @@
 $(document).ready(function() {
     $(document).on('click', '.main-table-btn', function (e) {
         if ($(e.target)[0].localName === 'td') {
-            let work = $(e.target).parent().attr('data');
+            let po = $(e.target).parent().attr('data');
 
-            let obj = objArr.filter(item => item.work == work)[0];
+            let obj = objArr.filter(item => item.po == po)[0];
             updateValues(obj);
 
             $('#main-table').slideToggle();
@@ -26,16 +26,16 @@ $(document).ready(function() {
     // })
 
     function updateValues(obj) {
-        $('#work').val(obj.work);
-        $('#material').val(obj.material).change();
-        $('#gage').val(obj.gage).change();
+        $('#heat_num').val(obj.heat_num);
+        $('#po').val(obj.po);
+        $('#type_mat').val(obj.type_mat).change();
+        $('#mesh').val(obj.mesh).change();
         $('#width').val(obj.width);
-        $('#heat').val(obj.heat);
-        $('#pattern').val(obj.pattern).change();
-        $('#holes').val(obj.holes).change();
-        $('#centers').val(obj.centers).change();
-        $('#tpm_po').val(obj.tpm_po);
-        $('#tpm_job').prop('checked', obj.tpm_job === 1 ? true : false);
+        $('#tot_len').val(obj.tot_len);
+        $('#allocated').prop('checked', obj.allocated === 1 ? true : false);
+        $('#job').val(obj.job);
+        $('#length').val(obj.length);
+        $('#crate').val(obj.crate);
     }
 
     $('#main-table-show').click(function() {
@@ -45,16 +45,17 @@ $(document).ready(function() {
 
     $('#main-table-save').click(function() {
         let obj = {
-            work: $('#work').val(),
-            material: $('#material').val(),
-            gage: $('#gage').val(),
+            heat_num: $('#heat_num').val(),
+            po: $('#po').val(),
+            supplier: $('#supplier').val(),
+            type_mat: $('#type_mat').val(),
+            mesh: $('#mesh').val(),
             width: $('#width').val(),
-            heat: $('#heat').val(),
-            pattern: $('#pattern').val(),
-            holes: $('#holes').val(),
-            centers: $('#centers').val(),
-            tpm_po: $('#tpm_po').val(),
-            tpm_job: $('#tpm_job').prop('checked') ? 1 : 0,
+            tot_len: $('#tot_len').val(),
+            allocated: $('#allocated').prop('checked') ? 1 : 0,
+            job: $('#job').val(),
+            length: $('#length').val(),
+            crate: $('#crate').val()
         }
 
         let flag = false;
@@ -64,7 +65,7 @@ $(document).ready(function() {
         if (flag) alert("Please input all data!");
         else {
             $.ajax({
-                url: '/api/v1/steel_tbl/create',
+                url: '/api/v1/packing_list_entry/create',
                 type: 'post',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -87,10 +88,10 @@ $(document).ready(function() {
     })
 
     $('#main-table-delete').click(function() {
-        let work = $('#work').val();
-        if (work) {
+        let po = $('#po').val();
+        if (po) {
             $.ajax({
-                url: `/api/v1/delete_row/steel_tbl/work/${work}`,
+                url: `/api/v1/delete_row/packing_list_entry/po/${po}`,
                 type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -112,22 +113,20 @@ $(document).ready(function() {
         } else {
             alert("You didn't select any data!");
         }
-
     })
 
-
-
     $('#main-table-format').click(function() {
-        $('#work').val('');
-        $('#material').val('').change();
-        $('#gage').val('').change();
+        $('#heat_num').val('');
+        $('#po').val('');
+        $('#supplier').val('');
+        $('#type_mat').val('').change();
         $('#width').val('');
-        $('#heat').val('');
-        $('#pattern').val('').change();
-        $('#holes').val('').change();
-        $('#centers').val('').change();
-        $('#tpm_po').val('');
-        $('#tpm_job').val('');
+        $('#mesh').val('');
+        $('#tot_len').val('');
+        $('#job').val('').change();
+        $('#length').val('');
+        $('#allocated').prop('checked', false);
+        $('#crate').val('');
     })
 
 })
