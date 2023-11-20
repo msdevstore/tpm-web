@@ -1,0 +1,25 @@
+.btn-control {
+    /*padding: 6px 8px;*/
+    /*background-color: transparent;*/
+    /*border: 1px solid #1BC5BD;*/
+    /*color: #1BC5BD;*/
+    /*vertical-align: middle;*/
+    /*margin: 5px;*/
+    margin: 5px 5px;
+}
+
+.btn-control:disabled {
+    background-color: #1BC5BD;
+}
+
+.fa {
+    color: #1BC5BD;
+}
+
+.fa:hover {
+    color: white;
+}
+
+.btn-control i {
+    font-size: x-large;
+}

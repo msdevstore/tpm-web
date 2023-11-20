@@ -1,0 +1,8 @@
+.delete-btn {
+    font-weight: bold;
+    color: rgb(113, 106, 202) !important;
+}
+
+.delete-btn:hover {
+    cursor: pointer;
+}

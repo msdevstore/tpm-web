@@ -128,18 +128,18 @@
 
 fieldset {
     /*margin-bottom: 1em !important;*/
-    border: 1px solid #ccc !important;
+    border: 1px solid #1BC5BD !important;
     padding: 1em !important;
 }
 
 legend {
     padding: 5px 20px !important;
     border-radius: 20px;
-    color: #555;
+    color: #1BC5BD;
     font-size: larger;
     float: none;
     width: auto;
-    border: 1px solid #ccc;
+    border: 1px solid #1BC5BD;
 }
 
 fieldset.child-fieldset legend {
@@ -234,14 +234,16 @@ fieldset.child-fieldset legend {
 .btn-control {
     padding: 5px 10px;
     width: 150px;
-    background-color: white;
+    background-color: transparent;
     border: 1px solid #1BC5BD;
     transition: .3s;
+    color: #1BC5BD !important;
 }
 
 .btn-control:hover {
-    color: #1BC5BD;
+    color: white !important;
     background-color: #1BC5BD;
+    cursor: pointer;
 }
 
 

@@ -28,52 +28,28 @@
                         <thead>
                         <tr>
                             <th>No</th>
-                            <th>Mill</th>
-                            <th>Job Number</th>
-                            <th>Company Name</th>
+                            <th>Job</th>
+                            <th>Company</th>
+                            <th>Part #</th>
                             <th>Quantity</th>
-                            <th>Ordered Date</th>
                             <th>Ship Date</th>
+                            <th>Mill</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>5</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>6</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>7</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        </tfoot>
+                        <?php $i = 1; ?>
+                        @foreach($in_progress_orders as $order)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$order->job}}</td>
+                                <td>{{$order->customer}}</td>
+                                <td>{{$order->part}}</td>
+                                <td>{{$order->quantity}}</td>
+                                <td>{{$order->ship_date}}</td>
+                                <td>{{$order->device}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -95,52 +71,28 @@
                         <thead>
                         <tr>
                             <th>No</th>
-                            <th>Mill</th>
-                            <th>Job Number</th>
-                            <th>Company Name</th>
+                            <th>Job</th>
+                            <th>Company</th>
+                            <th>Part #</th>
                             <th>Quantity</th>
-                            <th>Ordered Date</th>
                             <th>Ship Date</th>
+                            <th>Mill</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>5</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>6</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>7</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        </tfoot>
+                        <?php $i = 1; ?>
+                        @foreach($not_started_orders as $order)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$order->job}}</td>
+                                <td>{{$order->customer}}</td>
+                                <td>{{$order->part}}</td>
+                                <td>{{$order->quantity}}</td>
+                                <td>{{$order->ship_date}}</td>
+                                <td>{{$order->device}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>

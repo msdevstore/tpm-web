@@ -35,35 +35,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>8792</td>
-                            <td>Halliburton</td>
-                            <td>200</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>8793</td>
-                            <td>Halliburton</td>
-                            <td>50</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8794</td>
-                            <td>Halliburton</td>
-                            <td>10</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        </tfoot>
+                        <?php $i = 1; ?>
+                        @foreach($today_orders as $order)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$order->job}}</td>
+                                <td>{{$order->customer}}</td>
+                                <td>{{$order->quantity}}</td>
+                                <td>{{$order->ship_date}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -92,35 +74,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>8792</td>
-                            <td>Halliburton</td>
-                            <td>200</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>8793</td>
-                            <td>Halliburton</td>
-                            <td>50</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8794</td>
-                            <td>Halliburton</td>
-                            <td>10</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        </tfoot>
+                        <?php $i = 1; ?>
+                        @foreach($tomorrow_orders as $order)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$order->job}}</td>
+                                <td>{{$order->customer}}</td>
+                                <td>{{$order->quantity}}</td>
+                                <td>{{$order->ship_date}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>

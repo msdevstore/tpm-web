@@ -8,7 +8,7 @@ class PagesController extends Controller
 {
     public function index()
     {
-        $page_title = 'Dashboard';
+        $page_title = '';
         $page_description = '';
 
         return view('pages.dashboard', compact('page_title', 'page_description'));
@@ -21,8 +21,8 @@ class PagesController extends Controller
     // Datatables
     public function datatables()
     {
-        $page_title = 'Datatables';
-        $page_description = 'This is datatables test page';
+        $page_title = '';
+        $page_description = '';
 
         return view('pages.datatables', compact('page_title', 'page_description'));
     }
@@ -30,8 +30,8 @@ class PagesController extends Controller
     // KTDatatables
     public function ktDatatables()
     {
-        $page_title = 'KTDatatables';
-        $page_description = 'This is KTdatatables test page';
+        $page_title = '';
+        $page_description = '';
 
         return view('pages.ktdatatables', compact('page_title', 'page_description'));
     }

@@ -10,7 +10,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $page_title = 'Customers';
+        $page_title = '';
         $page_description = '';
         $last_id = DB::table('cust_tbl')->orderBy('cust_id', 'desc')->first()->cust_id;
         $new_id = $last_id + 1;

@@ -29,14 +29,14 @@
                             <div class="row align-items-center">
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="input-icon">
-                                        <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
+                                        <input type="text" class="form-control" placeholder="Search..." id="search_query" />
                                         <span>
                                                                 <i class="flaticon2-search-1 text-muted"></i>
                                                             </span>
                                     </div>
                                 </div>
                                 <div class="col-md-2 mt-5 mt-lg-0 d-flex justify-content-end">
-                                    <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                                    <a class="btn btn-light-primary px-6 font-weight-bold" id="search-btn">Search</a>
                                 </div>
                             </div>
                         </div>
@@ -64,34 +64,28 @@
                         <thead>
                         <tr>
                             <th>No</th>
-                            <th>Mill</th>
-                            <th>Job Number</th>
-                            <th>Company Name</th>
-                            <th>Quantity</th>
-                            <th>Ordered Date</th>
-                            <th>Ship Date</th>
+                            <th>Coil</th>
+                            <th>Job</th>
+                            <th>Work Number</th>
+                            <th>Date Allocated</th>
+                            <th>Weight</th>
+                            <th>Operator</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>5</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>6</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        </tfoot>
+                        <?php $i = 1; ?>
+                        @foreach($allocated_coils as $coil)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$coil->coil_no}}</td>
+                                <td>{{$coil->job}}</td>
+                                <td>{{$coil->operator}}</td>
+                                <td>{{$coil->date_received}}</td>
+                                <td>{{$coil->weight}}</td>
+                                <td>{{$coil->operator}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -125,16 +119,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>5</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        </tfoot>
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -171,7 +156,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        </tfoot>
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -195,7 +180,7 @@
                     <table class="table table-separate table-head-custom table-foot-custom table-checkable kt_datatable" style="margin-top: 13px !important">
                         <thead>
                         <tr>
-                            <th>Mesh ID</th>]
+                            <th>Mesh ID</th>
                             <th>Heat Number</th>
                             <th>Mesh</th>
                             <th>Type</th>
@@ -203,7 +188,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        </tfoot>
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -251,4 +236,11 @@
 @section('scripts')
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-btn').click(function() {
+                window.location.href =  `/order_status/material_search/${$('#search_query').val()}`;
+            })
+        })
+    </script>
 @endsection

@@ -34,10 +34,10 @@
         </div>
 {{--        @if(request()->is('customers'))--}}
             <div class="flex align-items-center">
-                <a href="#" id="main-table-show"><i class="fa fa-list-alt"></i></a> &nbsp;
-                <a href="#" id="main-table-save"><i class="fa fa-save"></i></a> &nbsp;
-                <a href="#" id="main-table-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
-                <a href="#" id="main-table-format"><i class="fa fa-undo"></i></a>
+                <a class="subheader-tools" id="main-table-show"><i class="fa fa-list-alt"></i></a> &nbsp;
+                <a class="subheader-tools" id="main-table-save"><i class="fa fa-save"></i></a> &nbsp;
+                <a class="subheader-tools" id="main-table-delete"><i class="fa fa-trash-alt"></i></a> &nbsp;
+                <a class="subheader-tools" id="main-table-format"><i class="fa fa-undo"></i></a>
             </div>
 {{--        @endif--}}
 

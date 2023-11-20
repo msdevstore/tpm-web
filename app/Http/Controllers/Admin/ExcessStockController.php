@@ -11,7 +11,7 @@ class ExcessStockController extends Controller
 
     public function part()
     {
-        $page_title = 'Excess Part Stock';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('excess_part')->get();
         $customers = DB::table('cust_tbl')->get();
@@ -22,7 +22,7 @@ class ExcessStockController extends Controller
 
     public function ring()
     {
-        $page_title = 'Excess Ring Stock';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('excess_ring')->get();
         $customers = DB::table('cust_tbl')->get();

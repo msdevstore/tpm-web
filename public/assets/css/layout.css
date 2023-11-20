@@ -17,4 +17,23 @@
 .btn.btn-success {
     padding: 4px 8px;
     width: 120px !important;
+    background-color: transparent;
+    color: #1BC5BD;
+    border: 1px solid #1BC5BD;
+    border-radius: 0;
+}
+
+.subheader-tools {
+    margin-right: 10px;
+}
+
+.subheader-tools i {
+    color: #3699FF;
+    transition: .3s;
+}
+
+.subheader-tools:hover i {
+    margin-right: 10px;
+    transform: scale(1.5, 1.5);
+    cursor: pointer;
 }

@@ -21,22 +21,15 @@
                 <form class="form">
                     <div class="card-body">
                         <div class="row gutter-b">
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <div class="grid-container-1" style="height: 250px; overflow-y: auto">
                                     <div class="grid-label"><label>mesh</label></div>
-                                    <div class="grid-label"><label>200 lat</label></div>
-                                    <div class="grid-label"><label>20x150</label></div>
-                                    <div class="grid-label"><label>18x210</label></div>
-                                    <div class="grid-label"><label>60X50</label></div>
-                                    <div class="grid-label"><label>60x40</label></div>
-                                    <div class="grid-label"><label>150 mesh</label></div>
-                                    <div class="grid-label"><label>18x140</label></div>
-                                    <div class="grid-label"><label>40 Mesh</label></div>
-                                    <div class="grid-label"><label>18 Mesh</label></div>
-                                    <div class="grid-label"><label>152x24</label></div>
+                                    @foreach($meshes as $mesh)
+                                        <div class="grid-label"><label>{{$mesh->mesh}}</label></div>
+                                    @endforeach
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="grid-container-3">
                                     <div class="grid-label"><label>Inner Shroud ID</label></div>
                                     <div class="grid-input"><input></div>
@@ -44,19 +37,25 @@
                                     <div class="grid-input">
                                         <select>
                                             <option>--Select--</option>
+                                            @foreach($gages as $gage)
+                                                <option>{{$gage->gage}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="grid-label"><label>Outer Shroud Gage</label></div>
                                     <div class="grid-input">
                                         <select>
                                             <option>--Select--</option>
+                                            @foreach($gages as $gage)
+                                                <option>{{$gage->gage}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="grid-label"><label>Outer Shroud Strip</label></div>
                                     <div class="grid-input"><input></div>
                                 </div>
                                 <div class="gutter-t">
-                                    <button class="btn btn-success">Delete Layers</button>
+                                    <button class="btn-control">Delete Layers</button>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -66,19 +65,28 @@
                                         <div class="grid-label"><label>Pattern</label></div>
                                         <div class="grid-input">
                                             <select>
-                                                <option></option>
+                                                <option>--Select--</option>
+                                                @foreach($patterns as $pattern)
+                                                    <option>{{$pattern->pattern}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="grid-label"><label>Holes</label></div>
                                         <div class="grid-input">
                                             <select>
-                                                <option></option>
+                                                <option>--Select--</option>
+                                                @foreach($fracs as $frac)
+                                                    <option value="{{$frac->decimal}}">{{$frac->holes}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="grid-label"><label>Centers</label></div>
                                         <div class="grid-input">
                                             <select>
-                                                <option></option>
+                                                <option>--Select--</option>
+                                                @foreach($fracs as $frac)
+                                                    <option value="{{$frac->decimal}}">{{$frac->centers}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -100,24 +108,33 @@
                             </div>
                             <div class="col-lg-3">
                                 <fieldset class="child-fieldset">
-                                    <legend>Inner shroud</legend>
+                                    <legend>Outer shroud</legend>
                                     <div class="grid-container-3">
                                         <div class="grid-label"><label>Pattern</label></div>
                                         <div class="grid-input">
                                             <select>
-                                                <option></option>
+                                                <option>--Select--</option>
+                                                @foreach($patterns as $pattern)
+                                                    <option>{{$pattern->pattern}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="grid-label"><label>Holes</label></div>
                                         <div class="grid-input">
                                             <select>
-                                                <option></option>
+                                                <option>--Select--</option>
+                                                @foreach($fracs as $frac)
+                                                    <option value="{{$frac->decimal}}">{{$frac->holes}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="grid-label"><label>Centers</label></div>
                                         <div class="grid-input">
                                             <select>
-                                                <option></option>
+                                                <option>--Select--</option>
+                                                @foreach($fracs as $frac)
+                                                    <option value="{{$frac->decimal}}">{{$frac->centers}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -135,53 +152,61 @@
                             </div>
                         </div>
                         <div class="row mt-20">
-                            <div class="col-8">
-                                <table class="table table-bordered table-head-bg">
-                                    <thead>
-                                    <tr>
-                                        <th>Layer</th>
-                                        <th>Mesh</th>
-                                        <th>Wires</th>
-                                        <th>Weave</th>
-                                        <th>Thickness</th>
-                                        <th>Weight</th>
-                                        <th>Width</th>
-                                        <th>Gap</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>30 Mesh</td>
-                                        <td>0.012</td>
-                                        <td>Plain</td>
-                                        <td>0.0220</td>
-                                        <td>0.30000</td>
-                                        <td><input></td>
-                                        <td><input></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>30 Mesh</td>
-                                        <td>0.012</td>
-                                        <td>Plain</td>
-                                        <td>0.0220</td>
-                                        <td>0.30000</td>
-                                        <td><input></td>
-                                        <td><input></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>30 Mesh</td>
-                                        <td>0.012</td>
-                                        <td>Plain</td>
-                                        <td>0.0220</td>
-                                        <td>0.30000</td>
-                                        <td><input></td>
-                                        <td><input></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col-7">
+                                <div class="table-container">
+                                    <table class="table table-bordered table-height table-head-bg">
+                                        <thead>
+                                        <tr>
+                                            <th>Layer</th>
+                                            <th>Mesh</th>
+                                            <th>Wires</th>
+                                            <th>Weave</th>
+                                            <th>Thickness</th>
+                                            <th>Weight</th>
+                                            <th>Width</th>
+                                            <th>Gap</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-7">
+                                        <button type="button" class="btn-control">Calculate Widths</button>
+                                        <button type="button" class="btn-control">Calculate Gaps</button>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="grid-container-3">
+                                            <div class="grid-label"><label>Gaps</label></div>
+                                            <div class="grid-input">
+                                                <select>
+                                                    <option>--Select--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="table-container">
+                                    <table class="table table-bordered table-height table-head-bg">
+                                        <thead>
+                                        <tr>
+                                            <th>Layer</th>
+                                            <th>Mesh</th>
+                                            <th>Lft Req'd</th>
+                                            <th>Weight Req'd</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

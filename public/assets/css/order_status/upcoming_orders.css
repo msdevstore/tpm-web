@@ -1,0 +1,9 @@
+.device-option {
+    padding: 4px 6px;
+    color: #1BC5BD;
+    border: 1px solid #1BC5BD;
+}
+
+.device-option:focus {
+    outline: none;
+}

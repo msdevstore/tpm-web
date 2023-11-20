@@ -1,0 +1,19 @@
+.form-container {
+    display: flex;
+}
+
+.card-header {
+    display: flex;
+}
+
+.div-custom input, .div-custom button {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid #1BC5BD;
+    color: #1BC5BD;
+}
+
+.div-custom input:focus {
+    outline: none;
+    border: 1px solid #1BC5BD;
+}

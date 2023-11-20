@@ -14,4 +14,11 @@
 
 .select-custom {
     padding: 2px 8px;
+    border: 1px solid #1BC5BD;
+    color: #1BC5BD;
+    background-color: transparent;
+}
+
+.select-custom:focus {
+    outline: none;
 }

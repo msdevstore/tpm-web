@@ -40,11 +40,9 @@
                                             <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                             <select class="form-control" id="kt_datatable_search_status">
                                                 <option value="">All</option>
-                                                @if(is_array($obj_arr))
-                                                    @foreach($obj_arr->first() as $key => $value)
-                                                        <option>{{$key}}</option>
-                                                    @endforeach
-                                                @endif
+                                                @foreach($obj_arr->first() as $key => $value)
+                                                    <option>{{$key}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -60,11 +58,9 @@
                     <table class="table table-separate table-hover table-head-custom table-foot-custom table-checkable kt_datatable" style="margin-top: 13px !important">
                         <thead>
                         <tr>
-                            @if(is_array($obj_arr))
-                                @foreach($obj_arr->first() as $key => $value)
-                                    <th>{{$key}}</th>
-                                @endforeach
-                            @endif
+                            @foreach($obj_arr->first() as $key => $value)
+                                <th>{{$key}}</th>
+                            @endforeach
                         </tr>
                         </thead>
                         <tbody>

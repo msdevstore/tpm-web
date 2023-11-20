@@ -61,7 +61,7 @@ class OrdersController extends Controller
 
     public function all()
     {
-        $page_title = 'All Orders';
+        $page_title = '';
         $page_description = '';
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
@@ -83,7 +83,7 @@ class OrdersController extends Controller
 
     public function yetToStart()
     {
-        $page_title = 'Yet to start';
+        $page_title = '';
         $page_description = '';
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
@@ -111,7 +111,7 @@ class OrdersController extends Controller
 
     public function started()
     {
-        $page_title = 'Started orders';
+        $page_title = '';
         $page_description = '';
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
@@ -139,7 +139,7 @@ class OrdersController extends Controller
 
     public function finished()
     {
-        $page_title = 'Finished orders';
+        $page_title = '';
         $page_description = '';
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
@@ -167,7 +167,7 @@ class OrdersController extends Controller
 
     public function shipped()
     {
-        $page_title = 'Shipped orders';
+        $page_title = '';
         $page_description = '';
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
@@ -195,7 +195,7 @@ class OrdersController extends Controller
 
     public function paused()
     {
-        $page_title = 'Paused orders';
+        $page_title = '';
         $page_description = '';
 
         $jobs = DB::table('orders_tbl')->where([
@@ -211,7 +211,7 @@ class OrdersController extends Controller
 
     public function stamping()
     {
-        $page_title = 'Stamping Jobs';
+        $page_title = '';
         $page_description = '';
         $orders = DB::table('stamping_orders_tbl')->orderBy('job', 'desc')->get();
         $job_no = DB::table('orders_tbl')->orderBy('job', 'desc')->first()->job + 1;

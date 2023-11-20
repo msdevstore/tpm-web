@@ -5,7 +5,7 @@
 @section('styles')
     <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/orders_shipped.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/orders/shipped.css') }}" />
 @endsection
 
 {{-- Content --}}
@@ -743,7 +743,7 @@
 @section('scripts')
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>
-    <script src="{{ asset('assets/js/orders_shipped.js') }}"></script>
+    <script src="{{ asset('assets/js/orders/shipped.js') }}"></script>
     <script>
         const orders = {{Js::from($orders)}};
 

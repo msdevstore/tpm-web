@@ -54,10 +54,10 @@ Route::delete('/orders/{id}', [OrdersController::class,'delete']);
 Route::get('/order_status/upcoming_orders', [OrderStatusController::class,'upcomingOrders']);
 Route::get('/order_status/shipping', [OrderStatusController::class,'shipping']);
 Route::get('/order_status/all_orders', [OrderStatusController::class,'allOrders']);
-Route::get('/order_status/material_search', [OrderStatusController::class,'materialSearch']);
-Route::get('/order_status/shipments', [OrderStatusController::class,'shipments']);
+Route::get('/order_status/material_search/{job}', [OrderStatusController::class,'materialSearch']);
+Route::get('/order_status/shipments/{field?}/{query?}', [OrderStatusController::class,'shipments']);
 Route::get('/order_status/mills', [OrderStatusController::class,'mills']);
-Route::get('/order_status/search_query', [OrderStatusController::class,'searchQuery']);
+Route::get('/order_status/search_query/{job?}/{part?}/{from?}/{to?}', [OrderStatusController::class,'searchQuery']);
 
 Route::get('/inventory/steel_work_number', [InventoryController::class,'steelWorkNumber']);
 Route::get('/inventory/receive_coil_mill', [InventoryController::class,'receiveCoilMill']);
@@ -83,6 +83,7 @@ Route::get('/quotes/new_quotes', [QuotesController::class,'newQuotes']);
 Route::get('/quotes/pricing_search', [QuotesController::class,'pricingSearch']);
 
 Route::get('/setting/users', [SettingController::class,'users']);
+Route::get('/setting/users/{id}', [SettingController::class,'userView']);
 Route::get('/setting/instruction_type', [SettingController::class,'instructionType']);
 Route::get('/setting/status_type', [SettingController::class,'statusType']);
 Route::get('/setting/tpm_type', [SettingController::class,'tpmType']);

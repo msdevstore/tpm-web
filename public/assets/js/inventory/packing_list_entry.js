@@ -43,7 +43,7 @@ $(document).ready(function() {
         $('#main-table').slideToggle();
     })
 
-    $('#main-table-save').click(function() {
+    $('#main-table-save, #save-btn').click(function() {
         let obj = {
             heat_num: $('#heat_num').val(),
             po: $('#po').val(),
@@ -128,5 +128,4 @@ $(document).ready(function() {
         $('#allocated').prop('checked', false);
         $('#crate').val('');
     })
-
 })

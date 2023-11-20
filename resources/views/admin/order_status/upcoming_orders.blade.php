@@ -4,6 +4,7 @@
 {{-- Styles --}}
 @section('styles')
     <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/order_status/upcoming_orders.css') }}" />
 @endsection
 
 {{-- Content --}}
@@ -27,127 +28,35 @@
                     <table class="table table-separate table-head-custom table-foot-custom table-checkable kt_datatable" style="margin-top: 13px !important">
                         <thead>
                         <tr>
-                            <th>No</th>
                             <th>Customer</th>
                             <th>Ship Date</th>
-                            <th>Part</th>
-                            <th>Job</th>
-                            <th>QTY</th>
+                            <th>Part #</th>
+                            <th>Job #</th>
+                            <th>Qty</th>
                             <th>Description</th>
                             <th>Mill</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
+                        @foreach($orders as $order)
+                            <tr class="main-table-btn" data="{{$order->job}}">
+                                <td><?php echo (strlen($order->customer) > 20) ? substr($order->customer, 0, 20) . '...' : $order->customer ?></td>
+                                <td><?php echo (strlen($order->ship_date) > 20) ? substr($order->ship_date, 0, 20) . '...' : $order->ship_date ?></td>
+                                <td><?php echo (strlen($order->part) > 20) ? substr($order->part, 0, 20) . '...' : $order->part ?></td>
+                                <td><?php echo (strlen($order->quantity) > 20) ? substr($order->quantity, 0, 20) . '...' : $order->quantity ?></td>
+                                <td><?php echo (strlen($order->job) > 20) ? substr($order->job, 0, 20) . '...' : $order->job ?></td>
+                                <td><?php echo (strlen($order->description) > 20) ? substr($order->description, 0, 20) . '...' : $order->description ?></td>
+                                <td>
+                                    <select class="device-option" data="{{$order->job}}">
+                                        <option value="">--- No selected ---</option>
+                                        @foreach($devices as $device)
+                                            <?php $selected = ''; if($device->device == $order->device) $selected = 'selected' ?>
+                                            <option value="{{$device->device}}" {{$selected}}>{{$device->device}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tfoot>
                     </table>
                     <!--end: Datatable-->
@@ -169,128 +78,36 @@
                     <table class="table table-separate table-head-custom table-foot-custom table-checkable kt_datatable" style="margin-top: 13px !important">
                         <thead>
                         <tr>
-                            <th>No</th>
                             <th>Customer</th>
                             <th>Ship Date</th>
-                            <th>Part</th>
-                            <th>Job</th>
-                            <th>QTY</th>
+                            <th>Part #</th>
+                            <th>Job #</th>
+                            <th>Qty</th>
                             <th>Description</th>
                             <th>Mill</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>Alloy Machine Works Inc</td>
-                            <td>2023-07-12</td>
-                            <td>H0K09198BM-INR</td>
-                            <td>8679</td>
-                            <td>5</td>
-                            <td>4.0 IN FLTR CRTG, FINE, 192.00</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Assign</a></td>
-                        </tr>
-                        </tfoot>
+                        @foreach($paused_orders as $order)
+                            <tr class="main-table-btn" data="{{$order->job}}">
+                                <td><?php echo (strlen($order->customer) > 20) ? substr($order->customer, 0, 20) . '...' : $order->customer ?></td>
+                                <td><?php echo (strlen($order->ship_date) > 20) ? substr($order->ship_date, 0, 20) . '...' : $order->ship_date ?></td>
+                                <td><?php echo (strlen($order->part) > 20) ? substr($order->part, 0, 20) . '...' : $order->part ?></td>
+                                <td><?php echo (strlen($order->quantity) > 20) ? substr($order->quantity, 0, 20) . '...' : $order->quantity ?></td>
+                                <td><?php echo (strlen($order->job) > 20) ? substr($order->job, 0, 20) . '...' : $order->job ?></td>
+                                <td><?php echo (strlen($order->description) > 20) ? substr($order->description, 0, 20) . '...' : $order->description ?></td>
+                                <td>
+                                    <select class="device-option" data="{{$order->job}}">
+                                        <option value="">--- No selected ---</option>
+                                        @foreach($devices as $device)
+                                                <?php $selected = ''; if($device->device == $order->device) $selected = 'selected' ?>
+                                            <option value="{{$device->device}}" {{$selected}}>{{$device->device}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -304,4 +121,5 @@
 @section('scripts')
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>
+    <script src="{{ asset('assets/js/order_status/upcoming_orders.js') }}"></script>
 @endsection

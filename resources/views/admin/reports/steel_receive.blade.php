@@ -30,6 +30,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <h1>Comfirming requirements</h1>
+                        </div>
                     </div>
                 </form>
                 <!--end::Form-->

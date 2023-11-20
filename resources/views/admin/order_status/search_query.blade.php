@@ -28,42 +28,30 @@
                         <div class="row align-items-center">
                             <div class="col-lg-11 col-xl-10">
                                 <div class="row align-items-center">
-                                    <div class="col-md-4 my-2 my-md-0">
+                                    <div class="col-md-3 my-2 my-md-0">
                                         <div class="input-icon">
-                                            <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
-                                            <span>
-																	<i class="flaticon2-search-1 text-muted"></i>
-																</span>
+                                            <input type="text" class="form-control" placeholder="Job" id="job" />
                                         </div>
                                     </div>
-                                    <div class="col-md-4 my-2 my-md-0">
-                                        <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                            <select class="form-control" id="kt_datatable_search_status">
-                                                <option value="">All</option>
-                                                <option value="1">Job</option>
-                                                <option value="2">Company</option>
-                                                <option value="3">Quantity</option>
-                                                <option value="4">Ship Date</option>
-                                                <option value="5">Action</option>
-                                            </select>
+                                    <div class="col-md-3 my-2 my-md-0">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Part" id="part" />
                                         </div>
                                     </div>
-                                    {{--                                    <div class="col-md-4 my-2 my-md-0">--}}
-                                    {{--                                        <div class="d-flex align-items-center">--}}
-                                    {{--                                            <label class="mr-3 mb-0 d-none d-md-block">Type:</label>--}}
-                                    {{--                                            <select class="form-control" id="kt_datatable_search_type">--}}
-                                    {{--                                                <option value="">All</option>--}}
-                                    {{--                                                <option value="1">Online</option>--}}
-                                    {{--                                                <option value="2">Retail</option>--}}
-                                    {{--                                                <option value="3">Direct</option>--}}
-                                    {{--                                            </select>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                    <div class="col-md-3 my-2 my-md-0">
+                                        <div class="input-icon">
+                                            <input type="date" class="form-control" id="from" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 my-2 my-md-0">
+                                        <div class="input-icon">
+                                            <input type="date" class="form-control" id="to" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-1 col-xl-2 mt-5 mt-lg-0 d-flex justify-content-end">
-                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                                <a class="btn btn-light-primary px-6 font-weight-bold" id="search-btn">Search</a>
                             </div>
                         </div>
                     </div>
@@ -82,43 +70,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>5</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>6</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>7</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td>2023-07-12</td>
-                        </tr>
-                        </tfoot>
+                        <?php $i = 1; ?>
+                        @foreach($orders as $order)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$order->device}}</td>
+                                <td>{{$order->job}}</td>
+                                <td>{{$order->cust_id}}</td>
+                                <td>{{$order->quantity}}</td>
+                                <td>{{$order->ordered}}</td>
+                                <td>{{$order->shipped}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -133,4 +97,15 @@
 @section('scripts')
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-btn').click(function() {
+                let job = $('#job').val();
+                let part = $('#part').val();
+                let from = $('#from').val();
+                let to = $('#to').val();
+                window.location.href = `/order_status/search_query/${job}/${part}/${from}/${to}`;
+            })
+        })
+    </script>
 @endsection

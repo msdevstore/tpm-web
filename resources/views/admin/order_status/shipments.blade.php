@@ -4,6 +4,7 @@
 {{-- Styles --}}
 @section('styles')
     <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/order_status/shipments.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 {{-- Content --}}
@@ -30,7 +31,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="input-icon">
-                                            <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
+                                            <input type="text" class="form-control" placeholder="Search..." id="search_query" />
                                             <span>
 																	<i class="flaticon2-search-1 text-muted"></i>
 																</span>
@@ -39,13 +40,11 @@
                                     <div class="col-md-4 my-2 my-md-0">
                                         <div class="d-flex align-items-center">
                                             <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                            <select class="form-control" id="kt_datatable_search_status">
+                                            <select class="form-control" id="search_field">
                                                 <option value="">All</option>
-                                                <option value="1">Job</option>
-                                                <option value="2">Company</option>
-                                                <option value="3">Quantity</option>
-                                                <option value="4">Ship Date</option>
-                                                <option value="5">Action</option>
+                                                <option value="job">Job</option>
+                                                <option value="cust_id">Company</option>
+                                                <option value="quantity">Quantity</option>
                                             </select>
                                         </div>
                                     </div>
@@ -63,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-1 col-xl-2 mt-5 mt-lg-0 d-flex justify-content-end">
-                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                                <a class="btn btn-light-primary px-6 font-weight-bold" id="search-btn">Search</a>
                             </div>
                         </div>
                     </div>
@@ -81,39 +80,18 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <?php $i = 1; ?>
+                        @foreach($partial_ships as $partial_ship)
                         <tr>
-                            <td>1</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Delete</a></td>
+                            <td>{{$i++}}</td>
+                            <td>{{$partial_ship->job}}</td>
+                            <td>{{$partial_ship->customer}}</td>
+                            <td>{{$partial_ship->quantity}}</td>
+                            <td>{{$partial_ship->ship_date}}</td>
+                            <td><a class="delete-btn" onclick="deletePartialShip('{{$partial_ship->job}}', '{{$partial_ship->cust_id}}')">Delete</a></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8791</td>
-                            <td>Halliburton</td>
-                            <td>100</td>
-                            <td>2023-07-12</td>
-                            <td><a class="highlight" style="font-weight: bold; color: rgb(113, 106, 202);">Delete</a></td>
-                        </tr>
-                        </tfoot>
+                        @endforeach
+                        </tbody>
                     </table>
                     <!--end: Datatable-->
                 </div>
@@ -127,4 +105,32 @@
 @section('scripts')
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-btn').click(function() {
+                const field = $('#search_field').val();
+                const query = $('#search_query').val();
+                console.log(query);
+                window.location.href = `/order_status/shipments/${field}/${query}`;
+            })
+        })
+
+        function deletePartialShip(job, cust_id) {
+            $.ajax({
+                url: `/api/v1/delete_partial_ship/${job}/${cust_id}`,
+                type: 'DELETE',
+                success: function(res) {
+                    console.log(res);
+                    if (res === '1') {
+                        alert("Deleted successfully!");
+                        window.location.reload();
+                    } else alert("Something went wrong!");
+                },
+                error: function(err) {
+                    console.log(err);
+                    alert("Failed!");
+                }
+            })
+        }
+    </script>
 @endsection

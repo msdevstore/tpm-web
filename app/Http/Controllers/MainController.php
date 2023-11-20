@@ -8,6 +8,229 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
+
+    public function deletePartialShip($job, $cust_id) {
+        return DB::table('partial_ship')->where(['job' => $job, 'cust_id' => $cust_id])->delete();
+    }
+
+    public function updateUpcomingOrders(Request $request) {
+        return response()->json(DB::table('orders_tbl')->where('job', str_replace(",", "", $request->job))->update(['device' => $request->device]));
+    }
+    public function createFooter(Request $request) {
+        $data = [
+            'id' => $request->id,
+            'tubmil_log' => $request->tubmil_log,
+            'tubmil_log-2' => $request->tubmil_log_2,
+            'tubmil_log-3' => $request->tubmil_log_3,
+            'tubmil_log-4' => $request->tubmil_log_4,
+            'tubmil_setup' => $request->tubmil_setup,
+            'tubmil_setup-2' => $request->tubmil_setup_2,
+            'tubmil_setup-3' => $request->tubmil_setup_3,
+            'tubmil_setup-4' => $request->tubmil_setup_4,
+            'first_part_drift' => $request->first_part_drift,
+            'first_part_drift-2' => $request->first_part_drift_2,
+            'first_part_drift-3' => $request->first_part_drift_3,
+            'first_part_drift-4' => $request->first_part_drift_4,
+            'welding_station_cklist' => $request->welding_station_cklist,
+            'welding_station_cklist-2' => $request->welding_station_cklist_2,
+            'welding_station_cklist-3' => $request->welding_station_cklist_3,
+            'welding_station_cklist-4' => $request->welding_station_cklist_4,
+            'worksheet' => $request->worksheet,
+            'worksheet-2' => $request->worksheet_2,
+            'worksheet-3' => $request->worksheet_3,
+            'worksheet-4' => $request->worksheet_4,
+            'direct_pack' => $request->direct_pack,
+            'direct_pack-2' => $request->direct_pack_2,
+            'direct_pack-3' => $request->direct_pack_3,
+            'direct_pack-4' => $request->direct_pack_4,
+            'cutoff_station' => $request->cutoff_station,
+            'cutoff_station-1' => $request->cutoff_station_2,
+            'cutoff_station-2' => $request->cutoff_station_3,
+            'cutoff_station-3' => $request->cutoff_station_4,
+            'inspection_station' => $request->inspection_station,
+            'inspection_station-2' => $request->inspection_station_2,
+            'inspection_station-3' => $request->inspection_station_3,
+            'inspection_station-4' => $request->inspection_station_4,
+            'ring_station' => $request->ring_station,
+            'ring_station-2' => $request->ring_station_2,
+            'ring_station-3' => $request->ring_station_3,
+            'ring_station-4' => $request->ring_station_4,
+            'coil_alloc' => $request->coil_alloc,
+            'coil_alloc-2' => $request->coil_alloc_2,
+            'coil_alloc-3' => $request->coil_alloc_3,
+            'coil_alloc-4' => $request->coil_alloc_4,
+            'mesh_alloc' => $request->mesh_alloc,
+            'mesh_alloc-2' => $request->mesh_alloc_2,
+            'mesh_alloc-3' => $request->mesh_alloc_3,
+            'mesh_alloc-4' => $request->mesh_alloc_4,
+            'final_inspection' => $request->final_inspection,
+            'final_inspection-2' => $request->final_inspection_2,
+            'final_inspection-3' => $request->final_inspection_3,
+            'final_inspection-4' => $request->final_inspection_4,
+        ];
+
+        $exist = DB::table('footer_for_pdf')->where('id', $request->id)->first();
+
+        if ($exist) return DB::table('footer_for_pdf')->where('id', $request->id)->update($data);
+        else {
+            return DB::table('footer_for_pdf')->insert($data);
+        }
+    }
+
+    public function createOne(Request $request, $table, $primary) {
+        $data = $request->all();
+        $exist = DB::table($table)->where($primary, $data[$primary])->first();
+        if ($exist) return DB::table($table)->where($primary, $data[$primary])->update($data);
+        else {
+            return DB::table($table)->insert($data);
+        }
+    }
+
+    public function createUser(Request $request) {
+        return DB::table('users')->insert(['username' => $request->username, 'password' => $request->password]);
+    }
+    public function updateUser(Request $request) {
+        $status = DB::table('users')->where('id', '<>', $request->id)->where('username', $request->username)->first();
+        if ($status) return response(2);
+        else return DB::table('users')->where('id', $request->id)->update(['username' => $request->username, 'password' => $request->password]);
+    }
+
+    public function activateUsersPermissions(Request $request) {
+        if ($request->checked == 'true') {
+            return DB::table('users_permissions')->insert(['permission_id' => $request->permission_id, 'user_id' => $request->user_id]);
+        } else if ($request->checked == 'false') {
+            return DB::table('users_permissions')->where(['permission_id' => $request->permission_id, 'user_id' => $request->user_id])->delete();
+        }
+    }
+
+    public function createShipInfo(Request $request) {
+        $data = [
+            'job' => $request->job,
+            'customer' => $request->customer,
+            'ship_to' => $request->ship_to,
+            'po' => $request->po,
+            'quantity' => $request->quantity,
+            'part' => $request->part,
+            'via' => $request->via,
+            'sh_date' => $request->sh_date,
+            'desc' => $request->desc,
+            'sold_to' => $request->sold_to,
+            'item' => $request->item,
+            'heat' => $request->heat,
+            'rings' => $request->rings,
+            'ring_heat' => $request->ring_heat,
+            'list' => $request->list,
+            'p_cert' => $request->p_cert,
+            'certs' => $request->certs
+        ];
+
+        $exist = DB::table('ship_info')->where('ship_no', $request->ship_no)->first();
+
+        if ($exist) return DB::table('ship_info')->where('ship_no', $request->ship_no)->update($data);
+        else {
+            $data['ship_no'] = $request->ship_no;
+            return DB::table('ship_info')->insert($data);
+        }
+    }
+
+    public function createRingDetail(Request $request) {
+        $data = [
+            'Date' => $request->Date,
+            'Ring_Size' => $request->Ring_Size,
+            'Excluder_Size' => $request->Excluder_Size,
+            'Job' => $request->Job,
+            'Qty' => $request->Qty
+        ];
+
+        $exist = DB::table('ring_detail')->where('Key', $request->Key)->first();
+
+        if ($exist) return DB::table('ring_detail')->where('Key', $request->Key)->update($data);
+        else {
+            $data['Key'] = $request->Key;
+            return DB::table('ring_detail')->insert($data);
+        }
+    }
+
+    public function createPart(Request $request) {
+        $data = [
+            'cust_id' => $request->cust_id,
+            'description' => $request->description,
+            'dim' => $request->dim,
+            'dim_plus' => $request->dim_plus,
+            'dim_minus' => $request->dim_minus,
+            'gage' => $request->gage,
+            'pattern' => $request->pattern,
+            'holes' => $request->holes,
+            'centers' => $request->centers,
+            'cutoff_length' => $request->cutoff_length,
+            'cutoff_length_plus' => $request->cutoff_length_plus,
+            'cutoff_length_minus' => $request->cutoff_length_minus,
+            'finished_length' => $request->finished_length,
+            'length_plus' => $request->length_plus,
+            'length_minus' => $request->length_minus,
+            'strip' => $request->strip
+        ];
+
+        $exist = DB::table('part_tbl')->where('part', $request->part)->first();
+
+        if ($exist) return DB::table('part_tbl')->where('part', $request->part)->update($data);
+        else {
+            $data['part'] = $request->part;
+            return DB::table('part_tbl')->insert($data);
+        }
+    }
+
+    public function createQuote(Request $request) {
+        $data = [
+            'cust_id' => $request->cust_id,
+            'part' => $request->part,
+            'address' => $request->address,
+            'fax_back' => $request->fax_back,
+            'date' => $request->date,
+            'fob' => $request->fob,
+            'terms' => $request->terms
+        ];
+
+        $exist = DB::table('quote_tbl')->where('quote', $request->quote)->first();
+
+        if ($exist) return DB::table('quote_tbl')->where('quote', $request->quote)->update($data);
+        else {
+            $data['quote'] = $request->quote;
+            return DB::table('quote_tbl')->insert($data);
+        }
+    }
+
+    public function createMatReq(Request $request) {
+        $data = [
+            'quantity' => $request->quantity,
+            'dim' => $request->dim,
+            'gage' => $request->gage,
+            'pattern' => $request->pattern,
+            'length' => $request->length,
+            'holes' => $request->holes,
+            'centers' => $request->centers,
+            'strip' => $request->strip
+        ];
+
+        $exist = DB::table('mat_req')->where('Id', $request->Id)->first();
+
+        if ($exist) return DB::table('mat_req')->where('Id', $request->Id)->update($data);
+        else {
+            $data['Id'] = $request->Id;
+            $data['Part'] = '';
+            $data['is_od'] = 1;
+            return DB::table('mat_req')->insert($data);
+        }
+    }
+
+    public function getPartInfo(Request $request) {
+        return DB::table('part_tbl')->where(['cust_id' => $request->cust_id, 'part' => $request->part])->first();
+    }
+
+    public function getPartsByCust($id) {
+        return DB::table('part_tbl')->where('cust_id', $id)->get();
+    }
+
     public function createExcessRing(Request $request) {
         $data = [
             'ring' => $request->ring,

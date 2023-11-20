@@ -10,7 +10,7 @@ class InventoryController extends Controller
 {
     public function steelWorkNumber()
     {
-        $page_title = 'Steel Work Number';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('steel_tbl')->get();
         $work = DB::table('steel_tbl')->orderBy('work', 'desc')->first()->work;
@@ -24,7 +24,7 @@ class InventoryController extends Controller
 
     public function receiveCoilMill()
     {
-        $page_title = 'Receive Coil Mill';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('coil_tbl')->get();
         $steels = DB::table('steel_tbl')->get();
@@ -35,7 +35,7 @@ class InventoryController extends Controller
 
     public function receiveCoilStamping()
     {
-        $page_title = 'Receive Coil Stamping';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('raw_coil_tbl')->get();
         $steels = DB::table('steel_tbl')->get();
@@ -45,7 +45,7 @@ class InventoryController extends Controller
 
     public function meshReceiving()
     {
-        $page_title = 'Mesh Receiving';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('mesh_tbl')->get();
         $mesh_types = DB::table('mesh')->get();
@@ -56,7 +56,7 @@ class InventoryController extends Controller
 
     public function meshInventory()
     {
-        $page_title = 'Mesh Inventory';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('mesh_tbl')->where('splice_chk', 1)->get();
         $mesh_types = DB::table('mesh')->get();
@@ -67,7 +67,7 @@ class InventoryController extends Controller
 
     public function meshAllocated()
     {
-        $page_title = 'Mesh Allocated';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('mesh_tbl')->where('allocated', 1)->get();
         $mesh_types = DB::table('mesh')->get();
@@ -78,7 +78,7 @@ class InventoryController extends Controller
 
     public function usedMesh()
     {
-        $page_title = 'Used Mesh';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('used_mesh')->get();
         $mesh_types = DB::table('mesh')->get();
@@ -89,7 +89,7 @@ class InventoryController extends Controller
 
     public function packingListEntry()
     {
-        $page_title = 'Packing List Entry';
+        $page_title = '';
         $page_description = '';
         $obj_arr = DB::table('packing_list_entry')->get();
         $mesh_types = DB::table('mesh')->get();
