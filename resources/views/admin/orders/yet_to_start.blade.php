@@ -767,6 +767,7 @@
                 $('#ship_method').val('').change();
                 $('#weld_spec_mill').val('').change();
                 $('#weld_spec_repair').val('').change();
+                toastr.success("You can add new data now!", "Success");
             })
         })
     </script>

@@ -12,14 +12,22 @@ $(document).ready(function() {
             success: function(res) {
                 console.log(res);
                 if (res) {
-                    alert("Paused job updated successfully!");
-                    window.location.reload();
+                    toastr.success(
+                        "Paused job updated successfully!",
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
                 }
-                else alert("Something went wrong!");
+                else toastr.warning("Something went wrong!");
             },
             error: function(err) {
                 console.log(err);
-                alert("Failed!");
+                toastr.error("Failed!");
             }
         })
     })

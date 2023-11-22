@@ -10,12 +10,21 @@ $(document).ready(function () {
                 },
                 success: function(res) {
                     console.log(res);
-                    if (res === 1) alert('Device added successfully!');
-                    else alert('Something went wrong!');
+                    if (res === 1) toastr.success(
+                        'Device added successfully!',
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
+                    else toastr.warning('Something went wrong!');
                 },
                 error: function(err) {
                     console.log(err);
-                    alert('Failed');
+                    toastr.error('Failed');
                 }
             })
         }

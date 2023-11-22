@@ -10,12 +10,21 @@ $(document).ready(function() {
             },
             success: function(res) {
                 console.log(res);
-                if (res) alert("Updated successfully!");
-                else alert("Something went wrong!");
+                if (res) toastr.success(
+                    "Updated successfully!",
+                    "Success",
+                    {
+                        timeOut: 1000,
+                        fadeOut: 1000,
+                        onHidden: function () {
+                            window.location.reload();
+                        }
+                    });
+                else toastr.info("Something went wrong!");
             },
             error: function(err) {
                 console.log(err);
-                alert("Failed!")
+                toastr.error("Failed!")
             }
         })
     })
@@ -24,7 +33,7 @@ $(document).ready(function() {
         let username = $('#username').val();
         let password = $('#password').val();
         let id = $('#user_id').val();
-        if (!username || !password || !id) alert("Username or password are required!");
+        if (!username || !password || !id) toastr.info("Username or password are required!");
         else {
             $.ajax({
                 url: '/api/v1/users/update',
@@ -36,16 +45,24 @@ $(document).ready(function() {
                 },
                 success: function (res) {
                     console.log(res);
-                    if (res === 2) alert("Username is used!");
-                    else if(res === 0) alert("Something went wrong!");
+                    if (res === 2) toastr.info("The username is already using!");
+                    else if(res === 0) toastr.warning("Something went wrong!");
                     else {
-                        alert("Updated successfully!");
-                        window.location.reload();
+                        toastr.success(
+                            "Updated successfully!",
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            });
                     }
                 },
                 error: function(err) {
                     console.log(err);
-                    alert("Failed!");
+                    toastr.error("Failed!");
                 }
             })
         }

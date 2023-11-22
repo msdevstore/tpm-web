@@ -52,7 +52,7 @@ $(document).ready(function() {
         // Object.keys(obj).forEach(key => {
         //     if (obj[key] === '') flag = true;
         // })
-        // if (flag) alert("Please input all data!");
+        // if (flag) toastr.info("Please input all data!!");
         // else {
         //     $.ajax({
         //         url: '/api/v1/excess_ring/create',
@@ -67,11 +67,11 @@ $(document).ready(function() {
         //                 alert("Updated successfully!");
         //                 window.location.reload();
         //             } else if (res === true) alert("Created successfully!");
-        //             else alert("Something went wrong!");
+        //             else toastr.warning("Something went wrong!");
         //         },
         //         error: function(err) {
         //             console.log(err);
-        //             alert("Failed!");
+        //             toastr.error("Failed!");
         //         }
         //     })
         // }
@@ -94,7 +94,7 @@ $(document).ready(function() {
         //             } else if (res === '2') {
         //                 alert("Can't find the data in database!");
         //             }
-        //             else alert("Something went wrong!");
+        //             else toastr.warning("Something went wrong!");
         //         },
         //         error: function(err) {
         //             console.log(err);
@@ -112,6 +112,7 @@ $(document).ready(function() {
         // $('#date_produced').val('');
         // $('#los').val('');
         setDefaultValues()
+        toastr.success("You can add new data now!", "Success");
     })
 
     /////////////////////
@@ -126,13 +127,13 @@ $(document).ready(function() {
                         options += `<option value="${customer.part}">${customer.part}</option>`
                     })
                 } else {
-                    alert("No data!");
+                    toastr.info("No data!");
                 }
                 $('#part').empty().append(options);
             },
             error: function(err) {
                 console.log(err);
-                alert("Failed!");
+                toastr.error("Failed!");
             }
         })
     })

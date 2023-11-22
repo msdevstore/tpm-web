@@ -12,9 +12,9 @@ class CustomerController extends Controller
     {
         $page_title = '';
         $page_description = '';
-        $last_id = DB::table('cust_tbl')->orderBy('cust_id', 'desc')->first()->cust_id;
+        $customers = DB::table('cust_tbl')->orderBy('cust_id', 'desc')->get();
+        $last_id = $customers->first()->cust_id;
         $new_id = $last_id + 1;
-        $customers = DB::table('cust_tbl')->get();
 
         return view('admin.customer.index', compact('page_title', 'page_description', 'new_id', 'customers'));
     }

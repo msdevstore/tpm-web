@@ -144,7 +144,7 @@
                 let email = $('#email').val();
 
                 if (!cust_id || !customer || !bill_to || !ship_to || !contact || !phone || !fax || !email) {
-                    alert("Please input all information!");
+                    toastr.warning("Please input all information!");
                 } else {
                     let data = {
                         cust_id: cust_id,
@@ -167,7 +167,16 @@
                             if (res) {
                                 let index = customers.findIndex(customer => customer.cust_id == cust_id);
                                 if (index >= 0) {
-                                    alert('Customer is updated successfully!');
+                                    toastr.success(
+                                        'Customer is updated successfully!',
+                                        "Success",
+                                        {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function () {
+                                                window.location.reload();
+                                            }
+                                        });
                                     // customers[index].cust_id = cust_id;
                                     // customers[index].customer = customer;
                                     // customers[index].bill_to = bill_to;
@@ -177,15 +186,23 @@
                                     // customers[index].fax = fax;
                                     // customers[index].email = email;
                                 } else {
-                                    alert('New customer is created successfully!');
+                                    toastr.success(
+                                        'New customer is created successfully!',
+                                        "Success",
+                                        {
+                                            timeOut: 1000,
+                                            fadeOut: 1000,
+                                            onHidden: function () {
+                                                window.location.reload();
+                                            }
+                                        });
                                     // customers.push(data);
                                 }
-                                window.location.reload();
-                            } else alert('Something went wrong!');
+                            } else toastr.warning('Something went wrong!');
                         },
                         error: function (err) {
                             console.log(err);
-                            alert('Failed');
+                            toastr.error('Failed');
                         }
                     })
                 }
@@ -204,16 +221,26 @@
                         success: function(res) {
                             console.log(res);
                             if (res) {
-                                alert("Customer is deleted successfully!");
-                                window.location.reload();
+                                toastr.success(
+                                    "Customer is deleted successfully!",
+                                    "Success",
+                                    {
+                                        timeOut: 1000,
+                                        fadeOut: 1000,
+                                        onHidden: function () {
+                                            window.location.reload();
+                                        }
+                                    });
                             }
-                            else alert("Something went wrong!");
+                            else toastr.warning("Something went wrong!");
                         },
                         error: function(err) {
                             console.log(err);
-                            alert("Failed!");
+                            toastr.error("Failed!");
                         }
                     })
+                } else {
+                    toastr.info("No data selected!")
                 }
             })
 
@@ -226,6 +253,7 @@
                 $('#phone').val('');
                 $('#fax').val('');
                 $('#email').val('');
+                toastr.success("You can add new data now!", "Success");
             })
 
             $(document).click('.customer-btn', function(e) {

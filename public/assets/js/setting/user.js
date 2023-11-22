@@ -7,13 +7,21 @@ $(document).ready(function () {
             success: function(res) {
                 console.log(res);
                 if (res === '1') {
-                    alert('Deleted successfully!');
-                    window.location.reload();
-                } else alert('Something went wrong!');
+                    toastr.success(
+                        'Deleted successfully!',
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
+                } else toastr.warning('Something went wrong!');
             },
             error: function(err) {
                 console.log(err);
-                alert('Failed!');
+                toastr.error('Failed!');
             }
         })
     })
@@ -23,9 +31,9 @@ $(document).ready(function () {
         let password = $('#password').val();
         let confirm_password = $('#confirm_password').val();
         if (!username || !password) {
-            alert("Enter your username and password!");
+            toastr.info("Enter your username and password!");
         } else if (password !== confirm_password) {
-            alert("Passwords not match!");
+            toastr.info("Passwords not match!");
         } else {
             $.ajax({
                 url: '/api/v1/users/create',
@@ -37,14 +45,22 @@ $(document).ready(function () {
                 success: function(res) {
                     console.log(res);
                     if (res) {
-                        alert("Created successfully!");
-                        window.location.reload()
+                        toastr.success(
+                            "Created successfully!",
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            });
 
-                    } else alert("Something went wrl");
+                    } else toastr.warning("Something went wrong!");
                 },
                 error: function (err) {
                     console.log(err);
-                    alert("Failed!");
+                    toastr.error("Failed!");
                 }
             })
         }

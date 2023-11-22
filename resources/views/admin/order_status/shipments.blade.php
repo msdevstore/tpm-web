@@ -122,13 +122,22 @@
                 success: function(res) {
                     console.log(res);
                     if (res === '1') {
-                        alert("Deleted successfully!");
-                        window.location.reload();
-                    } else alert("Something went wrong!");
+                        toastr.success(
+                            "Deleted successfully!",
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            }
+                        );
+                    } else toastr.warning("Something went wrong!");
                 },
                 error: function(err) {
                     console.log(err);
-                    alert("Failed!");
+                    toastr.error("Failed!");
                 }
             })
         }

@@ -66,8 +66,8 @@
                         <tbody>
                         @foreach($orders as $order)
                             <tr class="order-btn" data="{{$order->job}}">
-                                @foreach($order as $key => $value)
-                                    <td><?php echo (strlen($value) > 20) ? substr($value, 0, 20) . '...' : $value ?></td>
+                                @foreach($order as $value)
+                                    <td>{{$value}}</td>
                                 @endforeach
                             </tr>
                         @endforeach
@@ -107,7 +107,7 @@
                                             <select id="cust_id">
                                                 <option value="">Select</option>
                                                 @foreach($customers as $customer)
-                                                    <option value="{{$customer->cust_id}}"><?php echo (strlen($customer->customer) > 20) ? substr($customer->customer, 0, 20) . '...' : $customer->customer ?></option>
+                                                    <option value="{{$customer->cust_id}}">{{$customer->customer}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -118,7 +118,7 @@
                                             <select id="part">
                                                 <option value="">Select</option>
                                                 @foreach($parts as $part)
-                                                    <option {{$part->part}}><?php echo (strlen($part->part) > 20) ? substr($part->part, 0, 20) . '...' : $part->part ?></option>
+                                                    <option {{$part->part}}>{{$part->part}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -402,6 +402,7 @@
                 $('#ship_method').val('').change();
                 $('#weld_spec_mill').val('').change();
                 $('#weld_spec_repair').val('').change();
+                toastr.success("You can add new data now!", "Success");
             })
         })
     </script>

@@ -149,7 +149,7 @@ $(document).ready(function() {
         Object.keys(obj).forEach(key => {
             if (obj[key] === '') flag = true;
         })
-        if (flag) alert("Please input all data!");
+        if (flag) toastr.info("Please input all data!");
         else {
             $.ajax({
                 url: '/orders/create',
@@ -161,14 +161,31 @@ $(document).ready(function() {
                 success: function(res) {
                     console.log(res);
                     if (res === '1') {
-                        alert("Updated successfully!");
-                        window.location.reload();
-                    } else if (res === true) alert("Created successfully!");
-                    else alert("Something went wrong!");
+                        toastr.success(
+                            "Updated successfully!",
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            });
+                    } else if (res === true) toastr.success(
+                        "Created successfully!",
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
+                    else toastr.warning("Something went wrong!");
                 },
                 error: function(err) {
                     console.log(err);
-                    alert("Failed!");
+                    toastr.error("Failed!");
                 }
             })
         }
@@ -185,12 +202,21 @@ $(document).ready(function() {
             success: function(res) {
                 console.log(res);
                 if (res) {
-                    alert("Deleted successfully!");
-                    window.location.reload();
-                } else alert("Something went wrong!");
+                    toastr.success(
+                        "Deleted successfully!",
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
+                } else toastr.warning("Something went wrong!");
             },
             error: function(err) {
                 console.log(err);
+                toastr.error("Failed!");
             }
         })
     })
@@ -255,7 +281,7 @@ $(document).ready(function() {
             },
             error: function(err) {
                 console.log(err);
-                alert('Failed!');
+                toastr.error('Failed!');
             }
         })
     })
@@ -280,18 +306,27 @@ function updateAllocation(num, self) {
                 },
                 success: function(res) {
                     if (res.length) {
-                        alert(res.length + ' lists are updated!');
+                        toastr.success(
+                            res.length + ' lists are updated!',
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            });
                     } else {
-                        alert('No change!');
+                        toastr.info('No change!');
                     }
                 },
                 error: function(err) {
                     console.log(err);
-                    alert('Failed!');
+                    toastr.error('Failed!');
                 }
             })
         } else {
-            alert("No content selected!");
+            toastr.info("No content selected!");
         }
     } else if (num === 4 || num === 5) {
         const itemArr = $('tbody#mesh_data input[type="checkbox"]:checked');
@@ -310,18 +345,27 @@ function updateAllocation(num, self) {
                 },
                 success: function(res) {
                     if (res.length) {
-                        alert(res.length + ' lists are updated!');
+                        toastr.success(
+                            res.length + ' lists are updated!',
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            });
                     } else {
-                        alert('No change!');
+                        toastr.info('No change!');
                     }
                 },
                 error: function(err) {
                     console.log(err);
-                    alert('Failed!');
+                    toastr.error('Failed!');
                 }
             })
         } else {
-            alert("No content selected!");
+            toastr.info("No content selected!");
         }
     }
 }

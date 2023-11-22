@@ -82,7 +82,7 @@ $(document).ready(function() {
         // Object.keys(obj).forEach(key => {
         //     if (obj[key] === '') flag = true;
         // })
-        if (flag) alert("Please input all data!");
+        if (flag) toastr.info("Please input all data!!");
         else {
             $.ajax({
                 url: '/api/v1/stamping_orders_tbl/create',
@@ -94,14 +94,31 @@ $(document).ready(function() {
                 success: function(res) {
                     console.log(res);
                     if (res === '1') {
-                        alert("Updated successfully!");
-                        window.location.reload();
-                    } else if (res === true) alert("Created successfully!");
-                    else alert("Something went wrong!");
+                        toastr.success(
+                            "Updated successfully!",
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            });
+                    } else if (res === true) toastr.success(
+                        "Created successfully!",
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
+                    else toastr.warning("Something went wrong!");
                 },
                 error: function(err) {
                     console.log(err);
-                    alert("Failed!");
+                    toastr.error("Failed!");
                 }
             })
         }
@@ -118,15 +135,24 @@ $(document).ready(function() {
             success: function(res) {
                 console.log(res);
                 if (res === '1') {
-                    alert("Deleted successfully!");
-                    window.location.reload();
+                    toastr.success(
+                        "Deleted successfully!",
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
                 } else if (res === '2') {
-                    alert("Can't find the data in database!");
+                    toastr.warning("Can't find the data in database!");
                 }
-                else alert("Something went wrong!");
+                else toastr.warning("Something went wrong!");
             },
             error: function(err) {
                 console.log(err);
+                toastr.error("Failed!");
             }
         })
     })
@@ -154,6 +180,7 @@ $(document).ready(function() {
         $('#testCycles').val('');
         $('#remarks').val('');
         $('#press').val('').change();
+        toastr.success("You can add new data now!", "Success");
     })
 
     $('#main-table-show').click(function() {
