@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UtilsController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function() {
+    Route::post('/login', [AuthController::class,'signin']);
+
     Route::get('/get_all/{table}/{field?}', [UtilsController::class,'getAll']);
     Route::get('/get_latest/{table}', [UtilsController::class,'getLatest']);
 

@@ -19,13 +19,13 @@ return [
         [
             'title' => 'Customers',
             'root' => true,
-            'icon' => 'media/svg/icons/General/User.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'page' => 'customers',
             'visible' => 'preview',
         ],
         [
             'title' => 'Orders',
-            'icon' => 'media/svg/icons/Home/Book-open.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -61,7 +61,7 @@ return [
         ],
         [
             'title' => 'Order Status',
-            'icon' => 'media/svg/icons/Design/Bucket.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -98,7 +98,7 @@ return [
         [
             'title' => 'Inventory',
             'desc' => '',
-            'icon' => 'media/svg/icons/Home/Library.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -139,7 +139,7 @@ return [
         [
             'title' => 'Reports',
             'desc' => '',
-            'icon' => 'media/svg/icons/Layout/Layout-left-panel-2.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -175,7 +175,7 @@ return [
         ],
         [
             'title' => 'Excess Stock',
-            'icon' => 'media/svg/icons/Devices/Diagnostics.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -191,7 +191,7 @@ return [
         ],
         [
             'title' => 'Quotes',
-            'icon' => 'media/svg/icons/Layout/Layout-arrange.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'bullet' => 'dot',
             'root' => true,
             'submenu' => [
@@ -208,7 +208,7 @@ return [
         [
             'title' => 'Material Requirements',
             'root' => true,
-            'icon' => 'media/svg/icons/Design/PenAndRuller.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'page' => 'material_requirements',
             'visible' => 'preview',
         ],
@@ -222,34 +222,34 @@ return [
         [
             'title' => 'Uni_Quotes',
             'root' => true,
-            'icon' => 'media/svg/icons/General/Attachment2.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'page' => 'uni_quotes',
             'visible' => 'preview',
         ],
         [
             'title' => 'Part Information',
             'root' => true,
-            'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'page' => 'part_information',
             'visible' => 'preview',
         ],
         [
             'title' => 'Ring Adjustment',
             'root' => true,
-            'icon' => 'media/svg/icons/Design/Select.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'page' => 'ring_adjustment',
             'visible' => 'preview',
         ],
         [
             'title' => 'Ship Info',
             'root' => true,
-            'icon' => 'media/svg/icons/Shopping/Barcode-read.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'page' => 'ship_info',
             'visible' => 'preview',
         ],
         [
             'title' => 'Setting Pages',
-            'icon' => 'media/svg/icons/General/Settings-1.svg',
+            'icon' => 'media/svg/icons/Shopping/Box2.svg',
             'root' => true,
             'bullet' => 'dot',
             'submenu' => [

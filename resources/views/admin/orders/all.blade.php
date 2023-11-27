@@ -116,10 +116,8 @@
                                         <div class="grid-label"><label>Part No.</label></div>
                                         <div class="grid-input">
                                             <select id="part">
-                                                <option value="">Select</option>
-                                                @foreach($parts as $part)
-                                                    <option {{$part->part}}>{{$part->part}}</option>
-                                                @endforeach
+                                                <option value=""> --- Select --- </option>
+
                                             </select>
                                         </div>
                                         <div class="grid-label"><label>Quantity</label></div>

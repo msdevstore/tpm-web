@@ -67,7 +67,7 @@ class OrdersController extends Controller
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
         $orders = DB::table('orders_tbl')->orderBy('job', 'desc')->limit(30)->get();
         $job_no = $orders->first()->job + 1;
-        $parts = DB::table('part_tbl')->get();
+//        $parts = DB::table('part_tbl')->get();
         $mac_addresses = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
         $mill_operators = DB::table('employee')->where('mill_operator', 1)->get();
         $cutoff_operators = DB::table('employee')->where('cutoff_operator', 1)->get();
@@ -78,7 +78,7 @@ class OrdersController extends Controller
         $weld_spec_mills = DB::table('weld_spec_mill')->get();
         $weld_spec_repairs = DB::table('weld_spec_repair')->get();
 
-        return view('admin.orders.all', compact('orders', 'inspectors', 'repair_welders', 'cutoff_operators', 'mill_operators', 'page_title', 'page_description', 'job_no', 'customers', 'parts', 'mac_addresses', 'conts', 'ship_methods', 'weld_spec_mills', 'weld_spec_repairs'));
+        return view('admin.orders.all', compact('orders', 'inspectors', 'repair_welders', 'cutoff_operators', 'mill_operators', 'page_title', 'page_description', 'job_no', 'customers', 'mac_addresses', 'conts', 'ship_methods', 'weld_spec_mills', 'weld_spec_repairs'));
     }
 
     public function yetToStart()
@@ -89,7 +89,7 @@ class OrdersController extends Controller
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
         $orders = DB::table('orders_tbl')->where('has_started', 0)->orderBy('job', 'desc')->limit(30)->get();
         $job_no = $orders->first()->job + 1;
-        $parts = DB::table('part_tbl')->get();
+//        $parts = DB::table('part_tbl')->get();
         $mac_addresses = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
         $mill_operators = DB::table('employee')->where('mill_operator', 1)->get();
         $cutoff_operators = DB::table('employee')->where('cutoff_operator', 1)->get();
@@ -106,7 +106,7 @@ class OrdersController extends Controller
         $gages = DB::table('gage_tbl')->get();
         $patterns = DB::table('pat_tbl')->get();
 
-        return view('admin.orders.yet_to_start', compact('materials', 'gages', 'patterns', 'instr_types', 'status_types', 'tpm_types', 'orders', 'inspectors', 'repair_welders', 'cutoff_operators', 'mill_operators', 'page_title', 'page_description', 'job_no', 'customers', 'parts', 'mac_addresses', 'conts', 'ship_methods', 'weld_spec_mills', 'weld_spec_repairs'));
+        return view('admin.orders.yet_to_start', compact('materials', 'gages', 'patterns', 'instr_types', 'status_types', 'tpm_types', 'orders', 'inspectors', 'repair_welders', 'cutoff_operators', 'mill_operators', 'page_title', 'page_description', 'job_no', 'customers', 'mac_addresses', 'conts', 'ship_methods', 'weld_spec_mills', 'weld_spec_repairs'));
     }
 
     public function started()

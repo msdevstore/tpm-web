@@ -704,24 +704,20 @@ class MainController extends Controller
             } break;
             case 4: {
                 foreach ($ids as $id) {
-                    foreach ($ids as $id) {
-                        DB::table('mesh_tbl')->where('mesh_no', $id)->update([
-                            'allocated' => 1,
-                            'job' => $job,
-                            'TPM_JOB' => $job
-                        ]);
-                    }
+                    DB::table('mesh_tbl')->where('mesh_no', $id)->update([
+                        'allocated' => 1,
+                        'job' => $job,
+                        'TPM_JOB' => $job
+                    ]);
                 }
             } break;
             case 5: {
                 foreach ($ids as $id) {
-                    foreach ($ids as $id) {
-                        DB::table('mesh_tbl')->where('mesh_no', $id)->update([
-                            'allocated' => 0,
-                            'job' => 0,
-                            'TPM_JOB' => 0
-                        ]);
-                    }
+                    DB::table('mesh_tbl')->where('mesh_no', $id)->update([
+                        'allocated' => 0,
+                        'job' => 0,
+                        'TPM_JOB' => 0
+                    ]);
                 }
             } break;
         }
@@ -747,7 +743,11 @@ class MainController extends Controller
             case 2: {
                 $data = DB::table('coil_tbl')
                     ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
-                    ->where('coil_tbl.allocated', 0)
+                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
+                    ->where([
+                        'coil_tbl.allocated' => 0,
+                        'part_tbl.gage' => 'steel_tbl.gage'
+                    ])
                     ->select('coil_tbl.coil_no',
                         'coil_tbl.coil_no',
                         'coil_tbl.weight',

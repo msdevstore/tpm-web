@@ -6,6 +6,10 @@
     color: #1BC5BD
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: #1BC5BD
+}
+
 .card.card-custom > .card-header .card-title, .card.card-custom > .card-header .card-title .card-label {
     color: #1BC5BD
 }

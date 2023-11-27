@@ -72,6 +72,10 @@ class PagesController extends Controller
         return view('pages.icons.fontawesome', compact('page_title', 'page_description'));
     }
 
+    public function fixing() {
+        return view('error.fixing');
+    }
+
     // lineawesome
     public function lineawesome()
     {

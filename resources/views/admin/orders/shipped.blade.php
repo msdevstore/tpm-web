@@ -117,9 +117,6 @@
                                         <div class="grid-input">
                                             <select id="part">
                                                 <option value="">Select</option>
-                                                @foreach($parts as $part)
-                                                    <option {{$part->part}}><?php echo (strlen($part->part) > 20) ? substr($part->part, 0, 20) . '...' : $part->part ?></option>
-                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="grid-label"><label>Quantity</label></div>

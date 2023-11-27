@@ -143,7 +143,7 @@
                 let fax = $('#fax').val();
                 let email = $('#email').val();
 
-                if (!cust_id || !customer || !bill_to || !ship_to || !contact || !phone || !fax || !email) {
+                if (!cust_id || !customer || !bill_to || !contact || !phone) {
                     toastr.warning("Please input all information!");
                 } else {
                     let data = {

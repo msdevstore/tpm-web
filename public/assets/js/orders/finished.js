@@ -1,5 +1,26 @@
 $(document).ready(function() {
 
+    $('#cust_id').change(function() {
+        $.ajax({
+            url: '/api/v1/get_parts_by_cust/' + $(this).val(),
+            type: 'get',
+            success: function(res) {
+                console.log(res);
+                if (res.length) {
+                    let content = '';
+                    res.forEach(item => {
+                        content += `<option value="${item['part']}">${item['part']}</option>`
+                    })
+                    $('#part').empty().append(content);
+                } else toastr.warning("There is no part for this customer");
+            },
+            error: function(err) {
+                console.log(err);
+                toastr.error("Getting parts by company is failed!");
+            }
+        })
+    })
+
     $(document).on('click', '.order-btn', function(e) {
         if ($(e.target)[0].localName === 'td') {
             let job = $(e.target).parent().attr('data');
@@ -97,9 +118,8 @@ $(document).ready(function() {
 
     function updateValues(obj) {
         $('#job').val(obj.job);
-        $('#cust_id').val(obj.cust_id);
+        $('#cust_id').val(obj.cust_id).change();
         $('#po').val(obj.po);
-        $('#part').val(obj.part);
         $('#quantity').val(obj.quantity);
         $('#ordered').val(obj.ordered.substring(0,10));
         $('#due').val(obj.due.substring(0,10));

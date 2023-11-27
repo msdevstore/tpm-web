@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UniScreenController;
 use App\Http\Controllers\Admin\UniQuotesController;
 use App\Http\Controllers\Admin\PartInfoController;
 use App\Http\Controllers\Admin\RingAdjustController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,9 @@ use App\Http\Controllers\Admin\RingAdjustController;
 //    return view('index');
 //});
 
-//Route::get('/', [PagesController::class,'index']);
+//Route::get('/', [PagesController::class,'fixing']);
 
-Route::get('/', [CustomerController::class,'index']);
+Route::get('/', [AuthController::class,'login']);
 
 Route::get('/customers', [CustomerController::class,'index']);
 Route::post('/customers/create', [CustomerController::class,'create']);
