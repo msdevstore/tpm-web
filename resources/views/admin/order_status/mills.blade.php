@@ -19,153 +19,24 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row justify-content-center py-2">
-                        <h1 class="w-100 text-center text-primary">Mill_01</h1>
-                        <table class="table table-bordered w-75">
-                            <thead>
-                            <tr>
-                                <th>Job #</th>
-                                <th>OD</th>
-                                <th>Operator</th>
-                                <th>Scrap</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>8726</td>
-                                <td>4.85</td>
-                                <td>Andrade</td>
-                                <td>0.1%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center py-2">
-                        <h1 class="w-100 text-center text-primary">Mill_02</h1>
-                        <table class="table table-bordered w-75">
-                            <thead>
-                            <tr>
-                                <th>Job #</th>
-                                <th>OD</th>
-                                <th>Operator</th>
-                                <th>Scrap</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>8726</td>
-                                <td>4.85</td>
-                                <td>Andrade</td>
-                                <td>0.1%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center py-2">
-                        <h1 class="w-100 text-center text-primary">Mill_03</h1>
-                        <table class="table table-bordered w-75">
-                            <thead>
-                            <tr>
-                                <th>Job #</th>
-                                <th>OD</th>
-                                <th>Operator</th>
-                                <th>Scrap</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>8726</td>
-                                <td>4.85</td>
-                                <td>Andrade</td>
-                                <td>0.1%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center py-2">
-                        <h1 class="w-100 text-center text-primary">Mill_04</h1>
-                        <table class="table table-bordered w-75">
-                            <thead>
-                            <tr>
-                                <th>Job #</th>
-                                <th>OD</th>
-                                <th>Operator</th>
-                                <th>Scrap</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>8726</td>
-                                <td>4.85</td>
-                                <td>Andrade</td>
-                                <td>0.1%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center py-2">
-                        <h1 class="w-100 text-center text-primary">Mill_05</h1>
-                        <table class="table table-bordered w-75">
-                            <thead>
-                            <tr>
-                                <th>Job #</th>
-                                <th>OD</th>
-                                <th>Operator</th>
-                                <th>Scrap</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>8726</td>
-                                <td>4.85</td>
-                                <td>Andrade</td>
-                                <td>0.1%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center py-2">
-                        <h1 class="w-100 text-center text-primary">Mill_06</h1>
-                        <table class="table table-bordered w-75">
-                            <thead>
-                            <tr>
-                                <th>Job #</th>
-                                <th>OD</th>
-                                <th>Operator</th>
-                                <th>Scrap</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>8726</td>
-                                <td>4.85</td>
-                                <td>Andrade</td>
-                                <td>0.1%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center py-2">
-                        <h1 class="w-100 text-center text-primary">Mill_07</h1>
-                        <table class="table table-bordered w-75">
-                            <thead>
-                            <tr>
-                                <th>Job #</th>
-                                <th>OD</th>
-                                <th>Operator</th>
-                                <th>Scrap</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>8726</td>
-                                <td>4.85</td>
-                                <td>Andrade</td>
-                                <td>0.1%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    @foreach($obj_arr as $obj)
+                        <div class="row justify-content-center py-2">
+                            <h1 class="w-100 text-center text-primary">{{$obj['title']}}</h1>
+                            <table class="table table-bordered w-75">
+                                <thead>
+                                <tr>
+                                    <th>Job #</th>
+                                    <th>OD</th>
+                                    <th>Operator</th>
+                                    <th>Scrap</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {!! $obj['content'] !!}
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <!--end::Card-->

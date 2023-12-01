@@ -55,7 +55,7 @@ Route::delete('/orders/{id}', [OrdersController::class,'delete']);
 Route::get('/order_status/upcoming_orders', [OrderStatusController::class,'upcomingOrders']);
 Route::get('/order_status/shipping', [OrderStatusController::class,'shipping']);
 Route::get('/order_status/all_orders', [OrderStatusController::class,'allOrders']);
-Route::get('/order_status/material_search/{job}', [OrderStatusController::class,'materialSearch']);
+Route::get('/order_status/material_search/{job?}', [OrderStatusController::class,'materialSearch']);
 Route::get('/order_status/shipments/{field?}/{query?}', [OrderStatusController::class,'shipments']);
 Route::get('/order_status/mills', [OrderStatusController::class,'mills']);
 Route::get('/order_status/search_query/{job?}/{part?}/{from?}/{to?}', [OrderStatusController::class,'searchQuery']);

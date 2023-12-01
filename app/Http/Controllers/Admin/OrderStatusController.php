@@ -95,7 +95,7 @@ class OrderStatusController extends Controller
         return view('admin.order_status.all_orders', compact('page_title', 'page_description', 'in_progress_orders', 'not_started_orders'));
     }
 
-    public function materialSearch($job)
+    public function materialSearch($job = 'all')
     {
         $page_title = '';
         $page_description = '';
@@ -129,19 +129,66 @@ class OrderStatusController extends Controller
         $page_title = '';
         $page_description = '';
 
-        $mills = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
+        $mills = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->orderBy('device')->get();
 
+        $obj_arr = [];
         foreach ($mills as $mill) {
+            $content = '';
             $orders = DB::table('orders_tbl')->where(['device' => $mill->device, 'has_finished' => 0])->get();
             foreach ($orders as $order) {
-                $part = DB::table('part_tbl')->where('part', $order->part)->first();
-                $gage = DB::table('gage_tbl')->where('gage', $part->gage)->first();
-                $dim = $part->dim + 2 * $gage->thickness;
-            }
-        }
-//        dd($mills);
+                $parts = DB::table('part_tbl')->where(['part' => $order->part, 'is_od' => 1])->get();
+                $dim = 0;
+                if (!count($parts)) {
+                    $parts = DB::table('part_tbl')->where('part', $order->part)->get();
+                    $gage = DB::table('gage_tbl')->where('gage', $parts[0]->gage)->first();
+                    $dim = $parts[0]->dim + 2 * $gage->thickness;
+                }
 
-        return view('admin.order_status.mills', compact('page_title', 'page_description'));
+                $tube = DB::table('tubes_tbl')->where('job', $order->job)->first();
+                if ($tube) {
+                    $employee = DB::table('employee')->where('ID', $tube->mill_operator)->first();
+                    $name = $employee ? $employee->name : '';
+                    $op = substr($name, strpos($name, ' ') + 1);
+                } else {
+                    $op = '';
+                }
+
+                $millScraps = DB::table('scrap_tbl')->where('job', $order->job)->get();
+                $millParts = DB::table('part_tbl')->where('part', $order->part)->get();
+
+                if (count($millParts)) {
+                    $millTotalScrap = 0;
+
+                    foreach ($millScraps as $scrap) {
+                        $millTotalScrap += intval($scrap->tube_length);
+                    }
+
+                    if ($orders[0]->quantity * $millParts[0]->cutoff_length == 0) {
+                        $millScrRate = 0;
+                    } else {
+                        $millScrRate = round(($millTotalScrap / (floatval($orders[0]->quantity * floatval($millParts[0]->cutoff_length)))) * 100, 1);
+                    }
+                } else {
+                    $millScrRate = 0;
+                }
+
+
+                $content .= '<tr>
+                                <td>'.htmlspecialchars($order->job).'</td>
+                                <td>'.htmlspecialchars($dim).'</td>
+                                <td>'.htmlspecialchars(ucfirst($op)).'</td>
+                                <td>'.htmlspecialchars(strval($millScrRate)).'%</td>
+                            </tr> ';
+            }
+            $obj_arr[] = [
+                'title' => ucfirst($mill->device),
+                'content' => $content
+            ];
+        }
+
+//        dd($obj_arr);
+
+        return view('admin.order_status.mills', compact('page_title', 'page_description', 'obj_arr'));
     }
 
     public function searchQuery($job = null, $part = null, $from = null, $to = null)
