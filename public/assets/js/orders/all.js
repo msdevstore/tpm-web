@@ -98,14 +98,14 @@ $(document).ready(function() {
         $('#ordered').val(obj.ordered.substring(0,10));
         $('#due').val(obj.due.substring(0,10));
         $('#ship_date').val(obj.ship_date.substring(0,10));
-        $('#mill_operator').val(obj.mill_operator).change();
-        $('#cutoff_operator').val(obj.cutoff_operator).change();
-        $('#repair_welder').val(obj.repair_welder).change();
-        $('#inspector').val(obj.inspector).change();
-        $('#cont_type').val(obj.cont_type).change();
-        $('#ship_method').val(obj.ship_method).change();
-        $('#weld_spec_mill').val(obj.weld_spec_mill).change();
-        $('#weld_spec_repair').val(obj.weld_spec_repair).change();
+        // $('#mill_operator').val(obj.mill_operator).change();
+        // $('#cutoff_operator').val(obj.cutoff_operator).change();
+        // $('#repair_welder').val(obj.repair_welder).change();
+        // $('#inspector').val(obj.inspector).change();
+        // $('#cont_type').val(obj.cont_type).change();
+        // $('#ship_method').val(obj.ship_method).change();
+        // $('#weld_spec_mill').val(obj.weld_spec_mill).change();
+        // $('#weld_spec_repair').val(obj.weld_spec_repair).change();
     }
 
     $('#main-table-save').click(function() {
@@ -118,14 +118,14 @@ $(document).ready(function() {
             ordered: $('#ordered').val(),
             due: $('#due').val(),
             ship_date: $('#ship_date').val(),
-            mill_operator: $('#mill_operator').val(),
-            cutoff_operator: $('#cutoff_operator').val(),
-            repair_welder: $('#repair_welder').val(),
-            inspector: $('#inspector').val(),
-            cont_type: $('#cont_type').val(),
-            ship_method: $('#ship_method').val(),
-            weld_spec_mill: $('#weld_spec_mill').val(),
-            weld_spec_repair: $('#weld_spec_repair').val(),
+            // mill_operator: $('#mill_operator').val(),
+            // cutoff_operator: $('#cutoff_operator').val(),
+            // repair_welder: $('#repair_welder').val(),
+            // inspector: $('#inspector').val(),
+            // cont_type: $('#cont_type').val(),
+            // ship_method: $('#ship_method').val(),
+            // weld_spec_mill: $('#weld_spec_mill').val(),
+            // weld_spec_repair: $('#weld_spec_repair').val(),
         }
 
         let flag = false;
@@ -143,7 +143,19 @@ $(document).ready(function() {
                 data: obj,
                 success: function(res) {
                     console.log(res);
-                    if (res === "1") {
+                    if (res === '1') {
+                        toastr.success(
+                            "The information is created successfully!",
+                            "Success",
+                            {
+                                timeOut: 1000,
+                                fadeOut: 1000,
+                                onHidden: function () {
+                                    window.location.reload();
+                                }
+                            }
+                        );
+                    } else if (res === '2') {
                         toastr.success(
                             "The information is updated successfully!",
                             "Success",
@@ -154,7 +166,7 @@ $(document).ready(function() {
                                     window.location.reload();
                                 }
                             }
-                        );
+                        )
                     } else toastr.warning('Something went wrong!');
                 },
                 error: function(err) {
@@ -223,8 +235,7 @@ $(document).ready(function() {
                     tbodyContent = '<tr>';
                     if (type == "1") {
                         res.forEach((obj, index) => {
-                            tbodyContent += `<td> ${index + 1} </td>
-                            <td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                            tbodyContent += `<td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
                             <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
                             <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>
@@ -237,8 +248,8 @@ $(document).ready(function() {
                         })
                     } else {
                         res.forEach(obj => {
-                            tbodyContent += `<td><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" /> </td>
-                            <td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                            tbodyContent += `<td style="text-align: left"><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" />
+                            ${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
                             <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
                             <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>

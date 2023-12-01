@@ -31,18 +31,19 @@ class OrdersController extends Controller
         $obj['ordered'] = $request->ordered;
         $obj['due'] = $request->due;
         $obj['ship_date'] = $request->ship_date;
-        $obj['mill_operator'] = $request->mill_operator;
-        $obj['cutoff_operator'] = $request->cutoff_operator;
-        $obj['repair_welder'] = $request->repair_welder;
-        $obj['inspector'] = $request->inspector;
-        $obj['cont_type'] = $request->cont_type;
-        $obj['ship_method'] = $request->ship_method;
-        $obj['weld_spec_mill'] = $request->weld_spec_mill;
-        $obj['weld_spec_repair'] = $request->weld_spec_repair;
+//        $obj['mill_operator'] = $request->mill_operator;
+//        $obj['cutoff_operator'] = $request->cutoff_operator;
+//        $obj['repair_welder'] = $request->repair_welder;
+//        $obj['inspector'] = $request->inspector;
+//        $obj['cont_type'] = $request->cont_type;
+//        $obj['ship_method'] = $request->ship_method;
+//        $obj['weld_spec_mill'] = $request->weld_spec_mill;
+//        $obj['weld_spec_repair'] = $request->weld_spec_repair;
 
         $order = DB::table('orders_tbl')->where('job', $request->job)->first();
         if ($order) {
             $result = DB::table('orders_tbl')->where('job', $order->job)->update($obj);
+            if ($result) return response(2);
         } else {
             $obj['job'] = $request->job;
             $obj['has_started'] = 1;
@@ -54,9 +55,10 @@ class OrdersController extends Controller
             $obj['device'] = '';
             $obj['gen_pdf'] = '0';
             $result = DB::table('orders_tbl')->insert($obj);
+            if ($result) return response(1);
         }
 
-        return response()->json($result);
+        return response(0);
     }
 
     public function all()
@@ -66,7 +68,7 @@ class OrdersController extends Controller
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
         $orders = DB::table('orders_tbl')->orderBy('job', 'desc')->limit(30)->get();
-        $job_no = $orders->first()->job + 1;
+        $job_no = DB::table('orders_tbl')->orderBy('job', 'desc')->first()->job + 1;
 //        $parts = DB::table('part_tbl')->get();
         $mac_addresses = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
         $mill_operators = DB::table('employee')->where('mill_operator', 1)->get();
@@ -88,7 +90,7 @@ class OrdersController extends Controller
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
         $orders = DB::table('orders_tbl')->where('has_started', 0)->orderBy('job', 'desc')->limit(30)->get();
-        $job_no = $orders->first()->job + 1;
+        $job_no = DB::table('orders_tbl')->orderBy('job', 'desc')->first()->job + 1;
 //        $parts = DB::table('part_tbl')->get();
         $mac_addresses = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
         $mill_operators = DB::table('employee')->where('mill_operator', 1)->get();
@@ -116,7 +118,7 @@ class OrdersController extends Controller
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->limit(20)->get();
         $orders = DB::table('orders_tbl')->where('has_started', 1)->orderBy('job', 'desc')->limit(30)->get();
-        $job_no = $orders->first()->job + 1;
+        $job_no = DB::table('orders_tbl')->orderBy('job', 'desc')->first()->job + 1;
         $parts = DB::table('part_tbl')->get();
         $mac_addresses = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
         $mill_operators = DB::table('employee')->where('mill_operator', 1)->get();
@@ -144,7 +146,7 @@ class OrdersController extends Controller
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->limit(20)->get();
         $orders = DB::table('orders_tbl')->where('has_finished', 1)->orderBy('job', 'desc')->limit(30)->get();
-        $job_no = $orders->first()->job + 1;
+        $job_no = DB::table('orders_tbl')->orderBy('job', 'desc')->first()->job + 1;
         $parts = DB::table('part_tbl')->get();
         $mac_addresses = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
         $mill_operators = DB::table('employee')->where('mill_operator', 1)->get();
@@ -172,7 +174,7 @@ class OrdersController extends Controller
 
         $customers = DB::table('cust_tbl')->orderBy('customer')->get();
         $orders = DB::table('orders_tbl')->where('has_shipped', 1)->orderBy('job', 'desc')->limit(30)->get();
-        $job_no = $orders->first()->job + 1;
+        $job_no = DB::table('orders_tbl')->orderBy('job', 'desc')->first()->job + 1;
         $parts = DB::table('part_tbl')->get();
         $mac_addresses = DB::table('mac_add_tbl')->where('device', 'like', 'mill_%')->get();
         $mill_operators = DB::table('employee')->where('mill_operator', 1)->get();

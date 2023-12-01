@@ -182,7 +182,7 @@ $(document).ready(function() {
                     console.log(res);
                     if (res === '1') {
                         toastr.success(
-                            "Updated successfully!",
+                            "The information is created successfully!",
                             "Success",
                             {
                                 timeOut: 1000,
@@ -191,8 +191,8 @@ $(document).ready(function() {
                                     window.location.reload();
                                 }
                             });
-                    } else if (res === true) toastr.success(
-                        "Created successfully!",
+                    } else if (res === '2') toastr.success(
+                        "The information is updated successfully!!",
                         "Success",
                         {
                             timeOut: 1000,
@@ -269,8 +269,7 @@ $(document).ready(function() {
                     tbodyContent = '<tr>';
                     if (type == "1") {
                         res.forEach((obj, index) => {
-                            tbodyContent += `<td> ${index + 1} </td>
-                            <td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                            tbodyContent += `<td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
                             <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
                             <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>
@@ -283,8 +282,8 @@ $(document).ready(function() {
                         })
                     } else {
                         res.forEach(obj => {
-                            tbodyContent += `<td><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" /> </td>
-                            <td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                            tbodyContent += `<td style="text-align: left"><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" />
+                            ${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
                             <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
                             <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>

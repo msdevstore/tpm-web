@@ -39,7 +39,7 @@
                                         <div class="d-flex align-items-center">
                                             <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                             <select class="form-control" id="kt_datatable_search_status">
-                                                <option value="">All</option>
+                                                <option value="">New orders</option>
                                                 @foreach($orders->first() as $key => $value)
                                                     <option>{{$key}}</option>
                                                 @endforeach

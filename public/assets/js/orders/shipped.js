@@ -182,7 +182,7 @@ $(document).ready(function() {
                     console.log(res);
                     if (res === '1') {
                         toastr.success(
-                            "Updated successfully!",
+                            "The information is created successfully!",
                             "Success",
                             {
                                 timeOut: 1000,
@@ -191,8 +191,8 @@ $(document).ready(function() {
                                     window.location.reload();
                                 }
                             });
-                    } else if (res === true) toastr.success(
-                        "Created successfully!",
+                    } else if (res === '2') toastr.success(
+                        "The information is updated successfully!!",
                         "Success",
                         {
                             timeOut: 1000,

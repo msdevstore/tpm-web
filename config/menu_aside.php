@@ -30,7 +30,7 @@ return [
             'root' => true,
             'submenu' => [
                 [
-                    'title' => 'All',
+                    'title' => 'New Order',
                     'page' => 'orders/all'
                 ],
                 [
