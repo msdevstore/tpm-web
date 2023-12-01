@@ -70,5 +70,7 @@ Route::prefix('v1')->group(function() {
 
     Route::post('/users_permissions/activate', [MainController::class, 'activateUsersPermissions']);
     Route::delete('/delete_partial_ship/{job}/{cust_id}', [MainController::class, 'deletePartialShip']);
+
+    Route::get('/get_part_specs/{part_name}', [MainController::class, 'getPartSpecs']);
 });
 

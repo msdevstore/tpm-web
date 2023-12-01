@@ -9,6 +9,42 @@ use Illuminate\Support\Facades\DB;
 class MainController extends Controller
 {
 
+    public function getPartSpecs($part_name = 0) {
+        $part = DB::table('part_tbl')->where('part', $part_name)->first();
+        $oa_factor = DB::table('pat_tbl')->where('pattern', $part->pattern)->first()->oa_factor;
+        $thickness = DB::table('gage_tbl')->where('gage', $part->gage)->first()->thickness;
+        $oa = $part->holes == 0 ? 0 : pow($part->holes, 2) / pow($part->centers, 2) * $oa_factor;
+        $od = $part->is_od == 1 ? $part->dim : $part->dim + 2 * $thickness;
+        $tube_weight = 0.29 * $thickness * 4 * atan(1) * $od * $part->finished_length * (100 - $oa) / 100;
+        $weight_per_foot = $tube_weight / $part->finished_length * 12;
+        $feet = $part->finished_length / 12;
+        $hspi = $part->holes == 0 ? 0 : ($oa / (78.54 * pow($part->holes, 2)));
+
+        $side = sqrt(pow(4 * atan(1) * $od, 2) - pow($part->strip, 2));
+        $angle = 90 - (atan($side / $part->strip * 180 / (4 * atan(1))));
+        $lf_ft = 4 * atan(1) * $od / $part->strip;
+        $lf_tube = $feet * $lf_ft;
+
+        $order = DB::table('orders_tbl')->where('part', $part_name)->first();
+        $result['oa'] = round($oa, 3);
+        $result['tube_weight'] = round($tube_weight, 3);
+        $result['feet'] = round($feet, 3);
+        $result['weight_per_foot'] = round($weight_per_foot, 3);
+        $result['hspi'] = round($hspi, 3);
+        $result['angle'] = round($angle, 3);
+        $result['lf_ft'] = round($lf_ft, 3);
+        $result['lf_tube'] = round($lf_tube, 3);
+
+        $result['lf_req'] = round(1.1 * $lf_tube, 3);
+        $result['was'] = round($tube_weight * 1.1, 3);
+        $result['wbs'] = round(100 * $result['was'] / (100 - $oa), 3);
+        $result['tf'] = round($feet, 3);
+        $result['price'] = round($order->price, 3);
+        $result['PO_total'] = round($order->price, 3);
+
+        return response()->json($result);
+    }
+
     public function deletePartialShip($job, $cust_id) {
         return DB::table('partial_ship')->where(['job' => $job, 'cust_id' => $cust_id])->delete();
     }

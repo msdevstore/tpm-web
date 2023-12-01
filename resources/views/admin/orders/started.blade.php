@@ -138,6 +138,10 @@
                                         <div class="grid-input"><input id="was" type="number" step="0.001" placeholder="0.000"></div>
                                         <div class="grid-label"><label>Total tube (ft)</label></div>
                                         <div class="grid-input"><input id="tf" type="number" step="0.001" placeholder="0.000"></div>
+                                        <div class="grid-label"><label>Price</label></div>
+                                        <div class="grid-input"><input id="price" type="number" step="0.001" placeholder="0.000"></div>
+                                        <div class="grid-label"><label>Revenue total</label></div>
+                                        <div class="grid-input"><input id="PO_total" type="number" step="0.001" placeholder="0.000"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 gutter-b">

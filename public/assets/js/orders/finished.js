@@ -1,4 +1,47 @@
 $(document).ready(function() {
+    let calculation;
+
+    $('#part').change(function() {
+        $.ajax({
+            url: '/api/v1/get_part_specs/' + $(this).val(),
+            type: 'GET',
+            success: function(res) {
+                calculation = res;
+                $.each(res, function(i, j) {
+                    if ($('#quantity').val() !== '') {
+                        $('#' + i).val((parseFloat(j) * parseFloat($('#quantity').val())).toFixed(3));
+                    } else {
+                        $('#' + i).val(j.toFixed(3));
+                    }
+                })
+            },
+            error: function(err) {
+                console.log(err);
+                toastr.error('Failed fetching data!');
+            }
+        })
+    })
+
+    $('#quantity').keyup(function() {
+        // let quantity = $(this).val();
+        // let revenue = $('#price').val() * quantity;
+        // $('#PO_total').prop('value', revenue);
+        // $("#quantity").val(quantity);
+        // $("#modal_from").attr("max", quantity);
+        // $("#modal_to").attr("max", quantity);
+        // $("#modal_to").val(quantity);
+        let $thisval = $(this).val();
+        if (typeof calculation === 'object') {
+            $.each(calculation, function(i, j) {
+                $('#' + i).val((parseFloat(j.toFixed(3)) * parseFloat($thisval)).toFixed(3));
+            });
+        }
+    })
+
+    $('#price').keyup(function() {
+        let revenue = $('#quantity').val() * $(this).val();
+        $('#PO_total').prop('value', revenue);
+    })
 
     $('#cust_id').change(function() {
         $.ajax({
@@ -12,6 +55,7 @@ $(document).ready(function() {
                         content += `<option value="${item['part']}">${item['part']}</option>`
                     })
                     $('#part').empty().append(content);
+                    $("#part").val($("#part option:first").val()).change();
                 } else toastr.warning("There is no part for this customer");
             },
             error: function(err) {
