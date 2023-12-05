@@ -77,30 +77,33 @@ $(document).ready(function() {
                 type: 'get',
                 success: function(res) {
                     // console.log(res);
-                    const temp = `Weight Allocated: ${res.tw} <br>
-                                    Weight already used: ${res.used} <br>
-                                    Total Weight dedicated to job: ${Number(res.tw) + Number(res.used)}`;
-                    $('#weight_allocated_alert').empty().append(temp);
+                    $('#allocated b').html(res.tw);
+                    $('#already b').html(res.used);
+                    $('#dedicated b').html(Number(res.tw) + Number(res.used));
+                    // const temp = `Weight Allocated: ${res.tw} <br>
+                    //                 Weight already used: ${res.used} <br>
+                    //                 Total Weight dedicated to job: ${Number(res.tw) + Number(res.used)}`;
+                    // $('#weight_allocated_alert').empty().append(temp);
                 },
                 error: function(err) {
                     console.log(err);
                 }
             })
 
-            $.ajax({
-                url: '/api/v1/get_mesh_total/' + order.job,
-                type: 'get',
-                success: function(res) {
-                    console.log(res);
-                    const temp = `Length Allocated: ${res.ML} <br>
-                                    Length already used: ${res.EL} <br>
-                                    Total Required Length: ${Number(res.ML) + Number(res.EL)}`;
-                    $('#length_allocated_alert').empty().append(temp);
-                },
-                error: function(err) {
-                    console.log(err);
-                }
-            })
+            // $.ajax({
+            //     url: '/api/v1/get_mesh_total/' + order.job,
+            //     type: 'get',
+            //     success: function(res) {
+            //         console.log(res);
+            //         const temp = `Length Allocated: ${res.ML} <br>
+            //                         Length already used: ${res.EL} <br>
+            //                         Total Required Length: ${Number(res.ML) + Number(res.EL)}`;
+            //         $('#length_allocated_alert').empty().append(temp);
+            //     },
+            //     error: function(err) {
+            //         console.log(err);
+            //     }
+            // })
 
             $('#orders-table').slideToggle();
             $('#control-panel').css('display', 'flex');
@@ -265,6 +268,8 @@ $(document).ready(function() {
         const type = $(this).val();
         const part = $('#part').val();
         const job = $('#job').val();
+        const loading = '<tr><td colspan="7">Loading...</td></tr>';
+        $('#coil_data').empty().append(loading);
         $.ajax({
             url: '/api/v1/order_list_coil',
             type: 'post',
@@ -274,43 +279,52 @@ $(document).ready(function() {
                 job: job
             },
             success: function(res) {
+                console.log(res);
                 let tbodyContent = `<tr><td colspan="8" style="vertical-align: middle;">No data to display!</td></tr>`;
+                let required = 0;
+                let blank = 0;
+                let perf = 0;
+                let allocated = 0;
                 if(res.length > 0) {
-                    tbodyContent = '<tr>';
-                    if (type == "1") {
-                        res.forEach((obj, index) => {
-                            tbodyContent += `<td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
-                            <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
-                            <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
-                            <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>
-                            <td>${obj.hasOwnProperty('heat') ? obj['heat'] : ''}</td>
-                            <td>${obj.hasOwnProperty('job') ? obj['job'] : ''}</td>
-                            <td>${obj.hasOwnProperty('allocated') ? obj['allocated'] : ''}</td></tr>`
-                            // Object.keys(obj).forEach(key => {
-                            //     tbodyContent += `<td>${obj[key]}</td>`
-                            // });
-                        })
-                    } else {
+                    tbodyContent = '';
+                    // if (type == "2") {
                         res.forEach(obj => {
-                            tbodyContent += `<td style="text-align: left"><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" />
+                            tbodyContent += `<tr><td style="text-align: left"><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" />
                             ${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
-                            <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
+                            <td>${obj.hasOwnProperty('material') ? obj['material'] : ''}</td>
+                            <td>${obj.hasOwnProperty('gage') ? obj['gage'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
-                            <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>
-                            <td>${obj.hasOwnProperty('heat') ? obj['heat'] : ''}</td>
-                            <td>${obj.hasOwnProperty('job') ? obj['job'] : ''}</td>
-                            <td>${obj.hasOwnProperty('allocated') ? obj['allocated'] : ''}</td></tr>`
-                            // Object.keys(obj).forEach(key => {
-                            //     tbodyContent += `<td>${obj[key]}</td>`
-                            // });
+                            <td>${obj.hasOwnProperty('pattern') ? obj['pattern'] : ''}</td>
+                            <td>${obj.hasOwnProperty('holes') ? obj['holes'] : ''}</td>
+                            <td>${obj.hasOwnProperty('centers') ? obj['centers'] : ''}</td></tr>`;
+                            required += Number(obj['weight']);
+                            if (obj.hasOwnProperty('pattern') && obj['pattern'] === 'Blank') blank += Number(obj['weight']);
+                            if (obj.hasOwnProperty('allocated') && obj['allocated'] === 1) perf += 1;
+                            if (obj.hasOwnProperty('allocated') && obj['allocated'] === 1) allocated += Number(obj['weight']);
                         })
-                    }
+                    // } else {
+                    //     res.forEach(obj => {
+                    //         tbodyContent += `<tr><td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                    //         <td>${obj.hasOwnProperty('material') ? obj['material'] : ''}</td>
+                    //         <td>${obj.hasOwnProperty('gage') ? obj['gage'] : ''}</td>
+                    //         <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
+                    //         <td>${obj.hasOwnProperty('pattern') ? obj['pattern'] : ''}</td>
+                    //         <td>${obj.hasOwnProperty('holes') ? obj['holes'] : ''}</td>
+                    //         <td>${obj.hasOwnProperty('centers') ? obj['centers'] : ''}</td></tr>`
+                    //     })
+                    // }
                 }
                 $('#coil_data').empty().append(tbodyContent);
+                $('#required b').html(required);
+                $('#blank b').html(blank);
+                $('#perf b').html(perf);
+                $('#allocated b').html(allocated);
             },
             error: function(err) {
                 console.log(err);
-                toastr.error('Failed!');
+                toastr.error('Failed fetching data!');
+                let tbodyContent = `<tr><td colspan="8" style="vertical-align: middle;">No data to display!</td></tr>`;
+                $('#coil_data').empty().append(tbodyContent);
             }
         })
     })
@@ -318,85 +332,49 @@ $(document).ready(function() {
 
 function updateAllocation(num, self) {
     const job = $('#job').val();
+    let itemArr = [];
     if (num === 1 || num === 2 || num === 3) {
-        const itemArr = $('tbody#coil_data input[type="checkbox"]:checked');
-        if (itemArr.length) {
-            let ids = [];
-            itemArr.each(function(index, item) {
-                ids[index] = $(item).val();
-            });
-            $.ajax({
-                url: '/api/v1/update_allocation',
-                type: 'post',
-                data: {
-                    ids: ids,
-                    num: num,
-                    job: job,
-                },
-                success: function(res) {
-                    if (res.length) {
-                        toastr.success(
-                            res.length + ' lists are updated!',
-                            "Success",
-                            {
-                                timeOut: 1000,
-                                fadeOut: 1000,
-                                onHidden: function () {
-                                    window.location.reload();
-                                }
-                            });
-                    } else {
-                        toastr.warning('No change!');
-                    }
-                },
-                error: function(err) {
-                    console.log(err);
-                    toastr.error('Failed!');
-                }
-            })
-        } else {
-            toastr.info("No content selected!");
-        }
+        itemArr = $('tbody#coil_data input[type="checkbox"]:checked');
     } else if (num === 4 || num === 5) {
-        const itemArr = $('tbody#mesh_data input[type="checkbox"]:checked');
-        if (itemArr.length) {
-            let ids = [];
-            itemArr.each(function(index, item) {
-                ids[index] = $(item).val();
-            });
-            $.ajax({
-                url: '/api/v1/update_allocation',
-                type: 'post',
-                data: {
-                    ids: ids,
-                    num: num,
-                    job: job,
-                    part: part
-                },
-                success: function(res) {
-                    if (res.length) {
-                        toastr.success(
-                            res.length + ' lists are updated!',
-                            "Success",
-                            {
-                                timeOut: 1000,
-                                fadeOut: 1000,
-                                onHidden: function () {
-                                    window.location.reload();
-                                }
-                            });
-                    } else {
-                        toastr.warning('No change!');
-                    }
-                },
-                error: function(err) {
-                    console.log(err);
-                    toastr.error('Failed!');
+        itemArr = $('tbody#mesh_data input[type="checkbox"]:checked');
+    }
+
+    if (itemArr.length) {
+        let ids = [];
+        itemArr.each(function(index, item) {
+            ids[index] = $(item).val();
+        });
+        $.ajax({
+            url: '/api/v1/update_allocation',
+            type: 'post',
+            data: {
+                ids: ids,
+                num: num,
+                job: job,
+            },
+            success: function(res) {
+                if (res.length) {
+                    toastr.success(
+                        res.length + ' lists are updated!',
+                        "Success",
+                        {
+                            timeOut: 1000,
+                            fadeOut: 1000,
+                            onHidden: function () {
+                                window.location.reload();
+                            }
+                        });
+                } else {
+                    toastr.warning('No change!');
                 }
-            })
-        } else {
-            toastr.info("No content selected!");
-        }
+            },
+            error: function(err) {
+                console.log(err);
+                toastr.error('Failed!');
+            }
+        })
+    } else {
+        toastr.info("No content selected!");
     }
 }
 
@@ -405,23 +383,30 @@ function meshRequest(num) {
     const job = $('#job').val();
     const type = $("input[name='mesh_data']:checked").val();
 
-    $.ajax({
-        url: '/api/v1/order_list_mesh_order',
-        type: 'post',
-        data: {
-            part: part,
-            job: job,
-            type: type,
-            num: num
-        },
-        success: function(res) {
-            console.log(res);
-            let tbodyContent = `<tr><td colspan="9" style="vertical-align: middle;">No data to display!</td></tr>`;
-            if (res.length > 0) {
-                if (type === "1") {
-                    tbodyContent = '<tr>';
-                    res.forEach((obj, index) => {
-                        tbodyContent += `<td>${index + 1}</td>
+    if (!part) {
+        toastr.warning("You didn't select part, so we can't fetch the information!");
+    } else {
+        const loading = '<tr><td colspan="9">Loading...</td></tr>';
+        $('#mesh_data').empty().append(loading);
+        $.ajax({
+            url: '/api/v1/order_list_mesh_order',
+            type: 'post',
+            data: {
+                part: part,
+                job: job,
+                type: type,
+                num: num
+            },
+            success: function(res) {
+                console.log(res);
+                let part = res.part;
+                let meshes = res.meshes;
+                let tbodyContent = `<tr><td colspan="9" style="vertical-align: middle;">No data to display!</td></tr>`;
+                if (meshes.length > 0) {
+                    if (type === "1") {
+                        tbodyContent = '';
+                        meshes.forEach((obj, index) => {
+                            tbodyContent += `<tr><td>${index + 1}</td>
                             <td>${obj.hasOwnProperty('mesh') ? obj['mesh'] : ''}</td>
                             <td>${obj.hasOwnProperty('type') ? obj['type'] : ''}</td>
                             <td>${obj.hasOwnProperty('date_received') ? obj['date_received'] : ''}</td>
@@ -430,14 +415,11 @@ function meshRequest(num) {
                             <td>${obj.hasOwnProperty('allocated') ? obj['allocated'] : ''}</td>
                             <td>${obj.hasOwnProperty('TPM_JOB') ? obj['TPM_JOB'] : ''}</td>
                             <td>${obj.hasOwnProperty('heat') ? obj['heat'] : ''}</td></tr>`
-                        // Object.keys(obj).forEach(key => {
-                        //     tbodyContent += `<td>${obj[key]}</td>`
-                        // });
-                    })
-                } else {
-                    tbodyContent = '<tr>';
-                    res.forEach(obj => {
-                        tbodyContent += `<td><input type="checkbox" name="mesh_data_select" value="${obj.hasOwnProperty('mesh_no') ? obj['mesh_no'] : ''}" /> </td>
+                        })
+                    } else {
+                        tbodyContent = '';
+                        meshes.forEach(obj => {
+                            tbodyContent += `<tr><td><input type="checkbox" name="mesh_data_select" value="${obj.hasOwnProperty('mesh_no') ? obj['mesh_no'] : ''}" /> </td>
                             <td>${obj.hasOwnProperty('mesh') ? obj['mesh'] : ''}</td>
                             <td>${obj.hasOwnProperty('type') ? obj['type'] : ''}</td>
                             <td>${obj.hasOwnProperty('date_received') ? obj['date_received'] : ''}</td>
@@ -446,16 +428,25 @@ function meshRequest(num) {
                             <td>${obj.hasOwnProperty('allocated') ? obj['allocated'] : ''}</td>
                             <td>${obj.hasOwnProperty('TPM_JOB') ? obj['TPM_JOB'] : ''}</td>
                             <td>${obj.hasOwnProperty('heat') ? obj['heat'] : ''}</td></tr>`
-                        // Object.keys(obj).forEach(key => {
-                        //     tbodyContent += `<td>${obj[key]}</td>`
-                        // });
-                    })
+                        })
+                    }
                 }
+                $('#mesh_data').empty().append(tbodyContent);
+                $('#layer1_required').html(Number(part.layer_1_mesh));
+                $('#layer1_allocated').html(Number(part.layer_1_width));
+                $('#layer2_required').html(Number(part.layer_2_mesh));
+                $('#layer2_allocated').html(Number(part.layer_2_width));
+                $('#drainage1_required').html(Number(part.drainage_1_mesh));
+                $('#drainage1_allocated').html(Number(part.drainage_1_width));
+                $('#drainage2_required').html(Number(part.drainage_2_mesh));
+                $('#drainage2_allocated').html(Number(part.drainage_2_width));
+            },
+            error: function(err) {
+                console.log(err);
+                toastr.error('Failed fetching data!');
+                let tbodyContent = `<tr><td colspan="9" style="vertical-align: middle;">No data to display!</td></tr>`;
+                $('#mesh_data').empty().append(tbodyContent);
             }
-            $('#mesh_data').empty().append(tbodyContent);
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    })
+        })
+    }
 }

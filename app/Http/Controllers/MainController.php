@@ -699,7 +699,10 @@ class MainController extends Controller
             }
         }
 
-        return response()->json($meshes);
+        return response()->json([
+            'part' => $part,
+            'meshes' => $meshes
+        ]);
     }
 
     public function updateAllocation(Request $request) {
@@ -769,23 +772,31 @@ class MainController extends Controller
         switch ($type) {
             case 1: {
                 $data = DB::table('coil_tbl')
+                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
                     ->where([
-                        'job' => $job,
-                        'allocated' => 1
+                        'coil_tbl.allocated' => 1,
+//                        'coil_tbl.job' => $job
                     ])
-                    ->orderBy('coil_tbl.job')
+                    ->select('coil_tbl.coil_no',
+                        'coil_tbl.weight',
+                        'steel_tbl.material',
+                        'steel_tbl.gage',
+                        'steel_tbl.pattern',
+                        'steel_tbl.holes',
+                        'steel_tbl.centers',
+                        'steel_tbl.width',
+                        'coil_tbl.allocated')
+                    ->orderBy('width')
+                    ->orderBy('material')
                     ->get();
             }; break;
             case 2: {
                 $data = DB::table('coil_tbl')
                     ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
-                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
-                    ->where([
-                        'coil_tbl.allocated' => 0,
-                        'part_tbl.gage' => 'steel_tbl.gage'
-                    ])
+//                    ->where([
+//                        'coil_tbl.job' => $job
+//                    ])
                     ->select('coil_tbl.coil_no',
-                        'coil_tbl.coil_no',
                         'coil_tbl.weight',
                         'steel_tbl.material',
                         'coil_tbl.work',
@@ -794,23 +805,19 @@ class MainController extends Controller
                         'steel_tbl.holes',
                         'steel_tbl.centers',
                         'steel_tbl.width',
-                        'steel_tbl.heat',
-                        'coil_tbl.date_received',
-                        'coil_tbl.allocated',
-                        'coil_tbl.job',
-                        'coil_tbl.cycles',
-                        'coil_tbl.stamp_job')
-                    ->orderBy('coil_tbl.job')
+                        'coil_tbl.allocated')
+                    ->orderBy('steel_tbl.material')
                     ->get();
             }; break;
             case 3: {
                 $data = DB::table('coil_tbl')
                     ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
-                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
+//                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
                     ->where([
                         'coil_tbl.job' => 0,
                         'coil_tbl.allocated' => 0,
-                        'part_tbl.part' => $part
+//                        'part_tbl.part' => $part,
+                        'steel_tbl.width' => 6
                     ])
                     ->select('coil_tbl.coil_no',
                         'coil_tbl.weight',
@@ -821,15 +828,55 @@ class MainController extends Controller
                          'steel_tbl.holes',
                          'steel_tbl.centers',
                          'steel_tbl.width',
-                         'steel_tbl.heat',
-                         'coil_tbl.date_received',
                          'coil_tbl.allocated',
-                         'coil_tbl.job',
-                         'coil_tbl.cycles',
-                         'coil_tbl.stamp_job')
+                         'coil_tbl.job')
+                    ->orderBy('steel_tbl.material')
+                    ->get();
+            }; break;
+            case 4: {
+                $data = DB::table('coil_tbl')
+                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
+//                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
+                    ->where([
+//                        'coil_tbl.job' => $job,
+                        'steel_tbl.pattern' => 'Blank'
+                    ])
+                    ->select('coil_tbl.coil_no',
+                        'coil_tbl.weight',
+                        'steel_tbl.material',
+                        'coil_tbl.work',
+                        'steel_tbl.gage',
+                        'steel_tbl.pattern',
+                        'steel_tbl.holes',
+                        'steel_tbl.centers',
+                        'steel_tbl.width',
+                        'coil_tbl.allocated',
+                        'coil_tbl.job')
                     ->orderBy('coil_tbl.job')
                     ->get();
-            }
+            }; break;
+            case 5: {
+                $data = DB::table('coil_tbl')
+                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
+//                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
+                    ->where([
+                        'steel_tbl.width' => 6,
+                        'steel_tbl.pattern' => 'Blank'
+                    ])
+                    ->select('coil_tbl.coil_no',
+                        'coil_tbl.weight',
+                        'steel_tbl.material',
+                        'coil_tbl.work',
+                        'steel_tbl.gage',
+                        'steel_tbl.pattern',
+                        'steel_tbl.holes',
+                        'steel_tbl.centers',
+                        'steel_tbl.width',
+                        'coil_tbl.allocated',
+                        'coil_tbl.job')
+                    ->orderBy('coil_tbl.job')
+                    ->get();
+            }; break;
         }
 
         return response($data);

@@ -274,12 +274,13 @@
                                         <tr>
 {{--                                            <th>No</th>--}}
                                             <th>Coil#</th>
-                                            <th>Weight</th>
+                                            <th>Material</th>
+                                            <th>Gage</th>
                                             <th>Width</th>
-                                            <th>Worker#</th>
-                                            <th>Heat#</th>
-                                            <th>Job</th>
-                                            <th>Allocated</th>
+                                            <th>Pattern</th>
+                                            <th>Hole</th>
+                                            <th>Center</th>
+{{--                                            <th>Allocated</th>--}}
                                         </tr>
                                         </thead>
                                         <tbody id="coil_data">
@@ -294,11 +295,11 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 mt-30">
-                                <div class="alert alert-light" role="alert" id="weight_allocated_alert">
-                                    Total weight required for the order: 0 <br>
-                                    Blank allocated: 0 <br>
-                                    Perf material allocated: 0 <br>
-                                    Total weight allocated: 0
+                                <div class="alert alert-light pt-5" role="alert" id="weight_allocated_alert">
+                                    <p id="required">Total weight required for the order: <b>0</b></p>
+                                    <p id="blank">Blank allocated: <b>0</b></p>
+                                    <p id="perf">Perf material allocated: <b>0</b></p>
+                                    <p id="allocated">Total weight allocated: <b>0</b></p>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +350,7 @@
                             </div>
                             <div class="col-lg-4 mt-10">
                                 <div class="alert alert-light" role="alert" id="length_allocated_alert">
-                                    <table style="width: 100%;">
+                                    <table style="width: 100%; text-align: center">
                                         <thead>
                                         <tr>
                                             <th></th>
@@ -359,24 +360,24 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>Filter layer 1</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td style="text-align: left">Filter layer 1</td>
+                                            <td id="layer1_required">0</td>
+                                            <td id="layer1_allocated">0</td>
                                         </tr>
                                         <tr>
-                                            <td>Filter layer 2</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td style="text-align: left">Filter layer 2</td>
+                                            <td id="layer2_required">0</td>
+                                            <td id="layer2_allocated">0</td>
                                         </tr>
                                         <tr>
-                                            <td>Drainage 1</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td style="text-align: left">Drainage 1</td>
+                                            <td id="drainage1_required">0</td>
+                                            <td id="drainage1_allocated">0</td>
                                         </tr>
                                         <tr>
-                                            <td>Drainage 2</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td style="text-align: left">Drainage 2</td>
+                                            <td id="drainage2_required">0</td>
+                                            <td id="drainage2_allocated">0</td>
                                         </tr>
                                         </tbody>
                                     </table>

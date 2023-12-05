@@ -312,10 +312,10 @@ $(document).ready(function() {
             success: function(res) {
                 let tbodyContent = `<tr><td colspan="8" style="vertical-align: middle;">No data to display!</td></tr>`;
                 if(res.length > 0) {
-                    tbodyContent = '<tr>';
+                    tbodyContent = '';
                     if (type == "1") {
-                        res.forEach((obj, index) => {
-                            tbodyContent += `<td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                        res.forEach(obj => {
+                            tbodyContent += `<tr><td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
                             <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
                             <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>
