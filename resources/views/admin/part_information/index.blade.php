@@ -26,19 +26,19 @@
                     <div class="mb-7">
                         <div class="row align-items-center">
                             <div class="col-lg-11 col-xl-10">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4 my-2 my-md-0">
+                                <div class="row align-items-center my-2 my-md-0">
+                                    <div class="col-md-4">
                                         <div class="input-icon">
-                                            <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
+                                            <input type="text" class="form-control" placeholder="Search..." id="my_search_query" />
                                             <span>
 																	<i class="flaticon2-search-1 text-muted"></i>
 																</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 my-2 my-md-0">
+                                    <div class="col-md-4">
                                         <div class="d-flex align-items-center">
-                                            <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                            <select class="form-control" id="kt_datatable_search_status">
+                                            <label class="mr-3 mb-0 d-none d-md-block" for="my_search_field">Status:</label>
+                                            <select class="form-control" id="my_search_field">
                                                 <option value="">All</option>
                                                 @foreach($obj_arr->first() as $key => $value)
                                                     <option>{{$key}}</option>
@@ -46,16 +46,16 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <a class="btn btn-light-primary px-6 font-weight-bold" id="my_search_btn">Search</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-1 col-xl-2 mt-5 mt-lg-0 d-flex justify-content-end">
-                                <a href="" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
                             </div>
                         </div>
                     </div>
                     <!--end::Search Form-->
                     <!--begin: Datatable-->
-                    <table class="table table-separate table-hover table-head-custom table-foot-custom table-checkable kt_datatable" style="margin-top: 13px !important">
+                    <table class="table table-separate table-hover table-head-custom table-foot-custom table-checkable" id="my_table" style="margin-top: 13px !important">
                         <thead>
                         <tr>
                             @foreach($obj_arr->first() as $key => $value)
@@ -402,13 +402,13 @@
 {{-- Scripts Section --}}
 @section('scripts')
     <script src="{{ asset('plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/pages/crud/datatables/advanced/row-callback.js') }}"></script>
+    <script src="{{ asset('assets/js/my_table.js') }}"></script>
     <script src="{{ asset('assets/js/part_information.js') }}"></script>
     <script>
         const objArr = {{Js::from($obj_arr)}};
 
         $(document).ready(function() {
-            $('#DataTables_Table_0').parent().css('overflow-x', 'auto');
+            $('#my_table').parent().css('overflow-x', 'auto');
         })
     </script>
 @endsection
