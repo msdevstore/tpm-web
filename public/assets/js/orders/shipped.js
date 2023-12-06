@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+    $('.show-btn').click(function() {
+        $(this).parent().siblings().each((i, j) => {
+            if ($(j).attr('class').indexOf('d-none') >= 0) {
+                $(j).removeClass('d-none');
+            } else {
+                $(j).addClass('d-none');
+            }
+        });
+    })
+
     $('#part_info_btn').click(function() {
         let part = $('#part').val();
         if (part === "") {
@@ -17,12 +27,13 @@ $(document).ready(function() {
                     $('#part_modal_id_not_od').prop('checked', res.id_od ? true : false);
                     $('#part_modal_dim_plus').val(res.dim_plus);
                     $('#part_modal_dim_minus').val(res.dim_minus);
-                    // $('#part_modal_material').val('');
+                    $('#part_modal_material').val(res.material);
                     $('#part_modal_gage').val(res.gage).change();
                     $('#part_modal_pattern').val(res.pattern).change();
                     $('#part_modal_holes').val(res.holes).change();
                     $('#part_modal_centers').val(res.centers).change();
                     $('#part_modal_cutoff_length').val(res.cutoff_length);
+                    $('#part_modal_strip').val(res.strip);
                     // $('#part_modal_cutoff_id_drift').val(res.part);
                     $('#part_modal_mill').val(res.mill).change();
                     // $('#part_modal_blank_ring').val(res.part);
@@ -41,22 +52,29 @@ $(document).ready(function() {
                     $('#part_modal_drainage_2_width').val(res.drainage_2_width).change();
                     $('#part_modal_notes').val(res.notes);
                     $('#part_modal_insp_notes').val(res.insp_notes);
-                    // $('#part_modal_oa').val(res.part);
-                    // $('#part_modal_tube_weight').val(res.part);
-                    // $('#part_modal_tube_length_in_feet').val(res.part);
-                    // $('#part_modal_weight_foot').val(res.part);
-                    // $('#part_modal_hspi').val(res.part);
-                    // $('#part_modal_angle').val(res.part);
-                    // $('#part_modal_lf_per_foot').val(res.part);
-                    // $('#part_modal_lf_per_tube').val(res.part);
-                    $('#part_modal_drawing').val(res.drawing);
-                    $('#part_modal_drawing_number').val(res.drawing_number);
+                    $.ajax({
+                        url: "/api/v1/get_part_specs/" + part,
+                        type: 'GET',
+                        success: function(res) {
+                            $('#part_modal_oa').val(res.oa);
+                            $('#part_modal_tube_weight').val(res.tube_weight);
+                            $('#part_modal_tube_length_in_feet').val(res.feet);
+                            $('#part_modal_weight_foot').val(res.weight_per_foot);
+                            $('#part_modal_hspi').val(res.hspi);
+                            $('#part_modal_angle').val(res.angle);
+                            $('#part_modal_lf_per_foot').val(res.lf_ft);
+                            $('#part_modal_lf_per_tube').val(res.lf_tube);
+
+                            // $('#part_modal_drawing').val(res.drawing);
+                            // $('#part_modal_drawing_number').val(res.drawing_number);
+                            $('#partModalCenter').modal('show');
+                        }
+                    })
                 },
                 error: function(err) {
                     console.log(err);
                 }
             })
-            $('#partModalCenter').modal('show');
         }
     })
 
@@ -68,7 +86,9 @@ $(document).ready(function() {
             type: 'GET',
             success: function(res) {
                 calculation = res;
+                console.log($('#quantity').val());
                 $.each(res, function(i, j) {
+                    console.log($('#quantity').val() !== '')
                     if ($('#quantity').val() !== '') {
                         $('#' + i).val((parseFloat(j) * parseFloat($('#quantity').val())).toFixed(3));
                     } else {
@@ -274,7 +294,7 @@ $(document).ready(function() {
         Object.keys(obj).forEach(key => {
             if (obj[key] === '') flag = true;
         })
-        if (flag) toastr.info("Please input all data!!");
+        if (flag) toastr.info("Please input all data!");
         else {
             $.ajax({
                 url: '/orders/create',
@@ -341,6 +361,7 @@ $(document).ready(function() {
             },
             error: function(err) {
                 console.log(err);
+                toastr.error("Failed!");
             }
         })
     })
@@ -370,11 +391,10 @@ $(document).ready(function() {
             success: function(res) {
                 let tbodyContent = `<tr><td colspan="8" style="vertical-align: middle;">No data to display!</td></tr>`;
                 if(res.length > 0) {
-                    tbodyContent = '<tr>';
+                    tbodyContent = '';
                     if (type == "1") {
-                        res.forEach((obj, index) => {
-                            tbodyContent += `<td> ${index + 1} </td>
-                            <td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                        res.forEach(obj => {
+                            tbodyContent += `<tr><td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
                             <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
                             <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>
@@ -387,8 +407,8 @@ $(document).ready(function() {
                         })
                     } else {
                         res.forEach(obj => {
-                            tbodyContent += `<td><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" /> </td>
-                            <td>${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
+                            tbodyContent += `<td style="text-align: left"><input type="checkbox" name="coil_data_select" value="${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}" />
+                            ${obj.hasOwnProperty('coil_no') ? obj['coil_no'] : ''}</td>
                             <td>${obj.hasOwnProperty('weight') ? obj['weight'] : ''}</td>
                             <td>${obj.hasOwnProperty('width') ? obj['width'] : ''}</td>
                             <td>${obj.hasOwnProperty('operator') ? obj['operator'] : ''}</td>
@@ -405,7 +425,7 @@ $(document).ready(function() {
             },
             error: function(err) {
                 console.log(err);
-                toastr.error("Failed");
+                toastr.error('Failed!');
             }
         })
     })
@@ -441,12 +461,12 @@ function updateAllocation(num, self) {
                                 }
                             });
                     } else {
-                        toastr.info('No change!');
+                        toastr.warning('No change!');
                     }
                 },
                 error: function(err) {
                     console.log(err);
-                    toastr.error("Failed");
+                    toastr.error('Failed!');
                 }
             })
         } else {
@@ -480,12 +500,12 @@ function updateAllocation(num, self) {
                                 }
                             });
                     } else {
-                        toastr.info('No change!');
+                        toastr.warning('No change!');
                     }
                 },
                 error: function(err) {
                     console.log(err);
-                    toastr.error("Failed");
+                    toastr.error('Failed!');
                 }
             })
         } else {

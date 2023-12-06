@@ -553,7 +553,7 @@ class MainController extends Controller
     }
 
     public function getPartDetail($part) {
-        return DB::table('part_tbl')->where('part', $part)->first();
+        return DB::table('part_tbl')->join('steel_tbl', 'part_tbl.pattern', '=', 'steel_tbl.pattern')->where('part', $part)->first();
     }
 
     public function orderListMeshOrder(Request $request) {

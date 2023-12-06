@@ -179,6 +179,10 @@ fieldset.child-fieldset legend {
     color: #1BC5BD;
 }
 
+.indi-input input[type='checkbox'] {
+    margin: 8px 0;
+}
+
 .indi-input input:focus, .indi-input select:focus {
     outline: none;
 }

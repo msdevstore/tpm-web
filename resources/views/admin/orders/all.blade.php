@@ -512,13 +512,54 @@
                                         </div>
                                     </div>
                                     <div class="d-flex mb-5">
-                                        <label class="main-color">Blank ring? <input type="checkbox" id="part_modal_blank_ring"></label>
+                                        <div class="col-2 indi-input">
+                                            <label>Blank ring?</label>
+                                            <input class="show-btn" type="checkbox" id="part_modal_blank_ring">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Blank Ring Length +</label>
+                                            <input id="part_modal_blank_ring_plus" value="0">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Blank Ring Length -</label>
+                                            <input id="part_modal_blank_ring_minus" value="0">
+                                        </div>
                                     </div>
                                     <div class="d-flex mb-5">
-                                        <label class="main-color">Dimple depth? <input type="checkbox" id="part_modal_depth_of_dimple"></label>
+                                        <div class="col-2 indi-input">
+                                            <label>Dimple depth?</label>
+                                            <input class="show-btn" type="checkbox" id="part_modal_depth_of_dimple">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Depth of dimple</label>
+                                            <input id="part_modal_depth_of_dimple" value="0">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Plus +</label>
+                                            <input id="part_modal_depth_of_dimple_plus" value="0">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Minus -</label>
+                                            <input id="part_modal_depth_of_dimple_minus" value="0">
+                                        </div>
                                     </div>
                                     <div class="d-flex mb-5">
-                                        <label class="main-color">Blank end ring? <input type="checkbox" id="part_modal_blank_end"></label>
+                                        <div class="col-2 indi-input">
+                                            <label>Blank end ring?</label>
+                                            <input class="show-btn" type="checkbox" id="part_modal_blank_end">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Width of ring</label>
+                                            <input id="part_modal_width_of_ring" value="0">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Plus +</label>
+                                            <input id="part_modal_width_of_ring_plus" value="0">
+                                        </div>
+                                        <div class="col-2 indi-input d-none">
+                                            <label>Minus -</label>
+                                            <input id="part_modal_width_of_ring_minus" value="0">
+                                        </div>
                                     </div>
                                     <div class="d-flex mb-5">
                                         <div class="col-2 indi-input">
@@ -635,9 +676,7 @@
                                         <div class="grid-label"><label>lf per tube</label></div>
                                         <div class="grid-input"><input id="part_modal_lf_per_tube"></div>
                                         <div class="grid-label"><label>Drawing</label></div>
-                                        <div class="grid-input"><input id="part_modal_drawing" type="file"></div>
-                                        <div class="grid-label"><label>Drawing Number</label></div>
-                                        <div class="grid-input"><input id="part_modal_drawing_number"></div>
+                                        <div class="grid-input"><input id="part_modal_drawing"></div>
                                     </div>
                                 </div>
                             </div>

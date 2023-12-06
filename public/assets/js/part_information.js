@@ -44,6 +44,31 @@ $(document).ready(function() {
         $('#length_plus').val(obj.length_plus);
         $('#length_minus').val(obj.length_minus);
         $('#strip').val(obj.strip);
+        $('#layer_1_width').val(obj.layer_1_width);
+        $('#drainage_1_width').val(obj.drainage_1_width);
+        $('#layer_2_mesh').val(obj.layer_2_mesh);
+        $('#drainage_2_mesh').val(obj.drainage_2_mesh);
+        $('#drainage_2_width').val(obj.drainage_2_width);
+        $('#notes').val(obj.notes);
+        $('#insp_notes').val(obj.insp_notes);
+        $.ajax({
+            url: "/api/v1/get_part_specs/" + obj.part,
+            type: 'GET',
+            success: function(res) {
+                console.log('here', res);
+                $('#oa').val(res.oa);
+                $('#tube_weight').val(res.tube_weight);
+                $('#feet').val(res.feet);
+                $('#weight_per_foot').val(res.weight_per_foot);
+                $('#hspi').val(res.hspi);
+                $('#angle').val(res.angle);
+                $('#lf_ft').val(res.lf_ft);
+                $('#lf_tube').val(res.lf_tube);
+
+                // $('#part_modal_drawing').val(res.drawing);
+                // $('#part_modal_drawing_number').val(res.drawing_number);
+            }
+        })
     }
 
     $('#main-table-show').click(function() {

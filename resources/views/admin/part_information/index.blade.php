@@ -367,25 +367,25 @@
                                 <div class="title text-center h-40px pt-3 bg-success text-white"><i class="fa fa-inbox text-white"></i> Calculations will be done after part is saved</div>
                                 <div class="grid-container-3">
                                     <div class="grid-label"><label>OA</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id="oa"></div>
                                     <div class="grid-label"><label>Tube Weight</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id="tube_weight"></div>
                                     <div class="grid-label"><label>Tube length in feet</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id="feet"></div>
                                     <div class="grid-label"><label>weight/foot</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id="weight_per_foot"></div>
                                     <div class="grid-label"><label>hspi</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id="hspi"></div>
                                     <div class="grid-label"><label>Angle</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id="angle"></div>
                                     <div class="grid-label"><label>lf per foot</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id="lf_ft"></div>
                                     <div class="grid-label"><label>lf per tube</label></div>
-                                    <div class="grid-input"><input></div>
-                                    <div class="grid-label"><label>Drawing</label></div>
-                                    <div class="grid-input"><input type="file"></div>
+                                    <div class="grid-input"><input id="lf_tube"></div>
+{{--                                    <div class="grid-label"><label>Drawing</label></div>--}}
+{{--                                    <div class="grid-input"><input type="file"></div>--}}
                                     <div class="grid-label"><label>Drawing Number</label></div>
-                                    <div class="grid-input"><input></div>
+                                    <div class="grid-input"><input id=""></div>
                                 </div>
                             </div>
                         </div>
