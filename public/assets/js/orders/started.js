@@ -1,4 +1,65 @@
 $(document).ready(function() {
+
+    $('#part_info_btn').click(function() {
+        let part = $('#part').val();
+        if (part === "") {
+            toastr.info("You need to choose Part!");
+        } else {
+            $.ajax({
+                url: "/api/v1/get_part_detail/" + part,
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    $('#part_modal_part').val(res.part);
+                    $('#part_modal_cust_id').val(res.cust_id).change();
+                    $('#part_modal_description').val(res.description);
+                    $('#part_modal_dim').val(res.dim);
+                    $('#part_modal_id_not_od').prop('checked', res.id_od ? true : false);
+                    $('#part_modal_dim_plus').val(res.dim_plus);
+                    $('#part_modal_dim_minus').val(res.dim_minus);
+                    // $('#part_modal_material').val('');
+                    $('#part_modal_gage').val(res.gage).change();
+                    $('#part_modal_pattern').val(res.pattern).change();
+                    $('#part_modal_holes').val(res.holes).change();
+                    $('#part_modal_centers').val(res.centers).change();
+                    $('#part_modal_cutoff_length').val(res.cutoff_length);
+                    // $('#part_modal_cutoff_id_drift').val(res.part);
+                    $('#part_modal_mill').val(res.mill).change();
+                    // $('#part_modal_blank_ring').val(res.part);
+                    $('#part_modal_depth_of_dimple').prop('checked', res.depth_of_dimple? true: false);
+                    $('#part_modal_blank_end').val(res.blank_end);
+                    $('#part_modal_finished').val(res.finished_length);
+                    $('#part_modal_length_plus').val(res.length_plus);
+                    $('#part_modal_length_minus').val(res.length_minus);
+                    $('#part_modal_min_ring').val(res.ring1_min_input);
+                    $('#part_modal_max_ring').val(res.ring1_max_input);
+                    $('#part_modal_die').val(res.die).change();
+                    $('#part_modal_layer_1_mesh').val(res.layer_1_mesh).change();
+                    $('#part_modal_drainage_1_mesh').val(res.drainage_1_mesh).change();
+                    $('#part_modal_drainage_1_width').val(res.drainage_1_width).change();
+                    $('#part_modal_layer_2_mesh').val(res.layer_2_mesh).change();
+                    $('#part_modal_drainage_2_width').val(res.drainage_2_width).change();
+                    $('#part_modal_notes').val(res.notes);
+                    $('#part_modal_insp_notes').val(res.insp_notes);
+                    // $('#part_modal_oa').val(res.part);
+                    // $('#part_modal_tube_weight').val(res.part);
+                    // $('#part_modal_tube_length_in_feet').val(res.part);
+                    // $('#part_modal_weight_foot').val(res.part);
+                    // $('#part_modal_hspi').val(res.part);
+                    // $('#part_modal_angle').val(res.part);
+                    // $('#part_modal_lf_per_foot').val(res.part);
+                    // $('#part_modal_lf_per_tube').val(res.part);
+                    $('#part_modal_drawing').val(res.drawing);
+                    $('#part_modal_drawing_number').val(res.drawing_number);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            })
+            $('#partModalCenter').modal('show');
+        }
+    })
+
     let calculation;
 
     $('#part').change(function() {
@@ -118,7 +179,7 @@ $(document).ready(function() {
             success: function(res) {
                 console.log('res: ', res);
                 $('#modal_job').val(job);
-                $('#jobModalCenterBtn').click();
+                $('#jobModalCenter').modal('show');
             },
             error: function(err) {
                 console.log(err);

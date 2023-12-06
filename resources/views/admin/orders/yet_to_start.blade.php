@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="grid-label"><label for="po">PO Number</label></div>
                                         <div class="grid-input"><input id="po"></div>
-                                        <div class="grid-label"><label for="part">Part No.</label></div>
+                                        <div class="grid-label"><label for="part">Part No.</label><a id="part_info_btn">i</a></div>
                                         <div class="grid-input">
                                             <select id="part">
                                                 <option value="">Select</option>
@@ -424,10 +424,259 @@
                 <!--end::Form-->
             </div>
             <!--end::Card-->
-            <!-- Button trigger modal-->
-            <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#jobModalCenter" id="jobModalCenterBtn">
-                Launch job modal
-            </button>
+            <!--start::Modal-->
+            <div class="modal fade" id="partModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Part Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <i aria-hidden="true" class="ki ki-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!--begin::Card-->
+                            <div class="row">
+                                <div class="col-lg-8 gutter-b">
+                                    <div class="grid-container-3 mb-10">
+                                        <div class="grid-label"><label>Part#</label></div>
+                                        <div class="grid-input"><input id="part_modal_part"></div>
+                                        <div class="grid-label"><label>Customer</label></div>
+                                        <div class="grid-input">
+                                            <select id="part_modal_cust_id">
+                                                @foreach($customers as $customer)
+                                                    <option value="{{$customer->cust_id}}">{{$customer->customer}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="grid-label"><label>Part Description</label></div>
+                                        <div class="grid-input"><textarea id="part_modal_description"></textarea></div>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <div class="col-2 indi-input">
+                                            <label>Dimension</label>
+                                            <input type="text" id="part_modal_dim">
+                                        </div>
+                                        <div class="col-1 indi-input">
+                                            <label>ID ?</label>
+                                            <input type="checkbox" id="part_modal_id_not_od">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Dim +</label>
+                                            <input type="text" id="part_modal_dim_plus">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Dim -</label>
+                                            <input type="text" id="part_modal_dim_minus">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <div class="col-3 indi-input">
+                                            <label>Material</label>
+                                            <select id="part_modal_material">
+                                                @foreach($materials as $material)
+                                                    <option>{{$material->material}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-3 indi-input">
+                                            <label>Gage</label>
+                                            <select id="part_modal_gage">
+                                                @foreach($gages as $gage)
+                                                    <option>{{$gage->gage}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <div class="col-2 indi-input">
+                                            <label>Pattern</label>
+                                            <select id="part_modal_pattern">
+                                                @foreach($patterns as $pattern)
+                                                    <option>{{$pattern->pattern}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Hole Size</label>
+                                            <select id="part_modal_holes">
+                                                @foreach($fracs as $frac)
+                                                    <option value="{{$frac->decimal}}">{{$frac->holes}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Hole Center</label>
+                                            <select id="part_modal_centers">
+                                                @foreach($fracs as $frac)
+                                                    <option value="{{$frac->decimal}}">{{$frac->centers}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <div class="col-2 indi-input">
+                                            <label>Cutoff length</label>
+                                            <input id="part_modal_cutoff_length">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Strip width</label>
+                                            <input id="part_modal_strip">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>ID Drift</label>
+                                            <input id="part_modal_cutoff_id_drift">
+                                        </div>
+                                        <div class="col-1 indi-input">
+                                            <label>Mill</label>
+                                            <select id="part_modal_mill">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <label class="main-color">Blank ring? <input type="checkbox" id="part_modal_blank_ring"></label>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <label class="main-color">Dimple depth? <input type="checkbox" id="part_modal_depth_of_dimple"></label>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <label class="main-color">Blank end ring? <input type="checkbox" id="part_modal_blank_end"></label>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <div class="col-2 indi-input">
+                                            <label>Finished</label>
+                                            <input id="part_modal_finished">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Length +</label>
+                                            <input id="part_modal_length_plus">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Length -</label>
+                                            <input id="part_modal_length_minus">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <div class="col-2 indi-input">
+                                            <label>Min. Ring</label>
+                                            <input id="part_modal_min_ring">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Max. Ring</label>
+                                            <input id="part_modal_max_ring">
+                                        </div>
+                                        <div class="col-2 indi-input">
+                                            <label>Die</label>
+                                            <select id="part_modal_die">
+                                                @foreach($dies as $die)
+                                                    <option value="{{$die->die}}">{{$die->die_id}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="row gutter-b">
+                                            <div class="col-6">
+                                                <div class="grid-container-3">
+                                                    <div class="grid-label"><label>Layer 1 Mesh</label></div>
+                                                    <div class="grid-input">
+                                                        <select id="part_modal_layer_1_mesh">
+                                                            @foreach($meshes as $mesh)
+                                                                <option>{{$mesh->mesh}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="grid-label"><label>Layer 1 Width</label></div>
+                                                    <div class="grid-input"><input id="part_modal_layer_1_width"></div>
+                                                    <div class="grid-label"><label>Drainage 1 Mesh</label></div>
+                                                    <div class="grid-input">
+                                                        <select id="part_modal_drainage_1_mesh">
+                                                            @foreach($meshes as $mesh)
+                                                                <option>{{$mesh->mesh}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="grid-label"><label>Drainage 1 Width</label></div>
+                                                    <div class="grid-input"><input id="part_modal_drainage_1_width"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="grid-container-3">
+                                                    <div class="grid-label"><label>Layer 2 Mesh</label></div>
+                                                    <div class="grid-input">
+                                                        <select id="part_modal_layer_2_mesh">
+                                                            @foreach($meshes as $mesh)
+                                                                <option>{{$mesh->mesh}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="grid-label"><label>Layer 2 Width</label></div>
+                                                    <div class="grid-input"><input id="part_modal_layer_2_width"></div>
+                                                    <div class="grid-label"><label>Drainage 2 Mesh</label></div>
+                                                    <div class="grid-input">
+                                                        <select id="part_modal_drainage_2_mesh">
+                                                            @foreach($meshes as $mesh)
+                                                                <option>{{$mesh->mesh}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="grid-label"><label>Drainage 2 Width</label></div>
+                                                    <div class="grid-input"><input id="part_modal_drainage_2_width"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="grid-container-3">
+                                                    <div class="grid-label"><label>MFG Notes</label></div>
+                                                    <div class="grid-input"><textarea id="part_modal_notes"></textarea></div>
+                                                    <div class="grid-label"><label>INSP. Notes</label></div>
+                                                    <div class="grid-input"><textarea id="part_modal_insp_notes"></textarea></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="title text-center h-40px pt-3 bg-success text-white"><i class="fa fa-inbox text-white"></i> Calculations will be done after part is saved</div>
+                                    <div class="grid-container-3">
+                                        <div class="grid-label"><label>OA</label></div>
+                                        <div class="grid-input"><input id="part_modal_oa"></div>
+                                        <div class="grid-label"><label>Tube Weight</label></div>
+                                        <div class="grid-input"><input id="part_modal_tube_weight"></div>
+                                        <div class="grid-label"><label>Tube length in feet</label></div>
+                                        <div class="grid-input"><input id="part_modal_tube_length_in_feet"></div>
+                                        <div class="grid-label"><label>weight/foot</label></div>
+                                        <div class="grid-input"><input id="part_modal_weight_foot"></div>
+                                        <div class="grid-label"><label>hspi</label></div>
+                                        <div class="grid-input"><input id="part_modal_hspi"></div>
+                                        <div class="grid-label"><label>Angle</label></div>
+                                        <div class="grid-input"><input id="part_modal_angle"></div>
+                                        <div class="grid-label"><label>lf per foot</label></div>
+                                        <div class="grid-input"><input id="part_modal_lf_per_foot"></div>
+                                        <div class="grid-label"><label>lf per tube</label></div>
+                                        <div class="grid-input"><input id="part_modal_lf_per_tube"></div>
+                                        <div class="grid-label"><label>Drawing</label></div>
+                                        <div class="grid-input"><input id="part_modal_drawing" type="file"></div>
+                                        <div class="grid-label"><label>Drawing Number</label></div>
+                                        <div class="grid-input"><input id="part_modal_drawing_number"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Card-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Modal-->
             <!--start::Modal-->
             <div class="modal fade" id="jobModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">

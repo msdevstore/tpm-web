@@ -8,6 +8,10 @@
 /*    border: 1px solid #ccc;*/
 /*}*/
 
+#part_info_btn:hover {
+    cursor: pointer;
+}
+
 .grid-container-3 {
     display: grid;
     grid-template-columns: auto auto auto;
