@@ -771,13 +771,15 @@ class MainController extends Controller
 
         switch ($type) {
             case 1: {
-                $data = DB::table('coil_tbl')
-                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
+                $data = DB::table('part_tbl')
+                    ->join('steel_tbl', 'part_tbl.pattern', '=', 'steel_tbl.pattern')
+                    ->join('coil_tbl', 'steel_tbl.work', '=', 'coil_tbl.work')
                     ->where([
                         'coil_tbl.allocated' => 1,
-//                        'coil_tbl.job' => $job
+                        'part_tbl.part' => $part
                     ])
                     ->select('coil_tbl.coil_no',
+                        'part_tbl.part',
                         'coil_tbl.weight',
                         'steel_tbl.material',
                         'steel_tbl.gage',
@@ -791,11 +793,16 @@ class MainController extends Controller
                     ->get();
             }; break;
             case 2: {
-                $data = DB::table('coil_tbl')
-                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
-//                    ->where([
-//                        'coil_tbl.job' => $job
-//                    ])
+                $data = DB::table('part_tbl')
+                    ->join('steel_tbl', 'part_tbl.pattern', '=', 'steel_tbl.pattern')
+                    ->join('coil_tbl', 'steel_tbl.work', '=', 'coil_tbl.work')
+                    ->where([
+                        'coil_tbl.allocated' => 1,
+                        'part_tbl.part' => $part,
+                        'part_tbl.gage' => 'steel_tbl.gage',
+                        'part_tbl.centers' => 'steel_tbl.centers',
+                        'part_tbl.holes' => 'steel_tbl.holes'
+                    ])
                     ->select('coil_tbl.coil_no',
                         'coil_tbl.weight',
                         'steel_tbl.material',
@@ -810,36 +817,38 @@ class MainController extends Controller
                     ->get();
             }; break;
             case 3: {
-                $data = DB::table('coil_tbl')
-                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
-//                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
+                $data = DB::table('part_tbl')
+                    ->join('steel_tbl', 'part_tbl.pattern', '=', 'steel_tbl.pattern')
+                    ->join('coil_tbl', 'steel_tbl.work', '=', 'coil_tbl.work')
                     ->where([
-                        'coil_tbl.job' => 0,
-                        'coil_tbl.allocated' => 0,
-//                        'part_tbl.part' => $part,
-                        'steel_tbl.width' => 6
+                        'coil_tbl.allocated' => 1,
+                        'part_tbl.part' => $part,
+                        'part_tbl.gage' => 'steel_tbl.gage',
+                        'part_tbl.centers' => 'steel_tbl.centers',
+                        'part_tbl.holes' => 'steel_tbl.holes'
                     ])
                     ->select('coil_tbl.coil_no',
                         'coil_tbl.weight',
                         'steel_tbl.material',
-                         'coil_tbl.work',
-                         'steel_tbl.gage',
-                         'steel_tbl.pattern',
-                         'steel_tbl.holes',
-                         'steel_tbl.centers',
-                         'steel_tbl.width',
-                         'coil_tbl.allocated',
-                         'coil_tbl.job')
+                        'coil_tbl.work',
+                        'steel_tbl.gage',
+                        'steel_tbl.pattern',
+                        'steel_tbl.holes',
+                        'steel_tbl.centers',
+                        'steel_tbl.width',
+                        'coil_tbl.allocated')
                     ->orderBy('steel_tbl.material')
                     ->get();
             }; break;
             case 4: {
-                $data = DB::table('coil_tbl')
-                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
-//                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
+                $data = DB::table('part_tbl')
+                    ->join('steel_tbl', 'part_tbl.pattern', '=', 'steel_tbl.pattern')
+                    ->join('coil_tbl', 'steel_tbl.work', '=', 'coil_tbl.work')
                     ->where([
-//                        'coil_tbl.job' => $job,
-                        'steel_tbl.pattern' => 'Blank'
+                        'coil_tbl.allocated' => 1,
+                        'part_tbl.part' => $part,
+                        'part_tbl.type' => 'steel_tbl.material',
+                        'part_tbl.gage' => 'steel_tbl.gage',
                     ])
                     ->select('coil_tbl.coil_no',
                         'coil_tbl.weight',
@@ -850,18 +859,19 @@ class MainController extends Controller
                         'steel_tbl.holes',
                         'steel_tbl.centers',
                         'steel_tbl.width',
-                        'coil_tbl.allocated',
-                        'coil_tbl.job')
-                    ->orderBy('coil_tbl.job')
+                        'coil_tbl.allocated')
+                    ->orderBy('steel_tbl.material')
                     ->get();
             }; break;
             case 5: {
-                $data = DB::table('coil_tbl')
-                    ->join('steel_tbl', 'coil_tbl.work', '=', 'steel_tbl.work')
-//                    ->join('part_tbl', 'steel_tbl.pattern', '=', 'part_tbl.pattern')
+                $data = DB::table('part_tbl')
+                    ->join('steel_tbl', 'part_tbl.pattern', '=', 'steel_tbl.pattern')
+                    ->join('coil_tbl', 'steel_tbl.work', '=', 'coil_tbl.work')
                     ->where([
-                        'steel_tbl.width' => 6,
-                        'steel_tbl.pattern' => 'Blank'
+                        'coil_tbl.allocated' => 1,
+                        'part_tbl.part' => $part,
+                        'part_tbl.type' => 'steel_tbl.material',
+                        'part_tbl.gage' => 'steel_tbl.gage',
                     ])
                     ->select('coil_tbl.coil_no',
                         'coil_tbl.weight',
@@ -872,9 +882,8 @@ class MainController extends Controller
                         'steel_tbl.holes',
                         'steel_tbl.centers',
                         'steel_tbl.width',
-                        'coil_tbl.allocated',
-                        'coil_tbl.job')
-                    ->orderBy('coil_tbl.job')
+                        'coil_tbl.allocated')
+                    ->orderBy('steel_tbl.material')
                     ->get();
             }; break;
         }
