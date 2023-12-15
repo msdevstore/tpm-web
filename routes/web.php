@@ -109,7 +109,7 @@ Route::get('/setting/rings', [SettingController::class,'rings']);
 Route::get('/setting/footer_settings', [SettingController::class,'footerSettings']);
 
 Route::get('/material_requirements', [MaterialReqController::class,'index']);
-Route::get('/uni_screen', [UniScreenController::class,'index']);
+Route::get('/uniscreen', [UniScreenController::class,'index']);
 Route::get('/uni_quotes', [UniQuotesController::class,'index']);
 Route::get('/part_information', [PartInfoController::class,'index']);
 Route::get('/ring_adjustment', [RingAdjustController::class,'index']);

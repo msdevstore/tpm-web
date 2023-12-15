@@ -213,10 +213,10 @@ return [
             'visible' => 'preview',
         ],
         [
-            'title' => 'Uni_Screen',
+            'title' => 'UniScreen',
             'root' => true,
             'icon' => 'media/svg/icons/Shopping/Box2.svg',
-            'page' => 'uni_screen',
+            'page' => 'uniscreen',
             'visible' => 'preview',
         ],
         [
